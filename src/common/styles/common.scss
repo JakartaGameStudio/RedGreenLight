@@ -1,0 +1,60 @@
+@import "~common/styles/variables/globals";
+@import "~common/styles/variables/fonts.scss";
+@import "~common/styles/variables/colors.scss";
+
+@import "reset";
+@import "fonts";
+
+body,
+html {
+  font-family: $font-family;
+  font-weight: $font-weight-regular;
+  line-height: 1.4;
+  background: #fff;
+  color: $color-black;
+  font-size: $font-size;
+}
+
+@for $i from 1 through 6 {
+  h#{$i},
+  .h#{$i} {
+    font-size: (6 - $i) * 0.5em + 1em;
+    color: currentColor;
+    font-weight: $font-weight-medium;
+    margin: 0.5em 0;
+  }
+}
+
+small,
+.small {
+  color: inherit;
+  font-size: 75%;
+}
+
+b,
+strong {
+  font-weight: $font-weight-medium;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: $color-links;
+  text-decoration: none;
+}
+
+p {
+  margin: 0 0 .5em 0;
+}
+
+ul,
+ol {
+  margin: 1em 0;
+  padding-left: 1em;
+
+  li {
+    margin: 0 0 0.5em 0;
+  }
+}
