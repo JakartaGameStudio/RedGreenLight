@@ -9,7 +9,8 @@
     "build": "webpack",
     "build:prod": "webpack --mode=production",
     "lint:all": "npm-run-all lint:scripts",
-    "lint:scripts": "eslint ./src --fix"
+    "lint:scripts": "eslint ./src --fix",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -67,16 +68,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.(js|jsx|ts|tsx)": [
-      "eslint --fix --quiet"
-    ]
   },
   "release-it": {
     "git": {
