@@ -73,7 +73,6 @@
     "prefer-arrow-callback": "error",
     "dot-notation": "error",
     "eslint-comments/no-unlimited-disable": "off",
-    "@typescript-eslint/class-name-casing": "off",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "warn",
