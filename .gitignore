@@ -1,6 +1,5 @@
 build
 .DS_Store
-.npmrc
 npm-debug.log
 .env
 .phutil_module_cache
