@@ -1,0 +1,11 @@
+$container-width: var(--layout-container-width);
+$container-padding: var(--layout-container-padding);
+
+$layout-breakpoints: (
+  xs: 425px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px,
+  xl: 1440px,
+  xxl: 1680px,
+);

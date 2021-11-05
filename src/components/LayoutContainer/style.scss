@@ -1,0 +1,8 @@
+@import "~common/styles/variables/layout.scss";
+
+.container {
+  width: 100%;
+  max-width: $container-width;
+  padding: 0 $container-padding;
+  margin: 0 auto;
+}

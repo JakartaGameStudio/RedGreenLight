@@ -1,0 +1,94 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "legacyDecorators": true,
+      "modules": true
+    }
+  },
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort",
+    "import",
+    "react",
+    "prettier"
+  ],
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "no-shadow": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "info"
+        ]
+      }
+    ],
+    "no-useless-constructor": "off",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ],
+    "no-prototype-builtins": "off",
+    "no-throw-literal": "off",
+    "prefer-promise-reject-errors": "off",
+    "no-unused-vars": "off",
+    "max-lines": [
+      "error",
+      {
+        "max": 500,
+        "skipBlankLines": true,
+        "skipComments": true
+      }
+    ],
+    "curly": "error",
+    "require-await": "warn",
+    "prefer-arrow-callback": "error",
+    "dot-notation": "error",
+    "eslint-comments/no-unlimited-disable": "off",
+    "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "warn",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/prefer-interface": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "sort-class-members/sort-class-members": "off",
+    "simple-import-sort/imports": "error",
+    "import/order": "off",
+    "import/no-default-export": "error",
+    "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }]
+  }
+}
