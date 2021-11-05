@@ -4,9 +4,10 @@ const build = './build';
 module.exports = {
   src,
   build,
+  static: './static',
   server: {
     base: build,
   },
-  html: `${src}/index.html`,
+  html: `./public/index.html`,
   entry: `${src}/index.tsx`,
 };

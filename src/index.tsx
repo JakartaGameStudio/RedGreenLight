@@ -1,14 +1,6 @@
 import './index.scss';
 
-import LayoutContainer from 'components/LayoutContainer';
-import SearchIcon from 'images/icons/search.svg';
-import React from 'react';
+import { App } from 'App';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(
-  <LayoutContainer>
-    <h1>Hello</h1>
-    <SearchIcon />
-  </LayoutContainer>,
-  document.getElementById('js-app'),
-);
+ReactDOM.render(<App />, document.getElementById('root'));

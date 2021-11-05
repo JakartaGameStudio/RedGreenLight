@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge');
 const path = require('path');
 
-module.exports = merge($.tasks.html, $.tasks.styles, $.tasks.images, $.tasks.scripts, {
+module.exports = merge($.tasks.html, $.tasks.styles, $.tasks.images, $.tasks.scripts, $.tasks.static, {
   entry: path.resolve($.paths.entry),
   context: path.resolve($.paths.src),
   output: {
