@@ -10,7 +10,8 @@
     "build:prod": "webpack --mode=production",
     "lint:all": "npm-run-all lint:scripts",
     "lint:scripts": "eslint ./src --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "husky:pre-commit": "npm run lint:all"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
