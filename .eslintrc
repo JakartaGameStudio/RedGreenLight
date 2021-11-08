@@ -38,7 +38,6 @@
         "allowTemplateLiterals": true
       }
     ],
-    "no-shadow": "off",
     "no-console": [
       "error",
       {
@@ -78,7 +77,9 @@
     "require-await": "warn",
     "prefer-arrow-callback": "error",
     "dot-notation": "error",
+    "no-shadow": "off",
     "eslint-comments/no-unlimited-disable": "off",
+    "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "warn",
