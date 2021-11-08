@@ -1,9 +1,6 @@
-@import "~common/styles/variables/globals";
-@import "~common/styles/variables/fonts.scss";
-@import "~common/styles/variables/colors.scss";
-
-@import "reset";
-@import "fonts";
+@import "./variables/globals";
+@import "./variables/fonts";
+@import "./variables/colors";
 
 body,
 html {

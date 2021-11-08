@@ -23,11 +23,11 @@
     "prettier"
   ],
   "extends": [
+    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:import/typescript"
   ],
   "rules": {
     "quotes": [
@@ -68,6 +68,12 @@
         "skipComments": true
       }
     ],
+    "max-params": [
+      "error",
+      {
+        "max": 2
+      }
+    ],
     "curly": "error",
     "require-await": "warn",
     "prefer-arrow-callback": "error",
@@ -89,6 +95,8 @@
     "simple-import-sort/imports": "error",
     "import/order": "off",
     "import/no-default-export": "error",
+    "import/no-anonymous-default-export": "error",
+    "import/extensions": "off",
     "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }]
   }
 }

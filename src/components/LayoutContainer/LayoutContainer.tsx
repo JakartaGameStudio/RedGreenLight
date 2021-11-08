@@ -1,4 +1,4 @@
-import styles from './style.scss';
+import styles from './LayoutContainer.module.scss';
 import { LayoutContainerProps } from './types';
 
 export function LayoutContainer({ children }: LayoutContainerProps) {

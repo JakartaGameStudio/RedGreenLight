@@ -1,8 +1,7 @@
 const { merge } = require('webpack-merge');
-const ARGV = require('yargs').argv;
 
 global.$ = {
-  isProd: ARGV.mode === 'production',
+  isProd: process.env.mode === 'production',
   paths: require('./config/paths'),
   tasks: {
     scripts: require('./config/tasks/scripts'),
