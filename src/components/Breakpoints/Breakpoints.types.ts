@@ -1,5 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 
-export type BreakpointsProps = PropsWithChildren<{
+export type BreakpointsProps = {
   points: string[] | string;
-}>;
+  children: ReactNode;
+};
