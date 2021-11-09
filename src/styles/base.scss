@@ -1,4 +1,4 @@
-@import "./variables/globals";
+@import "./variables/theme";
 @import "./variables/fonts";
 @import "./variables/colors";
 
@@ -6,17 +6,17 @@ body,
 html {
   font-family: $font-family;
   font-weight: $font-weight-regular;
-  line-height: 1.4;
-  background: #fff;
-  color: $color-black;
-  font-size: $font-size;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text;
+  background: $color-background;
 }
 
 @for $i from 1 through 6 {
   h#{$i},
   .h#{$i} {
     font-size: (6 - $i) * 0.5em + 1em;
-    color: currentColor;
+    color: $color-title;
     font-weight: $font-weight-medium;
     margin: 0.5em 0;
   }
@@ -38,7 +38,7 @@ strong {
 }
 
 a {
-  color: $color-blue;
+  color: $color-link;
   text-decoration: none;
 }
 

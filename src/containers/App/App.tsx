@@ -1,11 +1,12 @@
 import './App.module.scss';
 
-import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
+import { Header } from 'components/Header/Header';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 export function App() {
   return (
-    <LayoutContainer>
-      <h1>Hello</h1>
-    </LayoutContainer>
+    <Router>
+      <Header />
+    </Router>
   );
 }

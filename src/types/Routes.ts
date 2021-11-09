@@ -1,5 +1,6 @@
 export enum Routes {
   index = '/',
+  about = '/about',
   game = '/game',
   forum = '/forum',
   profile = '/profile',

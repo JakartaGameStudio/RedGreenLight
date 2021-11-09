@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type LayoutContainerProps = {
-  children?: JSX.Element | JSX.Element[];
+  children: ReactNode;
 };
