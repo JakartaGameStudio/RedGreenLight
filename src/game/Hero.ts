@@ -1,13 +1,13 @@
 export class Hero {
-  // Не понимаю, что делать с типами, чтобы не было такой большой колонки
   x: number;
   y: number;
   radius: number;
   inBoost: boolean;
   boost: number;
   speed: number;
-  lose: boolean;
+  isLost: boolean;
   deboost: number;
+
   constructor(props: { x: number; y: number; radius: number; boost: number; deboost: number }) {
     this.x = props.x;
     this.y = props.y;
@@ -16,18 +16,20 @@ export class Hero {
     this.boost = props.boost;
     this.deboost = props.deboost;
     this.speed = 0;
-    this.lose = false;
+    this.isLost = false;
   }
 
   move(timeFraction: number) {
     if (!this.inBoost && this.speed < 0) {
       return;
     }
+
     if (this.inBoost) {
       this.speed += timeFraction * this.boost;
     } else {
       this.speed -= timeFraction * this.deboost;
     }
+
     this.x += timeFraction * this.speed;
   }
 
@@ -41,7 +43,7 @@ export class Hero {
 
   public checkStop() {
     if (this.speed > 0) {
-      this.lose = true;
+      this.isLost = true;
     }
   }
 }

@@ -2,6 +2,7 @@ export class BorderGame {
   color: string;
   width: number;
   height: number;
+
   constructor(params: { width: number; height: number }) {
     this.color = '#000';
     this.width = params.width;

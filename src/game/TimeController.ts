@@ -6,6 +6,7 @@ export class TimeController {
   timeoutValue: number | (() => number);
   safePeriodValue: number | (() => number);
   allowedMoveTimeValue: number | (() => number);
+
   constructor(obj: {
     timeout: number | (() => number);
     safePeriod: number | (() => number);
@@ -26,6 +27,7 @@ export class TimeController {
 
   reset() {
     this.realTime = 0;
+
     this.stopAllowedMoveTime =
       typeof this.allowedMoveTimeValue === 'number'
         ? this.allowedMoveTimeValue
@@ -56,7 +58,7 @@ export class TimeController {
     return this.realTime > this.stopTimeout;
   }
 
-  addRealTime(timeFraction: number) {
+  updateTime(timeFraction: number) {
     this.realTime += timeFraction;
   }
 }
