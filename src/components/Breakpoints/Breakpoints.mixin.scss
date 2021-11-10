@@ -1,0 +1,11 @@
+@import "~styles/variables/layout.scss";
+
+@mixin breakpoints($name) {
+  $screen: map_get($layout-breakpoints, $name);
+
+  @if ($screen) {
+    @media (min-width: $screen) {
+      @content;
+    }
+  }
+}

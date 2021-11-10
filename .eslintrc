@@ -98,6 +98,11 @@
     "import/no-default-export": "error",
     "import/no-anonymous-default-export": "error",
     "import/extensions": "off",
-    "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }]
+    "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": "*", "next": "block-like" }
+    ]
   }
 }
