@@ -1,11 +1,7 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 
-export enum TitleSizes {
-  h1,
-  h2,
-  h3,
-}
-
-export type TitleProps = PropsWithChildren<{
-  size: keyof typeof TitleSizes;
-}>;
+export type TitleProps = {
+  size: 'h1' | 'h2' | 'h3';
+  className?: ReactNode;
+  children: ReactNode;
+};

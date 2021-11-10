@@ -1,0 +1,52 @@
+@import "~styles/mixins/placeholder.scss";
+
+.field {
+  position: relative;
+}
+
+.label {
+  display: block;
+  position: absolute;
+  font-size: 12px;
+  line-height: 1;
+  left: 14px;
+  top: 8px;
+  color: var(--theme-color-basic-middle);
+}
+
+.error {
+  color: var(--theme-color-warning);
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  line-height: 18px;
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--theme-color-white);
+  border: 1px solid var(--theme-color-basic-light);
+  color: var(--theme-color-basic);
+  height: 48px;
+  outline: none;
+
+  @include placeholder() {
+    color: var(--theme-color-basic-middle);
+  }
+
+  &:focus {
+    border-color: var(--theme-color-basic-middle);
+  }
+}
+
+.inputActive {
+  padding-top: 20px;
+  padding-bottom: 8px;
+}
+
+.inputError {
+  border-color: var(--theme-color-warning);
+}

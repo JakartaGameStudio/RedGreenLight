@@ -17,11 +17,16 @@
   }
 }
 
-.buttonLight {
+.button--light {
   color: var(--theme-color-accent);
   background: var(--theme-color-accent-light);
 }
 
-.buttonWarning{
+.button--warning {
   background: var(--theme-color-warning);
+}
+
+.button--link {
+  color: var(--theme-color-accent);
+  background: none;
 }

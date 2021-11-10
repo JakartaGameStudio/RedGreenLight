@@ -4,7 +4,8 @@
     "ecmaVersion": 2020,
     "ecmaFeatures": {
       "legacyDecorators": true,
-      "modules": true
+      "modules": true,
+      "jsx": true
     }
   },
   "settings": {
@@ -101,7 +102,9 @@
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "*", "next": "return" },
-      { "blankLine": "always", "prev": "*", "next": "block-like" }
+      { "blankLine": "always", "prev": "*", "next": "block-like" },
+      { "blankLine": "always", "prev": "block-like", "next": "*" },
+      { "blankLine": "always", "prev": "function", "next": "*" }
     ],
     "react/jsx-curly-brace-presence": [
       "error",
@@ -109,6 +112,8 @@
         "props": "never",
         "children": "never"
       }
-    ]
+    ],
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-indent-props": [2, 2]
   }
 }

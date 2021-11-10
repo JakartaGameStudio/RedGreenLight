@@ -18,21 +18,22 @@ const rulesListItems = [
 
 export function PageIndex() {
   return (
-    <LayoutPage>
-      <Title size="h1" children="Найди свою скорость, чтобы выиграть" />
-      <div className={styles.text}>
+    <LayoutPage title="Найди свою скорость, чтобы выиграть">
+      <div className={styles.description}>
         <p>Быстрее двигаешься - медленнее тормозишь.</p>
         <p>Успей остановиться до того, как фигура повернется.</p>
       </div>
-      <Title size="h2" children="Правила" />
-      <ol>
-        {rulesListItems.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ol>
+      <div className={styles.rules}>
+        <Title size="h2" children="Правила" />
+        <ol>
+          {rulesListItems.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ol>
+      </div>
       <div className={styles.form}>
         <Button href={AppRoutes.game}>Начать игру</Button>
-        <Button href={AppRoutes.signUp} mods="light">
+        <Button href={AppRoutes.signUp} mod="light">
           Стать участником
         </Button>
       </div>

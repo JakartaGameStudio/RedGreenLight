@@ -4,11 +4,8 @@ import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
 import { ButtonProps } from './Button.types';
 
-export function Button({ className, children, href, mods, onClick }: ButtonProps) {
-  const classes = classNames(styles.button, className, {
-    [styles.buttonLight]: mods === 'light',
-    [styles.buttonWarning]: mods === 'warning',
-  });
+export function Button({ className, children, href, mod, onClick }: ButtonProps) {
+  const classes = classNames(styles.button, className, styles[`button--${mod}`]);
 
   if (href) {
     return <Link to={href} children={children} onClick={onClick} className={classes} />;
