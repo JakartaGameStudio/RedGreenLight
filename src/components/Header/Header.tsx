@@ -1,4 +1,6 @@
 import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
+import { UserMenu } from 'components/UserMenu/UserMenu';
+import Logo from 'images/logo.svg';
 import { NavLink } from 'react-router-dom';
 import { Routes } from 'types/Routes';
 
@@ -7,7 +9,13 @@ import styles from './Header.module.scss';
 export function Header() {
   return (
     <header className={styles.header}>
-      <LayoutContainer>{renderNav()}</LayoutContainer>
+      <LayoutContainer>
+        <div className={styles.inner}>
+          <Logo className={styles.logo} />
+          {renderNav()}
+          <UserMenu />
+        </div>
+      </LayoutContainer>
     </header>
   );
 }
@@ -19,18 +27,15 @@ function renderNav() {
       url: Routes.index,
     },
     {
-      title: 'Правила',
-      url: Routes.about,
-    },
-    {
       title: 'Форум',
       url: Routes.forum,
     },
     {
-      title: 'Результаты игры',
+      title: 'Статистика',
       url: Routes.leaderBoards,
     },
   ];
+
   return (
     <nav className={styles.nav}>
       <ul>
