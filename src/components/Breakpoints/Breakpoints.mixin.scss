@@ -1,4 +1,4 @@
-@import "common/styles/variables/layout";
+@import "~styles/variables/layout.scss";
 
 @mixin breakpoints($name) {
   $screen: map_get($layout-breakpoints, $name);
