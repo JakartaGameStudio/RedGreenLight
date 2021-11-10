@@ -1,0 +1,25 @@
+.button {
+  display: block;
+  width: 100%;
+  color: var(--theme-color-white);
+  background: var(--theme-color-accent);
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 14px 20px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.buttonLight {
+  color: var(--theme-color-accent);
+  background: var(--theme-color-accent-light);
+}
+
+.buttonWarning{
+  background: var(--theme-color-warning);
+}
