@@ -12,16 +12,6 @@ html {
   background: $color-background;
 }
 
-@for $i from 1 through 6 {
-  h#{$i},
-  .h#{$i} {
-    font-size: (6 - $i) * 0.5em + 1em;
-    color: $color-title;
-    font-weight: $font-weight-medium;
-    margin: 0.5em 0;
-  }
-}
-
 small,
 .small {
   color: inherit;

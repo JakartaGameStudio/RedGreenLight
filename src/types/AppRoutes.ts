@@ -1,4 +1,4 @@
-export enum Routes {
+export enum AppRoutes {
   index = '/',
   game = '/game',
   forum = '/forum',

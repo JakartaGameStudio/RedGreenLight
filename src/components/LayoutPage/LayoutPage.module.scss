@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+.header,
+.footer {
+  flex: 0 0 auto;
+}
+
+.main {
+  flex: 1 0 auto;
+}

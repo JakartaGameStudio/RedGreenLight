@@ -1,12 +1,15 @@
 import './App.module.scss';
 
-import { Header } from 'components/Header/Header';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { PageIndex } from 'pages/PageIndex/PageIndex';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AppRoutes } from 'types/AppRoutes';
 
 export function App() {
   return (
     <Router>
-      <Header />
+      <Routes>
+        <Route path={AppRoutes.index} element={<PageIndex />} />
+      </Routes>
     </Router>
   );
 }
