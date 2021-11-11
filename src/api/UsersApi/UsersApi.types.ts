@@ -1,24 +1,24 @@
 export type UsersApiUser = {
-  id: number;
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  phone: string;
-  display_name: string | null;
   avatar: string | null;
+  display_name: string | null;
+  email: string;
+  first_name: string;
+  id: number;
+  login: string;
+  phone: string;
+  second_name: string;
 };
 
 export type UsersApiRequest = {
-  users: number[];
   chatId: number;
+  users: number[];
 };
 
 export type UsersApiUpdateRequest = Omit<UsersApiUser, 'id'>;
 
 export type UsersApiPasswordRequest = {
-  oldPassword: string;
   newPassword: string;
+  oldPassword: string;
 };
 
 export type UsersApiAvatarRequest = FormData;

@@ -1,12 +1,12 @@
 export enum AppRoutes {
-  index = '/',
-  game = '/game',
   forum = '/forum',
+  game = '/game',
+  index = '/',
+  leaderBoards = '/leaderboards',
   profile = '/profile',
   profileEdit = '/profile/edit',
   profilePassword = '/profile/password',
   signIn = '/signin',
   signOut = '/signout',
   signUp = '/signup',
-  leaderBoards = '/leaderboards',
 }

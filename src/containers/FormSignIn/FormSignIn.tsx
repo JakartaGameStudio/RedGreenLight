@@ -14,12 +14,14 @@ export function FormSignIn() {
       onSubmit={onSubmit}
       fields={[
         {
+          id: `FormSignIn[${AuthApiSignInKeys.login}]`,
           name: AuthApiSignInKeys.login,
           placeholder: 'Логин',
           type: 'text',
           required: true,
         },
         {
+          id: `FormSignIn[${AuthApiSignInKeys.password}]`,
           name: AuthApiSignInKeys.password,
           placeholder: 'Пароль',
           type: 'password',

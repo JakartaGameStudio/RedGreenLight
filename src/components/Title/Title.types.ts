@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export type TitleProps = {
-  size: 'h1' | 'h2' | 'h3';
-  className?: ReactNode;
   children: ReactNode;
+  className?: ReactNode;
+  size: 'h1' | 'h2' | 'h3';
 };

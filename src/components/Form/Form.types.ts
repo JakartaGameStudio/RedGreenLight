@@ -11,6 +11,7 @@ export type FormState = FormFieldData[];
 export type FormProps = {
   buttons: Omit<ButtonProps, 'className'>[];
   fields: Omit<FormFieldProps, 'className' | 'onChange'>[];
+  onChange?(state: FormState): void;
   onSubmit(state: FormState): void;
   title?: string;
 };

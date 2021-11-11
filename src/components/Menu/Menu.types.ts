@@ -1,6 +1,6 @@
 export type MenuItem = {
-  url: string;
   text: string;
+  url: string;
 };
 
 export type MenuProps = {

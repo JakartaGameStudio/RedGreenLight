@@ -6,7 +6,7 @@ import { useState } from 'react';
 import styles from './Form.module.scss';
 import { FormProps, FormState } from './Form.types';
 
-export function Form({ title, fields, buttons, onSubmit }: FormProps) {
+export function Form({ title, fields, buttons, onSubmit, onChange }: FormProps) {
   const [formData, setFormData] = useState<FormState>();
 
   function handlerChange({ name, value }) {
@@ -16,6 +16,10 @@ export function Form({ title, fields, buttons, onSubmit }: FormProps) {
         [name]: value,
       };
     });
+
+    if (onChange) {
+      onChange(formData);
+    }
   }
 
   function handlerSubmit(event) {
@@ -26,9 +30,9 @@ export function Form({ title, fields, buttons, onSubmit }: FormProps) {
   return (
     <form className={styles.form} onSubmit={handlerSubmit}>
       <Title size="h3" children={title} className={styles.title} />
-      {fields.map((props, index) => (
+      {fields.map((props) => (
         <FormField
-          key={index}
+          key={props.id}
           className={styles.field}
           onChange={(value) => handlerChange({ name: props.name, value })}
           {...props}
