@@ -4,8 +4,9 @@ export type ButtonMods = 'light' | 'warning' | 'link';
 
 export type ButtonProps = {
   children: ReactNode;
+  className?: string;
   href?: string;
   mod?: ButtonMods;
-  className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  type?: 'submit' | 'reset';
 };

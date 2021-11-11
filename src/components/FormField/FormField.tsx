@@ -7,13 +7,13 @@ import { FormFieldProps } from './FormField.types';
 export function FormField({
   id,
   name,
-  type = 'text',
-  value,
   placeholder,
   onChange,
-  errors,
   required,
   className,
+  value = '',
+  errors = [],
+  type = 'text',
 }: FormFieldProps) {
   const [isActive, setActive] = useState(Boolean(value));
   const [val, setVal] = useState(value);
@@ -33,18 +33,21 @@ export function FormField({
 
   return (
     <div className={styles.field}>
-      {isActive && (
-        <label htmlFor={id} className={styles.label}>
-          {placeholder}
-        </label>
-      )}
+      <label
+        htmlFor={id}
+        className={classNames(styles.label, {
+          [styles.labelActive]: isActive,
+        })}
+      >
+        {placeholder}
+        {required && <span className={styles.required}>*</span>}
+      </label>
       <input
         id={id}
         name={name}
         value={val}
         type={type}
         required={required}
-        placeholder={isActive ? '' : placeholder}
         onFocus={handlerFocus}
         onBlur={handlerBlur}
         onChange={handlerChange}

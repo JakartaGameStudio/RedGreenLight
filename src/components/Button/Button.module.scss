@@ -29,4 +29,8 @@
 .button--link {
   color: var(--theme-color-accent);
   background: none;
+
+  &:hover {
+    color: var(--theme-color-basic);
+  }
 }

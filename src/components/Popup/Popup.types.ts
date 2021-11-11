@@ -1,5 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 
-export type PopupProps = PropsWithChildren<{
+export type PopupProps = {
   active?: boolean;
-}>;
+  children: ReactNode;
+};

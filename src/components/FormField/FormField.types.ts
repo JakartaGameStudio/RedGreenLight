@@ -1,11 +1,11 @@
-export type FormFieldProps = Partial<{
-  id: string;
+export type FormFieldProps = {
+  className?: string;
+  errors?: string[];
+  id?: string;
   name: string;
-  placeholder: string;
-  value: string;
-  type: 'text' | 'email' | 'number' | 'password' | 'tel';
-  errors: string[];
-  required: boolean;
-  className: string;
   onChange(value: string): void;
-}>;
+  placeholder: string;
+  required?: boolean;
+  type?: 'text' | 'email' | 'number' | 'password' | 'tel';
+  value?: string;
+};

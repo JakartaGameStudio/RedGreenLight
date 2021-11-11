@@ -2,6 +2,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   min-height: 100vh;
-  padding: 20px;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.form {
+  margin: auto;
+  width: 300px;
+  align-self: center;
 }

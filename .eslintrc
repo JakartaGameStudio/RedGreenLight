@@ -19,6 +19,7 @@
   "plugins": [
     "@typescript-eslint",
     "simple-import-sort",
+    "typescript-sort-keys",
     "import",
     "react",
     "prettier"
@@ -114,6 +115,8 @@
       }
     ],
     "react/jsx-first-prop-new-line": [2, "multiline"],
-    "react/jsx-indent-props": [2, 2]
+    "react/jsx-indent-props": [2, 2],
+    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/string-enum": "error"
   }
 }

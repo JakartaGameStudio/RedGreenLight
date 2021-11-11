@@ -36,8 +36,9 @@
 }
 
 .body {
-  background: #fff;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  color: var(--theme-color-basic);
+  background: var(--theme-color-white);
+  box-shadow: 0 0 6px rgba(#000, 0.1);
   border-radius: 12px;
   padding: 40px 30px;
   flex: 0 0 auto;
