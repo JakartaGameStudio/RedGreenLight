@@ -31,7 +31,7 @@ export function Header({ className }: HeaderProps) {
               },
             ]}
           />
-          <UserMenu />
+          <UserMenu className={styles.user} userName="Очень длинный username" />
         </div>
       </LayoutContainer>
     </header>

@@ -1,13 +1,32 @@
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .wrapper {
+  color: var(--theme-color-basic);
+  position: relative;
+}
+
+.head {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: var(--theme-color-basic);
+  cursor: pointer;
 }
 
 .username {
   flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-right: 10px;
+  white-space: nowrap;
 }
 
 .icon {
@@ -20,4 +39,44 @@
   height: 36px;
   border-radius: 50%;
   background-color: var(--theme-color-basic-light);
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  padding-top: 10px;
+  min-width: 100%;
+  animation: dropdown 0.2s ease-out;
+}
+
+.menu {
+  display: block;
+  padding: 10px;
+  margin: 0;
+  border-radius: 8px;
+  background: var(--theme-color-basic-light);
+}
+
+.menuItem {
+  display: block;
+  padding: 5px;
+  margin: 0;
+  line-height: 1;
+}
+
+.item {
+  color: var(--theme-color-basic);
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.itemWarning {
+  color: var(--theme-color-warning);
 }
