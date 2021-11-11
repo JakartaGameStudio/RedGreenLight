@@ -1,4 +1,11 @@
-@import "~styles/variables/layout.scss";
+$layout-breakpoints: (
+  xs: 425px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px,
+  xl: 1440px,
+  xxl: 1680px,
+);
 
 // чтобы использовать в JS надо сделать экспорт
 :export {

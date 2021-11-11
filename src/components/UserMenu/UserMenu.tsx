@@ -12,6 +12,7 @@ export function UserMenu({ userName, className }: UserMenuProps) {
 
   useEffect(() => {
     const documentClickHandler = () => setActive(false);
+
     document.addEventListener('click', documentClickHandler);
 
     return function () {

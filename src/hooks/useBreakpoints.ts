@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-import points from './Breakpoints.module.scss';
+import points from 'styles/variables/breakpoints.scss';
 
 export function useBreakpoints() {
   const [current, setCurrent] = useState([]);
