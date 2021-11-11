@@ -12,10 +12,12 @@ export function useBreakpoints() {
   useEffect(() => {
     const mediaList = Object.entries(points).map(([name, screen]) => {
       const media = window.matchMedia(`(min-width: ${screen})`);
+
       media.onchange = () => setCurrent(filter(mediaList));
 
       return { name, media };
     });
+
     setCurrent(filter(mediaList));
 
     return function () {
