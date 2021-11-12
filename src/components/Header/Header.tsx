@@ -34,7 +34,7 @@ export function Header({ className }: HeaderProps) {
       <LayoutContainer>
         <div className={styles.inner}>
           <NavLink className={styles.logo} to={AppRoutes.index}>
-            <Logo />
+            <Logo className={styles.logoIcon} />
           </NavLink>
           <Menu className={styles.nav} items={menuItems} />
           <UserMenu className={styles.user} userName="Очень длинный username" />
