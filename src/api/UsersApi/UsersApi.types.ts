@@ -1,20 +1,26 @@
+export enum UsersApiUserKeys {
+  avatar = 'avatar',
+  displayName = 'display_name',
+  email = 'email',
+  firstName = 'first_name',
+  id = 'id',
+  login = 'login',
+  phone = 'phone',
+  secondName = 'second_name',
+}
+
 export type UsersApiUser = {
-  avatar: string | null;
-  display_name: string | null;
-  email: string;
-  first_name: string;
-  id: number;
-  login: string;
-  phone: string;
-  second_name: string;
+  [UsersApiUserKeys.avatar]: string | null;
+  [UsersApiUserKeys.displayName]: string | null;
+  [UsersApiUserKeys.email]: string;
+  [UsersApiUserKeys.firstName]: string;
+  [UsersApiUserKeys.id]: number;
+  [UsersApiUserKeys.login]: string;
+  [UsersApiUserKeys.phone]: string;
+  [UsersApiUserKeys.secondName]: string;
 };
 
-export type UsersApiRequest = {
-  chatId: number;
-  users: number[];
-};
-
-export type UsersApiUpdateRequest = Omit<UsersApiUser, 'id'>;
+export type UsersApiUpdateRequest = Omit<UsersApiUser, UsersApiUserKeys.id>;
 
 export type UsersApiPasswordRequest = {
   newPassword: string;
@@ -23,4 +29,4 @@ export type UsersApiPasswordRequest = {
 
 export type UsersApiAvatarRequest = FormData;
 
-export type UsersApiFindRequest = Pick<UsersApiUser, 'login'>;
+export type UsersApiFindRequest = Pick<UsersApiUser, UsersApiUserKeys.login>;

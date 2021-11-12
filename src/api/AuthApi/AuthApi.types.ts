@@ -10,20 +10,20 @@ export type AuthApiSignInRequest = {
 
 export enum AuthApiSignUpKeys {
   email = 'email',
-  first_name = 'first_name',
+  firstName = 'first_name',
   login = 'login',
   password = 'password',
   phone = 'phone',
-  second_name = 'second_name',
+  secondName = 'second_name',
 }
 
 export type AuthApiSignUpRequest = {
   [AuthApiSignUpKeys.email]: string;
-  [AuthApiSignUpKeys.first_name]: string;
+  [AuthApiSignUpKeys.firstName]: string;
   [AuthApiSignUpKeys.login]: string;
   [AuthApiSignUpKeys.password]: string;
   [AuthApiSignUpKeys.phone]: string;
-  [AuthApiSignUpKeys.second_name]: string;
+  [AuthApiSignUpKeys.secondName]: string;
 };
 
 export type AuthApiError = {

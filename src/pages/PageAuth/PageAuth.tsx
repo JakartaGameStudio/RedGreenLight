@@ -10,9 +10,7 @@ export function PageAuth({ signUp }: PageAuthProps) {
   return (
     <div className={styles.page}>
       <Header className={styles.header} />
-      <div className={styles.form}>
-        {signUp ? <FormSignUp /> : <FormSignIn />}
-      </div>
+      <div className={styles.form}>{signUp ? <FormSignUp /> : <FormSignIn />}</div>
       <Footer />
     </div>
   );

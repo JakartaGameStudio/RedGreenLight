@@ -14,13 +14,13 @@ export function FormSignUp() {
       onSubmit={onSubmit}
       fields={[
         {
-          id: `FormSignUp[${AuthApiSignUpKeys.first_name}]`,
-          name: AuthApiSignUpKeys.first_name,
+          id: `FormSignUp[${AuthApiSignUpKeys.firstName}]`,
+          name: AuthApiSignUpKeys.firstName,
           placeholder: 'Имя',
         },
         {
-          id: `FormSignUp[${AuthApiSignUpKeys.second_name}]`,
-          name: AuthApiSignUpKeys.second_name,
+          id: `FormSignUp[${AuthApiSignUpKeys.secondName}]`,
+          name: AuthApiSignUpKeys.secondName,
           placeholder: 'Фамилия',
         },
         {
