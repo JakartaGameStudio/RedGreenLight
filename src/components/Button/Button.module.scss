@@ -1,8 +1,10 @@
+@import "~styles/variables/colors.scss";
+
 .button {
   display: block;
   width: 100%;
-  color: var(--theme-color-white);
-  background: var(--theme-color-accent);
+  color: $color-content;
+  background: $color-primary;
   border: none;
   cursor: pointer;
   border-radius: 8px;
@@ -18,19 +20,19 @@
 }
 
 .button--light {
-  color: var(--theme-color-accent);
-  background: var(--theme-color-accent-light);
+  color: $color-primary;
+  background: $color-primary-light;
 }
 
 .button--warning {
-  background: var(--theme-color-warning);
+  background: $color-secondary;
 }
 
 .button--link {
-  color: var(--theme-color-accent);
+  color: $color-primary;
   background: none;
 
   &:hover {
-    color: var(--theme-color-basic);
+    color: $color-basic;
   }
 }

@@ -1,3 +1,5 @@
+@import "~styles/variables/colors.scss";
+
 .menu {
   ul,
   li {
@@ -20,13 +22,13 @@
   line-height: 20px;
   padding: 10px 20px;
   border-radius: 6px;
-  color: var(--theme-color-basic);
+  color: $color-basic;
   transition: 0.2s ease-out background-color;
 
   &:global {
     &.active {
       cursor: default;
-      background-color: var(--theme-color-basic-light);
+      background-color: $color-basic-light;
     }
   }
 }

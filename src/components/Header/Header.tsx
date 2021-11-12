@@ -3,6 +3,7 @@ import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Menu } from 'components/Menu/Menu';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import Logo from 'images/logo.svg';
+import { NavLink } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
 import styles from './Header.module.scss';
@@ -13,7 +14,9 @@ export function Header({ className }: HeaderProps) {
     <header className={classNames(styles.header, className)}>
       <LayoutContainer>
         <div className={styles.inner}>
-          <Logo className={styles.logo} />
+          <NavLink className={styles.logo} to={AppRoutes.index}>
+            <Logo />
+          </NavLink>
           <Menu
             className={styles.nav}
             items={[
