@@ -29,4 +29,4 @@ export type UsersApiPasswordRequest = {
 
 export type UsersApiAvatarRequest = FormData;
 
-export type UsersApiFindRequest = Pick<UsersApiUser, UsersApiUserKeys.login>;
+export type UsersApiSearchRequest = Pick<UsersApiUser, UsersApiUserKeys.login>;

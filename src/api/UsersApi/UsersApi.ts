@@ -1,7 +1,9 @@
+import axios from 'axios';
+
 import {
   UsersApiAvatarRequest,
-  UsersApiFindRequest,
   UsersApiPasswordRequest,
+  UsersApiSearchRequest,
   UsersApiUpdateRequest,
   UsersApiUser,
 } from './UsersApi.types';
@@ -9,56 +11,48 @@ import {
 const API_URL = 'https://ya-praktikum.tech/api/v2/user';
 
 export const UsersApi = {
-  async getUser(id: number): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/${id}`, {
-      credentials: 'include',
+  async getUser(id: number) {
+    const response = await axios.get<UsersApiUser>(`${API_URL}/${id}`, {
+      withCredentials: true,
     });
 
-    return await request.json();
+    return response.data;
   },
-  async profile(data: UsersApiUpdateRequest): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/profile`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      credentials: 'include',
+  async updateProfile(data: UsersApiUpdateRequest) {
+    const response = await axios.put<UsersApiUser>(`${API_URL}/profile`, data, {
+      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    return await request.json();
+    return response.data;
   },
-  async password(data: UsersApiPasswordRequest): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/password`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      credentials: 'include',
+  async updatePassword(data: UsersApiPasswordRequest) {
+    const response = await axios.put<UsersApiUser>(`${API_URL}/password`, data, {
+      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    return await request.json();
+    return response.data;
   },
-  async profileAvatar(data: UsersApiAvatarRequest): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/profile/avatar`, {
-      body: data,
-      method: 'PUT',
-      credentials: 'include',
+  async updateAvatar(data: UsersApiAvatarRequest) {
+    const response = await axios.put<UsersApiUser>(`${API_URL}/profile/avatar`, data, {
+      withCredentials: true,
     });
 
-    return await request.json();
+    return response.data;
   },
-  async search(data: UsersApiFindRequest): Promise<UsersApiUser[]> {
-    const request = await fetch(`${API_URL}/search`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      credentials: 'include',
+  async searchUserByLogin(data: UsersApiSearchRequest) {
+    const response = await axios.post<UsersApiUser[]>(`${API_URL}/search`, data, {
+      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    return await request.json();
+    return response.data;
   },
 };
