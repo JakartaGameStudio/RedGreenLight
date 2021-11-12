@@ -1,7 +1,7 @@
 export type LeaderboarsPlayer = {
-  id: number,
-  login: string,
-  place: number,
-  value: string | number,
-  isOwn: boolean,
+  id: number;
+  isOwn: boolean;
+  login: string;
+  place: number;
+  value: string | number;
 };

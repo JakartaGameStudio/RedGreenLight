@@ -1,5 +1,9 @@
 .container {
   display: flex;
+  justify-content: center;
+}
+.mainList {
+  display: flex;
   flex-direction: column;
   gap: 20px;
   width: 600px;

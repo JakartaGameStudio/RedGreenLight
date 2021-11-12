@@ -1,7 +1,8 @@
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
-import styles from './PageLeaderbords.module.scss';
+import { LeaderboardsBlock } from 'components/LeaderboardsBlock/LeaderboardsBlock';
 import { LeaderboarsPlayer } from 'types/LeaderboarsPlayer.types';
-import { LeaderboardsList } from './../../components/LeaderboardsList/LeaderboardsList';
+
+import { MainList } from '../../components/MainList/MainList';
 
 const initialData: LeaderboarsPlayer[] = [
   {
@@ -10,39 +11,45 @@ const initialData: LeaderboarsPlayer[] = [
     place: 1,
     value: '0:23',
     isOwn: false,
-  }, {
+  },
+  {
     id: 242,
     login: 'SuperPlayer',
     place: 2,
     value: '0:23',
     isOwn: false,
-  }, {
+  },
+  {
     id: 2345,
     login: 'SuperPlayer',
     place: 3,
     value: '0:23',
     isOwn: false,
-  }, {
+  },
+  {
     id: 2678,
     login: 'SuperPlayer',
     place: 4,
     value: '0:23',
     isOwn: false,
-  }, {
+  },
+  {
     id: 9234,
     login: 'SuperPlayer',
     place: 5,
     value: '0:23',
     isOwn: true,
-  }
+  },
 ];
 
 export function PageLeaderbords() {
   return (
     <LayoutPage title="Рейтинг игроков">
-      <div className={styles.leaderBlock}>
-        <LeaderboardsList players={initialData} />
-      </div>
+      <MainList>
+        {initialData.map((item) => (
+          <LeaderboardsBlock key={item.id} {...item} />
+        ))}
+      </MainList>
     </LayoutPage>
   );
 }
