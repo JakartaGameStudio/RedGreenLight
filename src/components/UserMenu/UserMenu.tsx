@@ -11,12 +11,12 @@ export function UserMenu({ userName, className }: UserMenuProps) {
   const [isActive, setActive] = useState(false);
 
   useEffect(() => {
-    const documentClickHandler = () => setActive(false);
+    const closeMenu = () => setActive(false);
 
-    document.addEventListener('click', documentClickHandler);
+    document.addEventListener('click', closeMenu);
 
     return function () {
-      document.removeEventListener('click', documentClickHandler);
+      document.removeEventListener('click', closeMenu);
     };
   }, []);
 
@@ -33,26 +33,25 @@ export function UserMenu({ userName, className }: UserMenuProps) {
           <UserIcon width="1em" height="1em" />
         </div>
       </div>
-      {isActive && renderDropdown()}
+      {isActive && (
+        <nav className={styles.dropdown}>
+          <ul className={styles.menu}>
+            <li className={styles.menuItem}>
+              <NavLink className={styles.item} to={AppRoutes.profileEdit}>
+                Изменить даные
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <NavLink
+                className={classNames(styles.item, styles.itemWarning)}
+                to={AppRoutes.signOut}
+              >
+                Выйти
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      )}
     </div>
-  );
-}
-
-function renderDropdown() {
-  return (
-    <nav className={styles.dropdown}>
-      <ul className={styles.menu}>
-        <li className={styles.menuItem}>
-          <NavLink className={styles.item} to={AppRoutes.profileEdit}>
-            Изменить даные
-          </NavLink>
-        </li>
-        <li className={styles.menuItem}>
-          <NavLink className={classNames(styles.item, styles.itemWarning)} to={AppRoutes.signOut}>
-            Выйти
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
   );
 }

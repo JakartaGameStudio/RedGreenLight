@@ -1,18 +1,14 @@
 import { AuthApi } from 'api';
 import { AuthApiSignUpKeys } from 'api/AuthApi/AuthApi.types';
 import { Form } from 'components/Form/Form';
+import { FormProps } from 'components/Form/Form.types';
+import { useMemo } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignUp() {
-  function onSubmit(data) {
-    return AuthApi.signUp(data);
-  }
-
-  return (
-    <Form
-      title="Присоединиться к игре"
-      onSubmit={onSubmit}
-      fields={[
+  const formProps = useMemo<Pick<FormProps, 'fields' | 'buttons'>>(
+    () => ({
+      fields: [
         {
           id: `FormSignUp[${AuthApiSignUpKeys.firstName}]`,
           name: AuthApiSignUpKeys.firstName,
@@ -49,8 +45,8 @@ export function FormSignUp() {
           type: 'password',
           required: true,
         },
-      ]}
-      buttons={[
+      ],
+      buttons: [
         {
           children: 'Зарегистироваться',
           type: 'submit',
@@ -60,7 +56,21 @@ export function FormSignUp() {
           mod: 'link',
           href: AppRoutes.signIn,
         },
-      ]}
+      ],
+    }),
+    [],
+  );
+
+  function onSubmit(data) {
+    return AuthApi.signUp(data);
+  }
+
+  return (
+    <Form
+      title="Присоединиться к игре"
+      onSubmit={onSubmit}
+      fields={formProps.fields}
+      buttons={formProps.buttons}
     />
   );
 }
