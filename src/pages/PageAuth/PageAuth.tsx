@@ -11,8 +11,7 @@ export function PageAuth({ signUp }: PageAuthProps) {
     <div className={styles.page}>
       <Header className={styles.header} />
       <div className={styles.form}>
-        {signUp && <FormSignUp />}
-        {!signUp && <FormSignIn />}
+        {signUp ? <FormSignUp /> : <FormSignIn />}
       </div>
       <Footer />
     </div>
