@@ -8,9 +8,9 @@ export class TimeController {
   allowedMoveTimeValue: number | (() => number);
 
   constructor(obj: {
-    timeout: number | (() => number);
-    safePeriod: number | (() => number);
     allowedMoveTime: number | (() => number);
+    safePeriod: number | (() => number);
+    timeout: number | (() => number);
   }) {
     this.timeoutValue = obj.timeout;
     this.safePeriodValue = obj.safePeriod;

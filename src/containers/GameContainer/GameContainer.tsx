@@ -52,18 +52,15 @@ export const GameContainer = () => {
         fill: config.HERO_FILL_LOSE_COLOR,
       },
     });
-
     const timeController = new TimeController({
       timeout: 2000,
       safePeriod: 500,
       allowedMoveTime: 3000,
     });
-
     const borderGame = new BorderGame({
       width: config.GAME_WIDTH,
       height: config.GAME_HEIGHT,
     });
-
     const game = new Game({
       beforeStart: () => {
         timeController.start();

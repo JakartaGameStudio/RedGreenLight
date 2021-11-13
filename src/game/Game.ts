@@ -5,10 +5,10 @@ export class Game {
   private clear: () => void;
 
   constructor(props: {
-    render: () => void;
-    logic: (timeFraction: number) => void;
     beforeStart: () => void;
     clear: () => void;
+    logic: (timeFraction: number) => void;
+    render: () => void;
   }) {
     this.logic = props.logic;
     this.render = props.render;
@@ -18,7 +18,6 @@ export class Game {
 
   private run() {
     let lastTime = 0;
-
     const animate = (time: number) => {
       const timeFraction = time - (lastTime || time);
 

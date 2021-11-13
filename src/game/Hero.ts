@@ -8,7 +8,7 @@ export class Hero {
   isLost: boolean;
   deboost: number;
 
-  constructor(props: { x: number; y: number; radius: number; boost: number; deboost: number }) {
+  constructor(props: { boost: number; deboost: number; radius: number; x: number; y: number }) {
     this.x = props.x;
     this.y = props.y;
     this.radius = props.radius;

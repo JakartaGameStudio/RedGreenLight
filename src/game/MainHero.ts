@@ -2,29 +2,29 @@ import { Hero } from './Hero';
 
 export class MainHero extends Hero {
   mainStyle: {
-    stroke: string;
     fill: string;
+    stroke: string;
   };
 
   loseStyle: {
-    stroke: string;
     fill: string;
+    stroke: string;
   };
 
   constructor(params: {
-    x: number;
-    y: number;
-    radius: number;
     boost: number;
     deboost: number;
-    mainStyle: {
-      stroke: string;
-      fill: string;
-    };
     loseStyle: {
-      stroke: string;
       fill: string;
+      stroke: string;
     };
+    mainStyle: {
+      fill: string;
+      stroke: string;
+    };
+    radius: number;
+    x: number;
+    y: number;
   }) {
     super(params);
     this.mainStyle = params.mainStyle;
