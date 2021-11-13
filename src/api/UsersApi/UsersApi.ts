@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { ApiHelper } from 'helpers/ApiHelper';
 
 import {
   UsersApiAvatarRequest,
@@ -8,19 +8,14 @@ import {
   UsersApiUser,
 } from './UsersApi.types';
 
-const API_URL = 'https://ya-praktikum.tech/api/v2/user';
-
 export const UsersApi = {
   async getUser(id: number) {
-    const response = await axios.get<UsersApiUser>(`${API_URL}/${id}`, {
-      withCredentials: true,
-    });
+    const response = await ApiHelper.get<UsersApiUser>(`/user/${id}`);
 
     return response.data;
   },
   async updateProfile(data: UsersApiUpdateRequest) {
-    const response = await axios.put<UsersApiUser>(`${API_URL}/profile`, data, {
-      withCredentials: true,
+    const response = await ApiHelper.put<UsersApiUser>(`/user/profile`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -29,8 +24,7 @@ export const UsersApi = {
     return response.data;
   },
   async updatePassword(data: UsersApiPasswordRequest) {
-    const response = await axios.put<UsersApiUser>(`${API_URL}/password`, data, {
-      withCredentials: true,
+    const response = await ApiHelper.put<UsersApiUser>(`/user/password`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -39,15 +33,12 @@ export const UsersApi = {
     return response.data;
   },
   async updateAvatar(data: UsersApiAvatarRequest) {
-    const response = await axios.put<UsersApiUser>(`${API_URL}/profile/avatar`, data, {
-      withCredentials: true,
-    });
+    const response = await ApiHelper.put<UsersApiUser>(`/user/profile/avatar`, data);
 
     return response.data;
   },
   async searchUserByLogin(data: UsersApiSearchRequest) {
-    const response = await axios.post<UsersApiUser[]>(`${API_URL}/search`, data, {
-      withCredentials: true,
+    const response = await ApiHelper.post<UsersApiUser[]>(`/user/search`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
