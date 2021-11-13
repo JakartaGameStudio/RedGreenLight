@@ -1,0 +1,18 @@
+$layout-breakpoints: (
+  xs: 425px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px,
+  xl: 1440px,
+  xxl: 1680px,
+);
+
+// чтобы использовать в JS надо сделать экспорт
+:export {
+  xs: map_get($layout-breakpoints, xs);
+  sm: map_get($layout-breakpoints, sm);
+  md: map_get($layout-breakpoints, md);
+  lg: map_get($layout-breakpoints, lg);
+  xl: map_get($layout-breakpoints, xl);
+  xxl: map_get($layout-breakpoints, xxl);
+}

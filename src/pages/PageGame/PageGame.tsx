@@ -1,5 +1,5 @@
 import { GameContainer } from 'containers/GameContainer';
 
-export const GamePage = () => {
+export const PageGame = () => {
   return <GameContainer />;
 };

@@ -1,0 +1,61 @@
+@import "~styles/variables/colors.scss";
+
+.field {
+  position: relative;
+}
+
+.input,
+.label {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.label {
+  display: block;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: $color-basic-middle;
+  pointer-events: none;
+}
+
+.error {
+  color: $color-secondary;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid $color-basic-light;
+  border-radius: 8px;
+  color: $color-basic;
+  background: $color-content;
+  height: 48px;
+  outline: none;
+
+  &:focus {
+    border-color: $color-basic-middle;
+  }
+}
+
+.labelActive {
+  font-size: 12px;
+  line-height: 1;
+  top: 8px;
+}
+
+.inputActive {
+  padding-top: 20px;
+  padding-bottom: 8px;
+}
+
+.inputError {
+  border-color: $color-secondary;
+}
+
+.required {
+  color: $color-secondary;
+}
