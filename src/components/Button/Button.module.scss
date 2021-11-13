@@ -1,0 +1,38 @@
+@import "~styles/variables/colors.scss";
+
+.button {
+  display: block;
+  width: 100%;
+  color: $color-content;
+  background: $color-primary;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 14px 20px;
+  text-align: center;
+  user-select: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.button--light {
+  color: $color-primary;
+  background: $color-primary-light;
+}
+
+.button--warning {
+  background: $color-secondary;
+}
+
+.button--link {
+  color: $color-primary;
+  background: none;
+
+  &:hover {
+    color: $color-basic;
+  }
+}

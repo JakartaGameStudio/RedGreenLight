@@ -11,5 +11,6 @@ module.exports = merge({
     static: {
       publicPath: $.paths.server.base,
     },
+    historyApiFallback: { index: '/', disableDotRule: true },
   },
 });

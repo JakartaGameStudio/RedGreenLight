@@ -1,0 +1,51 @@
+@import "~styles/variables/colors.scss";
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: rgba(#000, 0.4);
+  overflow: auto;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  animation: popup 0.3s ease-out;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.body {
+  color: $color-basic;
+  background: $color-content;
+  box-shadow: 0 0 6px rgba(#000, 0.1);
+  border-radius: 12px;
+  padding: 40px 30px;
+  flex: 0 0 auto;
+  width: 340px;
+  max-width: 100%;
+  position: relative;
+}
+
