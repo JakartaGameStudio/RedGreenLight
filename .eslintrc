@@ -126,7 +126,6 @@
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-indent-props": [2, 2],
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/no-children-prop": "off"
+    "react/react-in-jsx-scope": "off"
   }
 }
