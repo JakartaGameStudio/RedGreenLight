@@ -46,4 +46,9 @@ export const UsersApi = {
 
     return response.data;
   },
+  async identify(): Promise<UsersApiUser> {
+    const response = await ApiHelper.get('/auth/user');
+
+    return response.data;
+  },
 };
