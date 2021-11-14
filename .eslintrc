@@ -9,7 +9,10 @@
     }
   },
   "settings": {
-    "import/resolver": "webpack"
+    "import/resolver": "webpack",
+    "react": {
+      "version": "latest"
+    }
   },
   "env": {
     "es6": true,
@@ -25,6 +28,7 @@
     "prettier"
   ],
   "extends": [
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:import/errors",
@@ -94,6 +98,8 @@
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/string-enum": "error",
     "sort-class-members/sort-class-members": "off",
     "simple-import-sort/imports": "error",
     "import/order": "off",
@@ -119,7 +125,8 @@
     ],
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-indent-props": [2, 2],
-    "typescript-sort-keys/interface": "error",
-    "typescript-sort-keys/string-enum": "error"
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-children-prop": "off"
   }
 }
