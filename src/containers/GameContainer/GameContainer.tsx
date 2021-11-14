@@ -1,5 +1,5 @@
 import { BorderGame, Game, MainHero, TimeController } from 'game';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const config = {
   GAME_WIDTH: 1024,
@@ -16,9 +16,11 @@ const config = {
   HERO_DEFAULT_RADIUS: 20,
   HERO_DEFAULT_BOOST: 0.00009,
   HERO_DEFAULT_DEBOOST: 0.00002,
+  TOTAL_TIME: 10000,
 };
 
 export const GameContainer = () => {
+  const [renderTime, setRenderTime] = useState('00:00');
   const ref = useRef(null);
 
   useEffect(() => {
@@ -56,6 +58,7 @@ export const GameContainer = () => {
       timeout: 2000,
       safePeriod: 500,
       allowedMoveTime: 3000,
+      totalTime: config.TOTAL_TIME,
     });
     const borderGame = new BorderGame({
       width: config.GAME_WIDTH,
@@ -81,8 +84,13 @@ export const GameContainer = () => {
           mainHero.checkStop();
         }
 
+        if (timeController.endTime) {
+          borderGame.color = config.GAME_BORDER_STOP_COLOR;
+          mainHero.isLost = true;
+        }
+
         if (timeController.timeOver && !mainHero.isLost) {
-          timeController.start();
+          timeController.reset();
         }
 
         mainHero.move(timeFraction);
@@ -91,6 +99,9 @@ export const GameContainer = () => {
       render: () => {
         borderGame.render(ctx);
         mainHero.render(ctx);
+        const tTime = new Date(timeController.remainingTime);
+
+        setRenderTime(`${tTime.getMinutes()}:${tTime.getSeconds()}`);
       },
       clear: () => ctx.clearRect(0, 0, canvas.width, canvas.height),
     });
@@ -105,5 +116,10 @@ export const GameContainer = () => {
     game.start();
   }, []);
 
-  return <canvas ref={ref} width={config.GAME_WIDTH} height={config.GAME_HEIGHT} />;
+  return (
+    <div>
+      <div>{renderTime}</div>
+      <canvas ref={ref} width={config.GAME_WIDTH} height={config.GAME_HEIGHT} />
+    </div>
+  );
 };

@@ -34,7 +34,9 @@ export class Hero {
   }
 
   public startBoost() {
-    this.inBoost = true;
+    if (!this.isLost) {
+      this.inBoost = true;
+    }
   }
 
   public endBoost() {
