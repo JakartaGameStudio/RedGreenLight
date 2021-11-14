@@ -9,5 +9,5 @@ export enum AppRoutes {
   profilePassword = '/profile/password',
   signIn = '/signin',
   signOut = '/signout',
-  signUp = '/signup'
+  signUp = '/signup',
 }
