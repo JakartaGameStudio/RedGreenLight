@@ -86,7 +86,7 @@ export class TimeController {
     this.isStop = true;
   }
 
-  restart() {
+  refresh() {
     this.reset();
     this.currentTime = 0;
     this.isStop = false;

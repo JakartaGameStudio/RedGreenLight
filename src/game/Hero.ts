@@ -1,22 +1,30 @@
 export class Hero {
   x: number;
   y: number;
+  baseX: number;
+  baseY: number;
   radius: number;
   inBoost: boolean;
   boost: number;
   speed: number;
   isLost: boolean;
+  isWin: boolean;
   deboost: number;
 
   constructor(props: { boost: number; deboost: number; radius: number; x: number; y: number }) {
-    this.x = props.x;
-    this.y = props.y;
+    this.x = this.baseX = props.x;
+    this.y = this.baseY = props.y;
     this.radius = props.radius;
-    this.inBoost = false;
     this.boost = props.boost;
     this.deboost = props.deboost;
+    this.inBoost = false;
     this.speed = 0;
     this.isLost = false;
+    this.isWin = false;
+  }
+
+  get leftBorder() {
+    return this.x - this.radius / 2;
   }
 
   move(timeFraction: number) {
@@ -43,9 +51,12 @@ export class Hero {
     this.inBoost = false;
   }
 
-  public checkStop() {
-    if (this.speed > 0) {
-      this.isLost = true;
-    }
+  public refresh() {
+    this.inBoost = false;
+    this.speed = 0;
+    this.isLost = false;
+    this.isWin = false;
+    this.x = this.baseX;
+    this.y = this.baseY;
   }
 }

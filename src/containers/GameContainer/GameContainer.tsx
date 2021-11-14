@@ -1,9 +1,12 @@
+import { LoseWindow, ModalWrapper, StartWindow, WinWindow } from 'components/GameModals/GameModals';
 import { BorderGame, Game, MainHero, TimeController } from 'game';
+import { FinishLine } from 'game/FinishLine';
 import { useEffect, useRef, useState } from 'react';
 
 const config = {
   GAME_WIDTH: 1024,
   GAME_HEIGHT: 640,
+  DISTANCE_LENGTH: 300,
   HERO_BORDER_MAIN_COLOR: 'rgb(57, 156, 130)',
   HERO_FILL_MAIN_COLOR: 'rgba(57, 156, 130, 0.1)',
   HERO_BORDER_LOSE_COLOR: 'rgb(243, 98, 123)',
@@ -18,13 +21,46 @@ const config = {
   HERO_DEFAULT_DEBOOST: 0.00002,
   TOTAL_TIME: 10000,
 };
+const mainHero = new MainHero({
+  x: config.HERO_START_POSITION_X,
+  y: config.HERO_START_POSITION_Y,
+  radius: config.HERO_DEFAULT_RADIUS,
+  boost: config.HERO_DEFAULT_BOOST,
+  deboost: config.HERO_DEFAULT_DEBOOST,
+  mainStyle: {
+    stroke: config.HERO_BORDER_MAIN_COLOR,
+    fill: config.HERO_FILL_MAIN_COLOR,
+  },
+  loseStyle: {
+    stroke: config.HERO_BORDER_LOSE_COLOR,
+    fill: config.HERO_FILL_LOSE_COLOR,
+  },
+});
+const timeController = new TimeController({
+  timeout: 2000,
+  safePeriod: 500,
+  allowedMoveTime: 3000,
+  totalTime: config.TOTAL_TIME,
+});
+const borderGame = new BorderGame({
+  width: config.GAME_WIDTH,
+  height: config.GAME_HEIGHT,
+});
+const game = new Game();
+const finishLine = new FinishLine({
+  height: config.GAME_HEIGHT,
+  lengthDistance: config.DISTANCE_LENGTH,
+});
 
 export const GameContainer = () => {
-  const [renderTime, setRenderTime] = useState('00:00');
-  const ref = useRef(null);
+  const [renderTime, setRenderTime] = useState('');
+  const [gameStatus, setGameStatus] = useState<'inGame' | 'beforeGame' | 'win' | 'lose'>(
+    'beforeGame',
+  );
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const canvas = ref.current as HTMLCanvasElement;
+    const canvas = canvasRef.current as HTMLCanvasElement;
 
     if (!canvas) {
       return;
@@ -39,87 +75,107 @@ export const GameContainer = () => {
     canvas.width = config.GAME_WIDTH;
     canvas.height = config.GAME_HEIGHT;
 
-    const mainHero = new MainHero({
-      x: config.HERO_START_POSITION_X,
-      y: config.HERO_START_POSITION_Y,
-      radius: config.HERO_DEFAULT_RADIUS,
-      boost: config.HERO_DEFAULT_BOOST,
-      deboost: config.HERO_DEFAULT_DEBOOST,
-      mainStyle: {
-        stroke: config.HERO_BORDER_MAIN_COLOR,
-        fill: config.HERO_FILL_MAIN_COLOR,
-      },
-      loseStyle: {
-        stroke: config.HERO_BORDER_LOSE_COLOR,
-        fill: config.HERO_FILL_LOSE_COLOR,
-      },
-    });
-    const timeController = new TimeController({
-      timeout: 2000,
-      safePeriod: 500,
-      allowedMoveTime: 3000,
-      totalTime: config.TOTAL_TIME,
-    });
-    const borderGame = new BorderGame({
-      width: config.GAME_WIDTH,
-      height: config.GAME_HEIGHT,
-    });
-    const game = new Game({
-      beforeStart: () => {
-        timeController.start();
-      },
-      logic: (timeFraction: number) => {
-        timeController.updateTime(timeFraction);
+    game.beforeStart = () => {
+      setGameStatus('inGame');
+      timeController.start();
+    };
 
-        if (timeController.allowedMove) {
-          borderGame.color = config.GAME_BORDER_ALLOWED_COLOR;
-        }
+    game.logic = (timeFraction: number) => {
+      timeController.updateTime(timeFraction);
 
-        if (timeController.safePeriod) {
-          borderGame.color = config.GAME_BORDER_WARNING_COLOR;
-        }
+      if (timeController.allowedMove) {
+        borderGame.color = config.GAME_BORDER_ALLOWED_COLOR;
+      }
 
-        if (timeController.timeout) {
-          borderGame.color = config.GAME_BORDER_STOP_COLOR;
-          mainHero.checkStop();
-        }
+      if (timeController.safePeriod) {
+        borderGame.color = config.GAME_BORDER_WARNING_COLOR;
+      }
 
-        if (timeController.endTime) {
-          borderGame.color = config.GAME_BORDER_STOP_COLOR;
-          mainHero.isLost = true;
-        }
+      if (timeController.timeout) {
+        borderGame.color = config.GAME_BORDER_STOP_COLOR;
+      }
 
-        if (timeController.timeOver && !mainHero.isLost) {
-          timeController.reset();
-        }
+      if (mainHero.leftBorder > finishLine.lengthDistance) {
+        mainHero.isWin = true;
+      }
 
-        mainHero.move(timeFraction);
-        mainHero.move(timeFraction);
-      },
-      render: () => {
-        borderGame.render(ctx);
-        mainHero.render(ctx);
-        const tTime = new Date(timeController.remainingTime);
+      if (mainHero.speed > 0 && timeController.timeout && !mainHero.isWin) {
+        mainHero.isLost = true;
+      }
 
-        setRenderTime(`${tTime.getMinutes()}:${tTime.getSeconds()}`);
-      },
-      clear: () => ctx.clearRect(0, 0, canvas.width, canvas.height),
-    });
+      if (timeController.endTime && !mainHero.isWin) {
+        borderGame.color = config.GAME_BORDER_STOP_COLOR;
+        mainHero.isLost = true;
+      }
 
-    canvas.addEventListener('mousedown', () => {
-      mainHero.startBoost();
-    });
-    canvas.addEventListener('mouseup', () => {
-      mainHero.endBoost();
-    });
+      if (mainHero.isLost) {
+        timeController.stop();
+        setGameStatus('lose');
+      }
 
-    game.start();
+      if (mainHero.isWin) {
+        timeController.stop();
+        setGameStatus('win');
+      }
+
+      if (timeController.timeOver && !mainHero.isLost && !mainHero.isWin) {
+        timeController.reset();
+      }
+
+      mainHero.move(timeFraction);
+      mainHero.move(timeFraction);
+    };
+
+    game.render = () => {
+      borderGame.render(ctx);
+      mainHero.render(ctx);
+      finishLine.render(ctx);
+      const tTime = new Date(timeController.remainingTime);
+
+      setRenderTime(`${tTime.getMinutes()}:${tTime.getSeconds()}`);
+    };
+
+    game.clear = () => ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    game.restart = () => {
+      mainHero.refresh();
+      timeController.refresh();
+      setGameStatus('inGame');
+    };
+
+    return () => {
+      game.clearAnimate();
+    };
   }, []);
 
+  const startGame = () => {
+    game.start();
+  };
+  const restartGame = () => {
+    game.restart();
+  };
+  const startBoost = () => {
+    mainHero.startBoost();
+  };
+  const endBoost = () => {
+    mainHero.endBoost();
+  };
+
   return (
-    <div>
+    <div onMouseDown={startBoost} onMouseUp={endBoost}>
       <div>{renderTime}</div>
-      <canvas ref={ref} width={config.GAME_WIDTH} height={config.GAME_HEIGHT} />
+      <canvas ref={canvasRef} width={config.GAME_WIDTH} height={config.GAME_HEIGHT} />
+      {gameStatus !== 'inGame' && (
+        <ModalWrapper>
+          {gameStatus === 'beforeGame' ? (
+            <StartWindow startGame={startGame} />
+          ) : gameStatus === 'lose' ? (
+            <LoseWindow restartGame={restartGame} />
+          ) : gameStatus === 'win' ? (
+            <WinWindow restartGame={restartGame} />
+          ) : null}
+        </ModalWrapper>
+      )}
     </div>
   );
 };
