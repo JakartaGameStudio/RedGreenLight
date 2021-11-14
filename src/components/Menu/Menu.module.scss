@@ -1,17 +1,19 @@
-.menu {
-  ul,
-  li {
-    padding: 0;
-    margin: 0;
-  }
-  ul {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  li {
-    display: block;
-  }
+@import "~styles/variables/colors.scss";
+
+.menuList,
+.menuListItem {
+  padding: 0;
+  margin: 0;
+}
+
+.menuList {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.menuListItem {
+  display: block;
 }
 
 .item {
@@ -20,13 +22,13 @@
   line-height: 20px;
   padding: 10px 20px;
   border-radius: 6px;
-  color: var(--theme-color-basic);
+  color: $color-basic;
   transition: 0.2s ease-out background-color;
 
   &:global {
     &.active {
       cursor: default;
-      background-color: var(--theme-color-basic-light);
+      background-color: $color-basic-light;
     }
   }
 }

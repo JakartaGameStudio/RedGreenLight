@@ -1,8 +1,8 @@
+@import "~styles/variables/colors.scss";
+
 .field {
   position: relative;
 }
-
-
 
 .input,
 .label {
@@ -15,12 +15,12 @@
   position: absolute;
   left: 15px;
   top: 15px;
-  color: var(--theme-color-basic-middle);
+  color: $color-basic-middle;
   pointer-events: none;
 }
 
 .error {
-  color: var(--theme-color-warning);
+  color: $color-secondary;
   font-size: 10px;
   margin-top: 5px;
 }
@@ -29,15 +29,15 @@
   display: block;
   width: 100%;
   padding: 14px;
-  border: 1px solid var(--theme-color-basic-light);
+  border: 1px solid $color-basic-light;
   border-radius: 8px;
-  color: var(--theme-color-basic);
-  background: var(--theme-color-white);
+  color: $color-basic;
+  background: $color-content;
   height: 48px;
   outline: none;
 
   &:focus {
-    border-color: var(--theme-color-basic-middle);
+    border-color: $color-basic-middle;
   }
 }
 
@@ -53,9 +53,9 @@
 }
 
 .inputError {
-  border-color: var(--theme-color-warning);
+  border-color: $color-secondary;
 }
 
 .required {
-  color: var(--theme-color-warning);
+  color: $color-secondary;
 }

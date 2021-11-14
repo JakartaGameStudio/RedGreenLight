@@ -1,16 +1,57 @@
+import classNames from 'classnames';
 import UserIcon from 'images/icons/user.svg';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
 import styles from './UserMenu.module.scss';
+import { UserMenuProps } from './UserMenu.types';
 
-export function UserMenu() {
+export function UserMenu({ userName, className }: UserMenuProps) {
+  const [isActive, setActive] = useState(false);
+
+  useEffect(() => {
+    const closeMenu = () => setActive(false);
+
+    document.addEventListener('click', closeMenu);
+
+    return function () {
+      document.removeEventListener('click', closeMenu);
+    };
+  }, []);
+
+  function onClick(event) {
+    event.stopPropagation();
+    setActive(!isActive);
+  }
+
   return (
-    <NavLink to={AppRoutes.profile} className={styles.wrapper}>
-      <div className={styles.username}>Профиль</div>
-      <div className={styles.icon}>
-        <UserIcon width="1em" height="1em" />
+    <div className={classNames(styles.wrapper, className)} onClick={onClick}>
+      <div className={styles.head} title={userName}>
+        <div className={styles.username}>{userName}</div>
+        <div className={styles.icon}>
+          <UserIcon width="1em" height="1em" />
+        </div>
       </div>
-    </NavLink>
+      {isActive && (
+        <nav className={styles.dropdown}>
+          <ul className={styles.menu}>
+            <li className={styles.menuItem}>
+              <NavLink className={styles.item} to={AppRoutes.profileEdit}>
+                Изменить даные
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <NavLink
+                className={classNames(styles.item, styles.itemWarning)}
+                to={AppRoutes.signOut}
+              >
+                Выйти
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      )}
+    </div>
   );
 }

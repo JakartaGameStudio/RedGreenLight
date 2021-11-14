@@ -1,6 +1,8 @@
+@import "~styles/variables/colors.scss";
+
 .footer {
   font-size: 12px;
-  color: var(--theme-color-basic-middle);
+  color: $color-basic-middle;
   padding: 30px 0;
   text-align: center;
 }

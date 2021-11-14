@@ -1,64 +1,49 @@
+import { ApiHelper } from 'helpers/ApiHelper';
+
 import {
   UsersApiAvatarRequest,
-  UsersApiFindRequest,
   UsersApiPasswordRequest,
+  UsersApiSearchRequest,
   UsersApiUpdateRequest,
   UsersApiUser,
 } from './UsersApi.types';
 
-const API_URL = 'https://ya-praktikum.tech/api/v2/user';
-
 export const UsersApi = {
-  async getUser(id: number): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/${id}`, {
-      credentials: 'include',
-    });
+  async getUser(id: number) {
+    const response = await ApiHelper.get<UsersApiUser>(`/user/${id}`);
 
-    return await request.json();
+    return response.data;
   },
-  async profile(data: UsersApiUpdateRequest): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/profile`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      credentials: 'include',
+  async updateProfile(data: UsersApiUpdateRequest) {
+    const response = await ApiHelper.put<UsersApiUser>(`/user/profile`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    return await request.json();
+    return response.data;
   },
-  async password(data: UsersApiPasswordRequest): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/password`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      credentials: 'include',
+  async updatePassword(data: UsersApiPasswordRequest) {
+    const response = await ApiHelper.put<UsersApiUser>(`/user/password`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    return await request.json();
+    return response.data;
   },
-  async profileAvatar(data: UsersApiAvatarRequest): Promise<UsersApiUser> {
-    const request = await fetch(`${API_URL}/profile/avatar`, {
-      body: data,
-      method: 'PUT',
-      credentials: 'include',
-    });
+  async updateAvatar(data: UsersApiAvatarRequest) {
+    const response = await ApiHelper.put<UsersApiUser>(`/user/profile/avatar`, data);
 
-    return await request.json();
+    return response.data;
   },
-  async search(data: UsersApiFindRequest): Promise<UsersApiUser[]> {
-    const request = await fetch(`${API_URL}/search`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      credentials: 'include',
+  async searchUserByLogin(data: UsersApiSearchRequest) {
+    const response = await ApiHelper.post<UsersApiUser[]>(`/user/search`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    return await request.json();
+    return response.data;
   },
 };
