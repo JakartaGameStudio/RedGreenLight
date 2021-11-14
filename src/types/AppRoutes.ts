@@ -1,4 +1,5 @@
 export enum AppRoutes {
+  error500 = '/500',
   forum = '/forum',
   game = '/game',
   index = '/',
@@ -8,5 +9,5 @@ export enum AppRoutes {
   profilePassword = '/profile/password',
   signIn = '/signin',
   signOut = '/signout',
-  signUp = '/signup',
+  signUp = '/signup'
 }
