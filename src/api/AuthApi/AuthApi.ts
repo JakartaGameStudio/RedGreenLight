@@ -1,13 +1,10 @@
-import axios from 'axios';
+import { ApiHelper } from 'helpers/ApiHelper';
 
 import { AuthApiSignInRequest, AuthApiSignUpRequest, AuthApiSignUpResponse } from './AuthApi.types';
 
-const API_URL = 'https://ya-praktikum.tech/api/v2/auth';
-
 export const AuthApi = {
   async signUp(data: AuthApiSignUpRequest) {
-    const response = await axios.post<AuthApiSignUpResponse>(`${API_URL}/signup`, data, {
-      withCredentials: true,
+    const response = await ApiHelper.post<AuthApiSignUpResponse>('/auth/signup', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -17,8 +14,7 @@ export const AuthApi = {
   },
 
   signIn(data: AuthApiSignInRequest) {
-    return axios.post(`${API_URL}/signin`, data, {
-      withCredentials: true,
+    return ApiHelper.post('/auth/signin', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -26,8 +22,6 @@ export const AuthApi = {
   },
 
   signOut() {
-    return axios.post(`${API_URL}/logout`, null, {
-      withCredentials: true,
-    });
+    return ApiHelper.post('/auth/logout');
   },
 };
