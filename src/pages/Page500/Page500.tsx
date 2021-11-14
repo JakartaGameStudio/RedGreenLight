@@ -5,5 +5,5 @@ export function Page500() {
   const { state } = useLocation();
   const message = state.error.toString();
 
-  return <LayoutPage title="Произошла внутренняя ошибка">{message}</LayoutPage>;
+  return <LayoutPage title="Произошла внутренняя ошибка 🙈">{message}</LayoutPage>;
 }
