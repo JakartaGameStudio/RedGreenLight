@@ -1,5 +1,6 @@
 import './App.module.scss';
 
+import { Page404 } from 'pages/Page404/Page404';
 import { Page500 } from 'pages/Page500/Page500';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageGame } from 'pages/PageGame/PageGame';
@@ -18,6 +19,7 @@ export function App() {
         <Route path={AppRoutes.signUp} element={<PageAuth signUp={true} />} />
         <Route path={AppRoutes.signOut} element={<PageSignOut />} />
         <Route path={AppRoutes.error500} element={<Page500 />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>
   );
