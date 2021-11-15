@@ -4,6 +4,7 @@ import { Preloader } from 'components/Preloader/Preloader';
 import { Profile } from 'components/Profile/Profile';
 import { profileFieldsLabels } from 'constans/profileFieldsLabels';
 import { useEffect, useState } from 'react';
+import {ApiRoutes} from "types/ApiRoutes";
 
 const fieldsKeys = [
   UsersApiUserKeys.firstName,
@@ -39,6 +40,17 @@ export function ProfileContainer() {
   }
 
   const title = userData[UsersApiUserKeys.displayName] || userData[UsersApiUserKeys.login];
+  const avatarImage = userData[UsersApiUserKeys.avatar];
 
-  return <Profile fields={createFieldsFromData(userData)} title={title} />;
+  return (
+    <Profile
+      fields={createFieldsFromData(userData)}
+      title={title}
+      avatar={{
+        image: {
+          src: avatarImage ? `${ApiRoutes.resources}/${avatarImage}` : undefined,
+        },
+      }}
+    />
+  );
 }

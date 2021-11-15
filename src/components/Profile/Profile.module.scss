@@ -5,6 +5,10 @@
   margin-bottom: 30px;
 }
 
+.avatar {
+  margin-bottom: 30px;
+}
+
 .body,
 .nav {
   max-width: 350px;
@@ -28,6 +32,8 @@
 }
 
 .link {
+  font-size: 14px;
+  line-height: 20px;
   &:hover {
     color: $color-basic;
   }

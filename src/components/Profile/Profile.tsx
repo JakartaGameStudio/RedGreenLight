@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { ProfileAvatar } from 'components/ProfileAvatar/ProfileAvatar';
 import { Title } from 'components/Title/Title';
 import { NavLink } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
@@ -6,10 +7,11 @@ import { AppRoutes } from 'types/AppRoutes';
 import styles from './Profile.module.scss';
 import { ProfileProps } from './Profile.types';
 
-export function Profile({ title, fields }: ProfileProps) {
+export function Profile({ title, fields, avatar }: ProfileProps) {
   return (
     <div className={styles.profile}>
       <div className={styles.head}>
+        <ProfileAvatar className={styles.avatar} {...avatar} />
         <Title size="h2">{title}</Title>
       </div>
       <div className={styles.body}>
