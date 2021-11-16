@@ -16,10 +16,8 @@ export function FormField({
   type = 'text',
 }: FormFieldProps) {
   const [isActive, setActive] = useState(Boolean(value));
-  const [val, setVal] = useState(value);
 
   function handlerChange({ target }) {
-    setVal(target.value);
     onChange(target.value);
   }
 
@@ -28,7 +26,7 @@ export function FormField({
   }
 
   function handlerBlur() {
-    setActive(Boolean(val));
+    setActive(Boolean(value));
   }
 
   return (
@@ -45,7 +43,7 @@ export function FormField({
       <input
         id={id}
         name={name}
-        value={val}
+        value={value}
         type={type}
         required={required}
         onFocus={handlerFocus}
