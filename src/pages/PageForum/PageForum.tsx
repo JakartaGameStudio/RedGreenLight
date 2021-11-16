@@ -32,8 +32,8 @@ export function PageForum() {
   return (
     <LayoutPage title="Форум">
       <MainList>
-        {initialData.map((item) => (
-          <ForumSectionLink key={item.id} {...item} />
+        {initialData.map((section) => (
+          <ForumSectionLink key={section.id} section={section} />
         ))}
       </MainList>
     </LayoutPage>
