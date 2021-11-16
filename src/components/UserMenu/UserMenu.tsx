@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import UserIcon from 'images/icons/user.svg';
-=======
 import classNames from 'classnames';
 import UserIcon from 'images/icons/user.svg';
 import { useEffect, useState } from 'react';
->>>>>>> main
 import { NavLink } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 

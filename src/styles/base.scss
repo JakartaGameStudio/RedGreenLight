@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-@import "./variables/theme";
-=======
->>>>>>> main
 @import "./variables/fonts";
 @import "./variables/colors";
 
@@ -11,13 +7,8 @@ html {
   font-weight: $font-weight-regular;
   font-size: $font-size-base;
   line-height: $line-height-base;
-<<<<<<< HEAD
-  color: $color-text;
-  background: $color-background;
-=======
   color: $color-basic;
   background: $color-content;
->>>>>>> main
 }
 
 small,
