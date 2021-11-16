@@ -8,7 +8,7 @@ export class Hero {
   boost: number;
   speed: number;
   isLost: boolean;
-  isWin: boolean;
+  isWon: boolean;
   deboost: number;
 
   constructor(props: { boost: number; deboost: number; radius: number; x: number; y: number }) {
@@ -20,7 +20,7 @@ export class Hero {
     this.inBoost = false;
     this.speed = 0;
     this.isLost = false;
-    this.isWin = false;
+    this.isWon = false;
   }
 
   get leftBorder() {
@@ -55,7 +55,7 @@ export class Hero {
     this.inBoost = false;
     this.speed = 0;
     this.isLost = false;
-    this.isWin = false;
+    this.isWon = false;
     this.x = this.baseX;
     this.y = this.baseY;
   }

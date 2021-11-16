@@ -1,6 +1,7 @@
-@import "~styles/variables/colors.scss";
+@import "~styles/variables/fonts";
+@import "~styles/variables/colors";
 
-.modelWrapper {
+.modalWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,10 +16,15 @@
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
   animation: popup 0.3s ease-out;
+
   &__body {
     width: 300px;
     padding: 20px 20px;
     border-radius: 10px;
     background-color: $color-content;
+  }
+
+  &__title {
+    margin-bottom: 20px;
   }
 }

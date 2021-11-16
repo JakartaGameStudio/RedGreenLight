@@ -65,14 +65,14 @@ export class TimeController {
     return this.cycleTime > this.stopTimeout;
   }
 
-  get endTime() {
+  get timeEnded() {
     return this.totalTime <= this.currentTime;
   }
 
   get remainingTime() {
     const remainingTime = this.totalTime - this.currentTime;
 
-    return remainingTime > 0 ? remainingTime : 0;
+    return Math.max(remainingTime, 0);
   }
 
   updateTime(timeFraction: number) {
