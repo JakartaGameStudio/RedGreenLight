@@ -1,8 +1,15 @@
+import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
 import { ApiHelper } from 'helpers/ApiHelper';
 
 import { AuthApiSignInRequest, AuthApiSignUpRequest, AuthApiSignUpResponse } from './AuthApi.types';
 
 export const AuthApi = {
+  async identify(): Promise<UsersApiUser> {
+    const response = await ApiHelper.get('/auth/user');
+
+    return response.data;
+  },
+
   async signUp(data: AuthApiSignUpRequest) {
     const response = await ApiHelper.post<AuthApiSignUpResponse>('/auth/signup', data, {
       headers: {

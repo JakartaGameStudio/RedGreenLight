@@ -1,4 +1,4 @@
-import { UsersApi } from 'api';
+import { AuthApi } from 'api';
 import { UsersApiKeys, UsersApiUser } from 'api/UsersApi/UsersApi.types';
 import { Preloader } from 'components/Preloader/Preloader';
 import { ProfileAvatar } from 'components/ProfileAvatar/ProfileAvatar';
@@ -18,7 +18,7 @@ export function Profile({ type }: ProfileProps) {
   const [popupActive, setPopupActive] = useState(false);
 
   useEffect(() => {
-    UsersApi.identify()
+    AuthApi.identify()
       .then((data) => {
         setUserData(data);
       })
