@@ -40,7 +40,6 @@
         "allowTemplateLiterals": true
       }
     ],
-    "no-shadow": "off",
     "no-console": [
       "error",
       {
@@ -80,7 +79,9 @@
     "require-await": "warn",
     "prefer-arrow-callback": "error",
     "dot-notation": "error",
+    "no-shadow": "off",
     "eslint-comments/no-unlimited-disable": "off",
+    "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "warn",
@@ -105,7 +106,9 @@
       { "blankLine": "always", "prev": "*", "next": "return" },
       { "blankLine": "always", "prev": "*", "next": "block-like" },
       { "blankLine": "always", "prev": "block-like", "next": "*" },
-      { "blankLine": "always", "prev": "function", "next": "*" }
+      { "blankLine": "always", "prev": "function", "next": "*" },
+      { "blankLine": "always", "prev": ["const", "let"], "next": "*" },
+      { "blankLine": "never", "prev": ["const", "let"], "next": ["const", "let"] }
     ],
     "react/jsx-curly-brace-presence": [
       "error",

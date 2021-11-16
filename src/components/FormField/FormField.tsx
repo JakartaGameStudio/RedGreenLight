@@ -56,15 +56,11 @@ export function FormField({
           [styles.inputError]: errors.length,
         })}
       />
-      {renderErrors(errors)}
+      {errors.map((error, index) => (
+        <div key={index} className={styles.error}>
+          {error}
+        </div>
+      ))}
     </div>
   );
-}
-
-function renderErrors(errors: FormFieldProps['errors']) {
-  return errors.map((error, index) => (
-    <div key={index} className={styles.error}>
-      {error}
-    </div>
-  ));
 }

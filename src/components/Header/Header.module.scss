@@ -10,11 +10,24 @@
 }
 
 .logo {
-  flex: 0 0 auto;
-  width: 120px;
-  margin-right: 40px;
+  display: block;
+  flex: 0 0 120px;
+  margin-right: 30px;
+  font-size: 0;
+  line-height: 0;
+}
+
+.logoIcon {
+  display: block;
+  width: 100%;
 }
 
 .nav {
   flex: 1 0 auto;
+}
+
+.user {
+  flex: 0 0 auto;
+  max-width: 140px;
+  margin-left: 30px;
 }

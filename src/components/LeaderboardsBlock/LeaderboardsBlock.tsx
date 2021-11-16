@@ -1,10 +1,14 @@
 import classNames from 'classnames';
 import UserIcon from 'images/icons/user.svg';
-import { LeaderboarsPlayer } from 'types/LeaderboarsPlayer.types';
+import { LeaderboardsPlayer } from 'types/LeaderboardsPlayer.types';
 
 import styles from './LeaderboardsBlock.module.scss';
 
-export function LeaderboardsBlock({ login, place, value, isOwn }: LeaderboarsPlayer) {
+type LeaderboardsBlockProps = { isOwn: boolean; player: LeaderboardsPlayer };
+
+export function LeaderboardsBlock({ player, isOwn }: LeaderboardsBlockProps) {
+  const { value, login, place } = player;
+
   return (
     <div
       className={classNames(styles.leaderboardsBlock, {
