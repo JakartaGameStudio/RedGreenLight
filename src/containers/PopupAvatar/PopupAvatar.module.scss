@@ -1,0 +1,40 @@
+@import "~styles/variables/colors.scss";
+
+.label {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 0 20px 0;
+}
+
+.link {
+  font-size: 14px;
+  color: var(--theme-color-primary);
+  &:hover {
+    text-decoration: underline;
+    color: var(--theme-color-basic);
+  }
+}
+
+.image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 200px;
+}
+
+.input {
+  display: none;
+}
+
+.value {
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 20px 0;
+  color: var(--theme-color-basic);
+}
+
+.button {
+  margin-top: 10px;
+}

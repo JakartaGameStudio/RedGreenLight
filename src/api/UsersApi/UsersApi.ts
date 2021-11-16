@@ -9,7 +9,7 @@ import {
 } from './UsersApi.types';
 
 export const UsersApi = {
-  async getUser(id: number) {
+  async getUserById(id: number) {
     const response = await ApiHelper.get<UsersApiUser>(`/user/${id}`);
 
     return response.data;

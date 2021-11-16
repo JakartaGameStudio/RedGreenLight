@@ -10,11 +10,11 @@ export function Button(props: ButtonProps) {
 
   return (
     <ButtonComponent
-      className={classNames(styles.button, className, {
+      {...props}
+      className={classNames(styles.button, props.className, {
         [styles[`button--${mod}`]]: mod,
       })}
       to={href}
-      {...props}
     />
   );
 }

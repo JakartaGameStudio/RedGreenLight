@@ -4,7 +4,7 @@ import { Preloader } from 'components/Preloader/Preloader';
 import { Profile } from 'components/Profile/Profile';
 import { profileFieldsLabels } from 'constans/profileFieldsLabels';
 import { useEffect, useState } from 'react';
-import {ApiRoutes} from "types/ApiRoutes";
+import { ApiRoutes } from 'types/ApiRoutes';
 
 const fieldsKeys = [
   UsersApiUserKeys.firstName,
