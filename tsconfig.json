@@ -4,6 +4,7 @@
       "dom",
       "esnext"
     ],
+    "resolveJsonModule": true,
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",

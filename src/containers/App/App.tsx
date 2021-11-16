@@ -16,6 +16,8 @@ export function App() {
         <Route path={AppRoutes.game} element={<PageGame />} />
         <Route path={AppRoutes.signUp} element={<PageAuth signUp={true} />} />
         <Route path={AppRoutes.profile} element={<PageProfile />} />
+        <Route path={AppRoutes.profileEdit} element={<PageProfile type="edit" />} />
+        <Route path={AppRoutes.profilePassword} element={<PageProfile type="password" />} />
       </Routes>
     </Router>
   );

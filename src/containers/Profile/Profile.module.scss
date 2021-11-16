@@ -5,16 +5,17 @@
   margin-bottom: 30px;
 }
 
+.preloader {
+  margin: 100px;
+  text-align: center;
+}
+
 .avatar {
   margin-bottom: 30px;
 }
 
-.body,
-.nav {
-  max-width: 350px;
-}
-
 .body {
+  max-width: 350px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -22,7 +23,7 @@
 .nav {
   display: block;
   padding: 0;
-  margin: 20px auto 0 auto;
+  margin-top: 20px;
 }
 
 .navItem {

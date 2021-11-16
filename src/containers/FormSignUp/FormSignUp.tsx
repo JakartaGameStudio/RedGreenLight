@@ -45,6 +45,14 @@ export function FormSignUp() {
     },
   ]);
 
+  function onChange({ name, value }) {
+    setFields((prevState) =>
+      prevState.map((field) => {
+        return field.name === name ? { ...field, value } : field;
+      }),
+    );
+  }
+
   function onSubmit(data) {
     return AuthApi.signUp(data);
   }
@@ -52,7 +60,7 @@ export function FormSignUp() {
   return (
     <Form
       title="Присоединиться к игре"
-      setFields={setFields}
+      onChange={onChange}
       onSubmit={onSubmit}
       fields={fields}
       buttons={[

@@ -25,6 +25,14 @@ export function FormSignIn() {
     },
   ]);
 
+  function onChange({ name, value }) {
+    setFields((prevState) =>
+      prevState.map((field) => {
+        return field.name === name ? { ...field, value } : field;
+      }),
+    );
+  }
+
   function onSubmit(data) {
     return AuthApi.signIn(data);
   }
@@ -32,7 +40,7 @@ export function FormSignIn() {
   return (
     <Form
       title="Вход"
-      setFields={setFields}
+      onChange={onChange}
       onSubmit={onSubmit}
       fields={fields}
       buttons={[

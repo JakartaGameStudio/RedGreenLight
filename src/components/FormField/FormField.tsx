@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './FormField.module.scss';
 import { FormFieldProps } from './FormField.types';
@@ -10,12 +10,18 @@ export function FormField({
   placeholder,
   onChange,
   required,
+  disabled,
   className,
+  readonly,
   value = '',
   errors = [],
   type = 'text',
 }: FormFieldProps) {
   const [isActive, setActive] = useState(Boolean(value));
+
+  useEffect(() => {
+    setActive(Boolean(value));
+  }, [value]);
 
   function handlerChange({ target }) {
     onChange(target.value);
@@ -45,6 +51,8 @@ export function FormField({
         name={name}
         value={value}
         type={type}
+        disabled={disabled}
+        readOnly={readonly}
         required={required}
         onFocus={handlerFocus}
         onBlur={handlerBlur}
