@@ -3,7 +3,7 @@ import './App.module.scss';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageGame } from 'pages/PageGame/PageGame';
 import { PageIndex } from 'pages/PageIndex/PageIndex';
-import { PageLeaderbords } from 'pages/PageLeaderbords/PageLeaderbords';
+import { PageLeaderboards } from 'pages/PageLeaderboards/PageLeaderboards';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
@@ -12,7 +12,7 @@ export function App() {
     <Router>
       <Routes>
         <Route path={AppRoutes.index} element={<PageIndex />} />
-        <Route path={AppRoutes.leaderBoards} element={<PageLeaderbords />} />
+        <Route path={AppRoutes.leaderBoards} element={<PageLeaderboards />} />
         <Route path={AppRoutes.signIn} element={<PageAuth />} />
         <Route path={AppRoutes.game} element={<PageGame />} />
         <Route path={AppRoutes.signUp} element={<PageAuth signUp={true} />} />

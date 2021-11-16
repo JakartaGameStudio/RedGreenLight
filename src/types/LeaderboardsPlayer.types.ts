@@ -1,6 +1,5 @@
-export type LeaderboarsPlayer = {
+export type LeaderboardsPlayer = {
   id: number;
-  isOwn: boolean;
   login: string;
   place: number;
   value: string | number;
