@@ -49,12 +49,13 @@ export function Profile({ type }: ProfileProps) {
         <div className={styles.body}>
           {type === 'edit' && <FormProfile />}
           {type === 'password' && <FormPassword />}
-          {!type && userData ? (
+          {!type && userData && (
             <>
               <ProfileInfo userData={userData} />
               <ProfileNav />
             </>
-          ) : (
+          )}
+          {!type && !userData && (
             <div className={styles.preloader}>
               <Preloader />
             </div>
