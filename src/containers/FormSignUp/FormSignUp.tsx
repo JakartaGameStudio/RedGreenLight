@@ -1,45 +1,46 @@
 import { AuthApi } from 'api';
-import { AuthApiSignUpKeys } from 'api/AuthApi/AuthApi.types';
+import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
+import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 import { useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignUp() {
   const [fields, setFields] = useState<FormProps['fields']>([
     {
-      id: `FormSignUp[${AuthApiSignUpKeys.firstName}]`,
-      name: AuthApiSignUpKeys.firstName,
-      placeholder: 'Имя',
+      id: `FormSignUp[${ApiUserKeys.firstName}]`,
+      name: ApiUserKeys.firstName,
+      placeholder: apiFieldsDictionary[ApiUserKeys.firstName],
     },
     {
-      id: `FormSignUp[${AuthApiSignUpKeys.secondName}]`,
-      name: AuthApiSignUpKeys.secondName,
-      placeholder: 'Фамилия',
+      id: `FormSignUp[${ApiUserKeys.secondName}]`,
+      name: ApiUserKeys.secondName,
+      placeholder: apiFieldsDictionary[ApiUserKeys.secondName],
     },
     {
-      id: `FormSignUp[${AuthApiSignUpKeys.login}]`,
-      name: AuthApiSignUpKeys.login,
+      id: `FormSignUp[${ApiUserKeys.login}]`,
+      name: ApiUserKeys.login,
       placeholder: 'Логин',
       required: true,
     },
     {
-      id: `FormSignUp[${AuthApiSignUpKeys.email}]`,
-      name: AuthApiSignUpKeys.email,
-      placeholder: 'Email',
+      id: `FormSignUp[${ApiUserKeys.email}]`,
+      name: ApiUserKeys.email,
+      placeholder: apiFieldsDictionary[ApiUserKeys.email],
       type: 'email',
     },
     {
-      id: `FormSignUp[${AuthApiSignUpKeys.phone}]`,
-      name: AuthApiSignUpKeys.phone,
-      placeholder: 'Телефон',
+      id: `FormSignUp[${ApiUserKeys.phone}]`,
+      name: ApiUserKeys.phone,
+      placeholder: apiFieldsDictionary[ApiUserKeys.phone],
       type: 'tel',
       required: true,
     },
     {
-      id: `FormSignUp[${AuthApiSignUpKeys.password}]`,
-      name: AuthApiSignUpKeys.password,
-      placeholder: 'Пароль',
+      id: `FormSignUp[${ApiUserKeys.password}]`,
+      name: ApiUserKeys.password,
+      placeholder: apiFieldsDictionary[ApiUserKeys.password],
       type: 'password',
       required: true,
     },

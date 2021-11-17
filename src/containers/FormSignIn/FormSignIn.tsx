@@ -1,24 +1,25 @@
 import { AuthApi } from 'api';
-import { AuthApiSignInKeys } from 'api/AuthApi/AuthApi.types';
+import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
+import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 import { useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignIn() {
   const [fields, setFields] = useState<FormProps['fields']>([
     {
-      id: `FormSignIn[${AuthApiSignInKeys.login}]`,
-      name: AuthApiSignInKeys.login,
-      placeholder: 'Логин',
+      id: `FormSignIn[${ApiUserKeys.login}]`,
+      name: ApiUserKeys.login,
+      placeholder: apiFieldsDictionary[ApiUserKeys.login],
       type: 'text',
       required: true,
       value: '',
     },
     {
-      id: `FormSignIn[${AuthApiSignInKeys.password}]`,
-      name: AuthApiSignInKeys.password,
-      placeholder: 'Пароль',
+      id: `FormSignIn[${ApiUserKeys.password}]`,
+      name: ApiUserKeys.password,
+      placeholder: apiFieldsDictionary[ApiUserKeys.password],
       type: 'password',
       required: true,
       value: '',

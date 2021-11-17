@@ -1,5 +1,5 @@
-import { UsersApi } from 'api';
-import { UsersApiKeys } from 'api/UsersApi/UsersApi.types';
+import { AuthApi, UsersApi } from 'api';
+import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
@@ -7,12 +7,12 @@ import { useEffect, useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
 
 const KEYS = [
-  UsersApiKeys.firstName,
-  UsersApiKeys.secondName,
-  UsersApiKeys.displayName,
-  UsersApiKeys.login,
-  UsersApiKeys.phone,
-  UsersApiKeys.email,
+  ApiUserKeys.firstName,
+  ApiUserKeys.secondName,
+  ApiUserKeys.displayName,
+  ApiUserKeys.login,
+  ApiUserKeys.phone,
+  ApiUserKeys.email,
 ];
 const INITIAL_FIELDS = KEYS.map((key) => ({
   id: `FormProfile[${key}]`,
@@ -25,7 +25,7 @@ export function FormProfile() {
   const [fields, setFields] = useState<FormProps['fields']>(INITIAL_FIELDS);
 
   useEffect(() => {
-    UsersApi.identify().then((data) => {
+    AuthApi.identify().then((data) => {
       setFields((prevState) => {
         return prevState.map((field) => ({
           ...field,

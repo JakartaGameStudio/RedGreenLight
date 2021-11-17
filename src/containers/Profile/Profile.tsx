@@ -1,5 +1,6 @@
 import { AuthApi } from 'api';
-import { UsersApiKeys, UsersApiUser } from 'api/UsersApi/UsersApi.types';
+import { ApiUserKeys } from 'api/api.types';
+import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
 import { Preloader } from 'components/Preloader/Preloader';
 import { ProfileAvatar } from 'components/ProfileAvatar/ProfileAvatar';
 import { Title } from 'components/Title/Title';
@@ -35,7 +36,7 @@ export function Profile({ type }: ProfileProps) {
     setPopupActive(false);
   }
 
-  const title = userData ? userData[UsersApiKeys.displayName] || userData[UsersApiKeys.login] : '';
+  const title = userData ? userData[ApiUserKeys.displayName] || userData[ApiUserKeys.login] : '';
 
   if (!userData) {
     return (

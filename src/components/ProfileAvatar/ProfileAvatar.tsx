@@ -1,4 +1,4 @@
-import { UsersApiKeys } from 'api/UsersApi/UsersApi.types';
+import { ApiUserKeys } from 'api/api.types';
 import classNames from 'classnames';
 import { getAvatarUrl } from 'helpers/getAvatarUrl';
 
@@ -6,8 +6,8 @@ import styles from './ProfileAvatar.module.scss';
 import { ProfileAvatarProps } from './ProfileAvatar.types';
 
 export function ProfileAvatar({ userData, onClick, className }: ProfileAvatarProps) {
-  const avatar = userData[UsersApiKeys.avatar];
-  const alt = userData[UsersApiKeys.displayName];
+  const avatar = userData[ApiUserKeys.avatar];
+  const alt = userData[ApiUserKeys.displayName];
   const imageUrl = getAvatarUrl(avatar);
 
   return (

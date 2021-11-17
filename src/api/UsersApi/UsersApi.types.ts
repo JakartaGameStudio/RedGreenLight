@@ -1,34 +1,14 @@
-export enum UsersApiKeys {
-  avatar = 'avatar',
-  displayName = 'display_name',
-  email = 'email',
-  firstName = 'first_name',
-  id = 'id',
-  login = 'login',
-  newPassword = 'newPassword',
-  oldPassword = 'oldPassword',
-  phone = 'phone',
-  secondName = 'second_name',
-}
+import { ApiUser, ApiUserKeys } from 'api/api.types';
 
-export type UsersApiUser = {
-  [UsersApiKeys.avatar]: string | null;
-  [UsersApiKeys.displayName]: string | null;
-  [UsersApiKeys.email]: string;
-  [UsersApiKeys.firstName]: string;
-  [UsersApiKeys.id]: number;
-  [UsersApiKeys.login]: string;
-  [UsersApiKeys.phone]: string;
-  [UsersApiKeys.secondName]: string;
-};
+export type UsersApiUser = Omit<ApiUser, ApiUserKeys.newPassword | ApiUserKeys.oldPassword>;
 
-export type UsersApiUpdateRequest = Omit<UsersApiUser, UsersApiKeys.id>;
+export type UsersApiUpdateRequest = Omit<UsersApiUser, ApiUserKeys.id>;
 
-export type UsersApiPasswordRequest = {
-  newPassword: string;
-  oldPassword: string;
-};
+export type UsersApiPasswordRequest = Pick<
+  ApiUser,
+  ApiUserKeys.newPassword | ApiUserKeys.oldPassword
+>;
 
 export type UsersApiAvatarRequest = FormData;
 
-export type UsersApiSearchRequest = Pick<UsersApiUser, UsersApiKeys.login>;
+export type UsersApiSearchRequest = Pick<ApiUser, ApiUserKeys.login>;

@@ -1,15 +1,16 @@
-import { UsersApiKeys, UsersApiUser } from 'api/UsersApi/UsersApi.types';
+import { ApiUserKeys } from 'api/api.types';
+import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 
 import styles from './Profile.module.scss';
 
 const KEYS = [
-  UsersApiKeys.firstName,
-  UsersApiKeys.secondName,
-  UsersApiKeys.displayName,
-  UsersApiKeys.login,
-  UsersApiKeys.phone,
-  UsersApiKeys.email,
+  ApiUserKeys.firstName,
+  ApiUserKeys.secondName,
+  ApiUserKeys.displayName,
+  ApiUserKeys.login,
+  ApiUserKeys.phone,
+  ApiUserKeys.email,
 ];
 
 export function ProfileInfo({ userData }: { userData: UsersApiUser }) {

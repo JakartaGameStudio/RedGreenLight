@@ -1,12 +1,13 @@
-import { UsersApiKeys } from 'api/UsersApi/UsersApi.types';
+import { ApiUserKeys } from 'api/api.types';
 
 export const apiFieldsDictionary = {
-  [UsersApiKeys.firstName]: 'Имя',
-  [UsersApiKeys.secondName]: 'Фамилия',
-  [UsersApiKeys.displayName]: 'Никнейм',
-  [UsersApiKeys.login]: 'Логин',
-  [UsersApiKeys.email]: 'Email',
-  [UsersApiKeys.phone]: 'Телефон',
-  [UsersApiKeys.newPassword]: 'Новый пароль',
-  [UsersApiKeys.oldPassword]: 'Старый пароль',
+  [ApiUserKeys.firstName]: 'Имя',
+  [ApiUserKeys.secondName]: 'Фамилия',
+  [ApiUserKeys.displayName]: 'Никнейм',
+  [ApiUserKeys.login]: 'Логин',
+  [ApiUserKeys.email]: 'Email',
+  [ApiUserKeys.phone]: 'Телефон',
+  [ApiUserKeys.password]: 'Пароль',
+  [ApiUserKeys.newPassword]: 'Новый пароль',
+  [ApiUserKeys.oldPassword]: 'Старый пароль',
 };

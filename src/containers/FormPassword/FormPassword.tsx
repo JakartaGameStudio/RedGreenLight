@@ -1,5 +1,5 @@
 import { UsersApi } from 'api';
-import { UsersApiKeys } from 'api/UsersApi/UsersApi.types';
+import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
@@ -9,15 +9,15 @@ import { AppRoutes } from 'types/AppRoutes';
 export function FormPassword() {
   const [fields, setFields] = useState<FormProps['fields']>([
     {
-      id: `FormPassword[${[UsersApiKeys.oldPassword]}]`,
-      name: UsersApiKeys.oldPassword,
-      placeholder: apiFieldsDictionary[UsersApiKeys.oldPassword],
+      id: `FormPassword[${[ApiUserKeys.oldPassword]}]`,
+      name: ApiUserKeys.oldPassword,
+      placeholder: apiFieldsDictionary[ApiUserKeys.oldPassword],
       type: 'password',
     },
     {
-      id: `FormPassword[${[UsersApiKeys.newPassword]}]`,
-      name: UsersApiKeys.newPassword,
-      placeholder: apiFieldsDictionary[UsersApiKeys.newPassword],
+      id: `FormPassword[${[ApiUserKeys.newPassword]}]`,
+      name: ApiUserKeys.newPassword,
+      placeholder: apiFieldsDictionary[ApiUserKeys.newPassword],
       type: 'password',
     },
     {
