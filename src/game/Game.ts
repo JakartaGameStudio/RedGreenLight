@@ -1,20 +1,10 @@
 export class Game {
-  private render: () => void;
-  private logic: (timeFraction: number) => void;
-  private beforeStart: () => void;
-  private clear: () => void;
-
-  constructor(props: {
-    beforeStart: () => void;
-    clear: () => void;
-    logic: (timeFraction: number) => void;
-    render: () => void;
-  }) {
-    this.logic = props.logic;
-    this.render = props.render;
-    this.beforeStart = props.beforeStart;
-    this.clear = props.clear;
-  }
+  public render: () => void;
+  public logic: (timeFraction: number) => void;
+  public beforeStart: () => void;
+  public clear: () => void;
+  public restart: () => void;
+  private requestID: number;
 
   private run() {
     let lastTime = 0;
@@ -25,7 +15,7 @@ export class Game {
       this.clear();
       this.logic(timeFraction);
       this.render();
-      requestAnimationFrame(animate);
+      this.requestID = requestAnimationFrame(animate);
     };
 
     requestAnimationFrame(animate);
@@ -34,5 +24,9 @@ export class Game {
   public start() {
     this.beforeStart();
     this.run();
+  }
+
+  public clearAnimate() {
+    cancelAnimationFrame(this.requestID);
   }
 }

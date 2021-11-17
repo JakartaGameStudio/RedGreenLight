@@ -7,6 +7,6 @@ export function Title({ size, children, className }: TitleProps) {
   const TagName = size;
 
   return (
-    <TagName children={children} className={classNames(styles.title, className, styles[size])} />
+    <TagName className={classNames(styles.title, className, styles[size])}>{children}</TagName>
   );
 }
