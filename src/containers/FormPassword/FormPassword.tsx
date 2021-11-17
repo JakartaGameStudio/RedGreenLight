@@ -28,14 +28,6 @@ export function FormPassword() {
     },
   ]);
 
-  function onChange({ name, value }) {
-    setFields((prevState) =>
-      prevState.map((field) => {
-        return field.name === name ? { ...field, value } : field;
-      }),
-    );
-  }
-
   function onSubmit(data) {
     return UsersApi.updatePassword(data);
   }
@@ -43,7 +35,7 @@ export function FormPassword() {
   return (
     <Form
       title="Изменить пароль"
-      onChange={onChange}
+      setFields={setFields}
       onSubmit={onSubmit}
       fields={fields}
       buttons={[

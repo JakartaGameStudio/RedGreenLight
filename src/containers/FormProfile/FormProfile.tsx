@@ -36,14 +36,6 @@ export function FormProfile() {
     });
   }, []);
 
-  function onChange({ name, value }) {
-    setFields((prevState) =>
-      prevState.map((field) => {
-        return field.name === name ? { ...field, value } : field;
-      }),
-    );
-  }
-
   function onSubmit(data) {
     return UsersApi.updateProfile(data);
   }
@@ -51,7 +43,7 @@ export function FormProfile() {
   return (
     <Form
       title="Изменить данные"
-      onChange={onChange}
+      setFields={setFields}
       onSubmit={onSubmit}
       fields={fields}
       buttons={[

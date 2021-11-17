@@ -3,9 +3,26 @@ import { FormField } from 'components/FormField/FormField';
 import { Title } from 'components/Title/Title';
 
 import styles from './Form.module.scss';
-import { FormProps } from './Form.types';
+import { FormProps, FormPropsWithOnChange, FormPropsWithSetter } from './Form.types';
 
-export function Form({ title, fields, buttons, onSubmit, onChange }: FormProps) {
+export function Form(props: FormPropsWithOnChange): JSX.Element;
+export function Form(props: FormPropsWithSetter): JSX.Element;
+
+export function Form({ title, fields, buttons, onSubmit, onChange, setFields }: FormProps) {
+  function handlerChange({ name, value }) {
+    if (setFields) {
+      setFields((prevState) =>
+        prevState.map((field) => {
+          return field.name === name ? { ...field, value } : field;
+        }),
+      );
+    }
+
+    if (onChange) {
+      onChange({ name, value });
+    }
+  }
+
   function handlerSubmit(event) {
     event.preventDefault();
 
@@ -27,7 +44,7 @@ export function Form({ title, fields, buttons, onSubmit, onChange }: FormProps) 
         <FormField
           key={props.id}
           className={styles.field}
-          onChange={(value) => onChange({ name: props.name, value })}
+          onChange={(value) => handlerChange({ name: props.name, value })}
           {...props}
         />
       ))}
