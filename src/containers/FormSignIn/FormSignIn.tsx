@@ -16,7 +16,6 @@ export function FormSignIn() {
       placeholder: apiFieldsDictionary[ApiUserKeys.login],
       type: 'text',
       required: true,
-      value: '',
     },
     {
       id: `FormSignIn[${ApiUserKeys.password}]`,
@@ -24,7 +23,6 @@ export function FormSignIn() {
       placeholder: apiFieldsDictionary[ApiUserKeys.password],
       type: 'password',
       required: true,
-      value: '',
     },
   ]);
 
