@@ -23,18 +23,6 @@ export function FormField({
     setActive(Boolean(value));
   }, [value]);
 
-  function handlerChange({ target }) {
-    onChange(target.value);
-  }
-
-  function handlerFocus() {
-    setActive(true);
-  }
-
-  function handlerBlur() {
-    setActive(Boolean(value));
-  }
-
   return (
     <div className={styles.field}>
       <label
@@ -54,9 +42,9 @@ export function FormField({
         disabled={disabled}
         readOnly={readonly}
         required={required}
-        onFocus={handlerFocus}
-        onBlur={handlerBlur}
-        onChange={handlerChange}
+        onFocus={() => setActive(true)}
+        onBlur={() => setActive(Boolean(value))}
+        onChange={({ target }) => onChange(target.value)}
         className={classNames(styles.input, className, {
           [styles.inputActive]: isActive,
           [styles.inputError]: errors.length,
