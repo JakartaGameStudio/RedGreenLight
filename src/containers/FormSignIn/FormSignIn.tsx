@@ -2,6 +2,7 @@ import { AuthApi } from 'api';
 import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
+import { Preloader } from 'components/Preloader/Preloader';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignIn() {
   const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
   const [fields, setFields] = useState<FormProps['fields']>([
     {
       id: `FormSignIn[${ApiUserKeys.login}]`,
@@ -27,13 +29,17 @@ export function FormSignIn() {
   ]);
 
   function onSubmit(data) {
+    setLoading(true);
+
     return AuthApi.signIn(data)
       .then(() => {
         navigate(AppRoutes.game);
       })
-      .catch(({ response }) => {
-        navigate(AppRoutes.error500, { state: { error: response.data.reason } });
-      });
+      .finally(() => setLoading(false));
+  }
+
+  if (isLoading) {
+    return <Preloader />;
   }
 
   return (

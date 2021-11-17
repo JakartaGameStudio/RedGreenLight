@@ -2,6 +2,7 @@ import { AuthApi, UsersApi } from 'api';
 import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
+import { Preloader } from 'components/Preloader/Preloader';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 import { useEffect, useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
@@ -23,6 +24,7 @@ const INITIAL_FIELDS = KEYS.map((key) => ({
 
 export function FormProfile() {
   const [fields, setFields] = useState<FormProps['fields']>(INITIAL_FIELDS);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     AuthApi.identify().then((data) => {
@@ -37,7 +39,13 @@ export function FormProfile() {
   }, []);
 
   function onSubmit(data) {
-    return UsersApi.updateProfile(data);
+    setLoading(true);
+
+    return UsersApi.updateProfile(data).finally(() => setLoading(false));
+  }
+
+  if (isLoading) {
+    return <Preloader />;
   }
 
   return (
