@@ -4,9 +4,11 @@ import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignIn() {
+  const navigate = useNavigate();
   const [fields, setFields] = useState<FormProps['fields']>([
     {
       id: `FormSignIn[${ApiUserKeys.login}]`,
@@ -35,7 +37,13 @@ export function FormSignIn() {
   }
 
   function onSubmit(data) {
-    return AuthApi.signIn(data);
+    return AuthApi.signIn(data)
+      .then(() => {
+        navigate(AppRoutes.game);
+      })
+      .catch(({ response }) => {
+        navigate(AppRoutes.error500, { state: { error: response.data.reason } });
+      });
   }
 
   return (
