@@ -12,7 +12,11 @@ export function LayoutPage({ children, title }: LayoutPageProps) {
       <Header className={styles.header} />
       <main className={styles.main}>
         <LayoutContainer>
-          {title && <Title size="h1" children={title} className={styles.title} />}
+          {title && (
+            <Title size="h1" className={styles.title}>
+              {title}
+            </Title>
+          )}
           {children}
         </LayoutContainer>
       </main>

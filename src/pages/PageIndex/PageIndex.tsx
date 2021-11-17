@@ -24,7 +24,7 @@ export function PageIndex() {
         <p>Успей остановиться до того, как фигура повернется.</p>
       </div>
       <div className={styles.rules}>
-        <Title size="h2" children="Правила" />
+        <Title size="h2">Правила</Title>
         <ol>
           {rulesListItems.map((item, index) => (
             <li key={index}>{item}</li>

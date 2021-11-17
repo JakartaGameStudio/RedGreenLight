@@ -29,7 +29,9 @@ export function Form({ title, fields, buttons, onSubmit, onChange }: FormProps) 
 
   return (
     <form className={styles.form} onSubmit={handlerSubmit}>
-      <Title size="h3" children={title} className={styles.title} />
+      <Title size="h3" className={styles.title}>
+        {title}
+      </Title>
       {fields.map((props) => (
         <FormField
           key={props.id}
@@ -39,7 +41,9 @@ export function Form({ title, fields, buttons, onSubmit, onChange }: FormProps) 
         />
       ))}
       {buttons.map((props, index) => (
-        <Button key={index} {...props} />
+        <Button key={index} {...props}>
+          {props.children}
+        </Button>
       ))}
     </form>
   );
