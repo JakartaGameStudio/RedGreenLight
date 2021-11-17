@@ -17,7 +17,7 @@ export function Page404() {
     return function () {
       clearInterval(interval);
     };
-  }, [time]);
+  }, [time, navigate]);
 
   return (
     <LayoutPage title="4🥺4 Страница не найдена">
