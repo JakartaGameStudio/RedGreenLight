@@ -1,4 +1,5 @@
 export enum AppRoutes {
+  error500 = '/500',
   forum = '/forum',
   game = '/game',
   index = '/',
