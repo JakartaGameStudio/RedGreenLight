@@ -6,10 +6,7 @@
   font-size: 0;
   line-height: 0;
   border-radius: 50%;
-  background-color: var(--theme-color-basic-light);
-  background-image: url("~images/icons/user.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background: var(--theme-color-basic-light) url("~images/icons/user.svg") center no-repeat;
   background-size: 50%;
   cursor: pointer;
 
@@ -27,7 +24,7 @@
   position: absolute;
   border-radius: inherit;
   background: var(--theme-color-content) url("~images/icons/camera.svg") center center no-repeat;
-  background-size: 20px 20px;
+  background-size: 70%;
   width: 25px;
   height: 25px;
 }

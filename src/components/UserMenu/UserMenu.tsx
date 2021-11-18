@@ -47,6 +47,11 @@ export function UserMenu({ userName, className }: UserMenuProps) {
               </NavLink>
             </li>
             <li className={styles.menuItem}>
+              <NavLink className={styles.item} to={AppRoutes.profilePassword}>
+                Изменить пароль
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
               <NavLink
                 className={classNames(styles.item, styles.itemWarning)}
                 to={AppRoutes.signOut}
