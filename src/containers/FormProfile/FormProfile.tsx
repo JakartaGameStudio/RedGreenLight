@@ -1,11 +1,13 @@
-import { AuthApi, UsersApi } from 'api';
+import { UsersApi } from 'api';
 import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
 import { Preloader } from 'components/Preloader/Preloader';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
+
+import { FormProfileProps } from './FormProfile.types';
 
 const KEYS = [
   ApiUserKeys.firstName,
@@ -15,33 +17,24 @@ const KEYS = [
   ApiUserKeys.phone,
   ApiUserKeys.email,
 ];
-const INITIAL_FIELDS = KEYS.map((key) => ({
-  id: `FormProfile[${key}]`,
-  name: key,
-  placeholder: apiFieldsDictionary[key],
-  disabled: true,
-}));
 
-export function FormProfile() {
-  const [fields, setFields] = useState<FormProps['fields']>(INITIAL_FIELDS);
+export function FormProfile({ userData, onSubmit }: FormProfileProps) {
+  const [fields, setFields] = useState<FormProps['fields']>(
+    KEYS.map((key) => ({
+      id: `FormProfile[${key}]`,
+      name: key,
+      placeholder: apiFieldsDictionary[key],
+      value: userData[key],
+    })),
+  );
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    AuthApi.identify().then((data) => {
-      setFields((prevState) => {
-        return prevState.map((field) => ({
-          ...field,
-          disabled: false,
-          value: data[field.name] || '',
-        }));
-      });
-    });
-  }, []);
-
-  function onSubmit(data) {
+  function handlerSubmit(data) {
     setLoading(true);
 
-    return UsersApi.updateProfile(data).finally(() => setLoading(false));
+    return UsersApi.updateProfile(data)
+      .then(onSubmit)
+      .finally(() => setLoading(false));
   }
 
   if (isLoading) {
@@ -52,7 +45,7 @@ export function FormProfile() {
     <Form
       title="Изменить данные"
       setFields={setFields}
-      onSubmit={onSubmit}
+      onSubmit={handlerSubmit}
       fields={fields}
       buttons={[
         {

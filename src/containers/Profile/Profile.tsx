@@ -52,7 +52,9 @@ export function Profile({ type }: ProfileProps) {
           <Title size="h3">{title}</Title>
         </div>
         <div className={styles.body}>
-          {type === 'edit' && <FormProfile />}
+          {type === 'edit' && (
+            <FormProfile userData={userData} onSubmit={(data) => setUserData(data)} />
+          )}
           {type === 'password' && <FormPassword />}
           {!type && userData && (
             <>
