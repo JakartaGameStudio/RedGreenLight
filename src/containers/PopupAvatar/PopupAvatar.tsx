@@ -1,11 +1,17 @@
-import { PopupProps } from 'hoc/Popup/Popup.types';
-import { withPopup } from 'hoc/Popup/withPopup';
+import { Popup } from 'components/Popup/Popup';
+import { PopupProps } from 'components/Popup/Popup.types';
 
 import { PopupAvatarFormProps } from './PopupAvatar.types';
 import { PopupAvatarForm } from './PopupAvatarForm';
 
-export function PopupAvatar({ active, onSubmit, onClose }: PopupProps & PopupAvatarFormProps) {
-  const PopupForm = withPopup<PopupAvatarFormProps>(PopupAvatarForm);
-
-  return <PopupForm active={active} onSubmit={onSubmit} onClose={onClose} />;
+export function PopupAvatar({
+  active,
+  onSubmit,
+  onClose,
+}: Omit<PopupProps, 'children'> & PopupAvatarFormProps) {
+  return (
+    <Popup active={active} onClose={onClose}>
+      <PopupAvatarForm onSubmit={onSubmit} onClose={onClose} />
+    </Popup>
+  );
 }

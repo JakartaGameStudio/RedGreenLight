@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from './FormField.module.scss';
 import { FormFieldProps } from './FormField.types';
@@ -17,18 +17,14 @@ export function FormField({
   errors = [],
   type = 'text',
 }: FormFieldProps) {
-  const [isActive, setActive] = useState(Boolean(value));
-
-  useEffect(() => {
-    setActive(Boolean(value));
-  }, [value]);
+  const [isFocus, setIsFocus] = useState(Boolean(value));
 
   return (
     <div className={styles.field}>
       <label
         htmlFor={id}
         className={classNames(styles.label, {
-          [styles.labelActive]: isActive,
+          [styles.labelActive]: isFocus || value,
         })}
       >
         {placeholder}
@@ -42,11 +38,11 @@ export function FormField({
         disabled={disabled}
         readOnly={readonly}
         required={required}
-        onFocus={() => setActive(true)}
-        onBlur={() => setActive(Boolean(value))}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
         onChange={({ target }) => onChange(target.value)}
         className={classNames(styles.input, className, {
-          [styles.inputActive]: isActive,
+          [styles.inputActive]: isFocus || value,
           [styles.inputError]: errors.length,
         })}
       />

@@ -4,7 +4,7 @@ import { ApiHelper } from 'helpers/ApiHelper';
 import { AuthApiSignInRequest, AuthApiSignUpRequest, AuthApiSignUpResponse } from './AuthApi.types';
 
 export const AuthApi = {
-  async identify(): Promise<UsersApiUser> {
+  async getUser(): Promise<UsersApiUser> {
     const response = await ApiHelper.get('/auth/user');
 
     return response.data;

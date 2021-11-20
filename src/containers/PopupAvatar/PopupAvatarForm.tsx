@@ -11,6 +11,7 @@ export function PopupAvatarForm({ onSubmit, onClose }: PopupAvatarFormProps) {
 
   function handlerSubmit(event) {
     event.preventDefault();
+
     const data = new FormData();
 
     data.append(ApiUserKeys.avatar, value);

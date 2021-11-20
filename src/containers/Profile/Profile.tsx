@@ -19,7 +19,7 @@ export function Profile({ type }: ProfileProps) {
   const [popupActive, setPopupActive] = useState(false);
 
   useEffect(() => {
-    AuthApi.identify()
+    AuthApi.getUser()
       .then((data) => {
         setUserData(data);
       })
