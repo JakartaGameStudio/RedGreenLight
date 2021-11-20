@@ -2,7 +2,6 @@ import { UsersApi } from 'api';
 import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
-import { Preloader } from 'components/Preloader/Preloader';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 import { useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
@@ -37,13 +36,10 @@ export function FormProfile({ userData, onSubmit }: FormProfileProps) {
       .finally(() => setLoading(false));
   }
 
-  if (isLoading) {
-    return <Preloader />;
-  }
-
   return (
     <Form
       title="Изменить данные"
+      isLoading={isLoading}
       setFields={setFields}
       onSubmit={handlerSubmit}
       fields={fields}

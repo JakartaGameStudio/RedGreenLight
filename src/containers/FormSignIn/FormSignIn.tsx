@@ -2,7 +2,6 @@ import { AuthApi } from 'api';
 import { ApiUserKeys } from 'api/api.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
-import { Preloader } from 'components/Preloader/Preloader';
 import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -38,13 +37,10 @@ export function FormSignIn() {
       .finally(() => setLoading(false));
   }
 
-  if (isLoading) {
-    return <Preloader />;
-  }
-
   return (
     <Form
       title="Вход"
+      isLoading={isLoading}
       setFields={setFields}
       onSubmit={onSubmit}
       fields={fields}

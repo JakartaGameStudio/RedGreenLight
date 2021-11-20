@@ -10,6 +10,7 @@ export type FormFieldData = {
 export interface Form {
   buttons: Omit<ButtonProps, 'className'>[];
   fields: Omit<FormFieldProps, 'className' | 'onChange'>[];
+  isLoading?: boolean;
   onSubmit(data: Record<string, string>): void;
   title?: string;
 }

@@ -1,5 +1,6 @@
 import { Button } from 'components/Button/Button';
 import { FormField } from 'components/FormField/FormField';
+import { Preloader } from 'components/Preloader/Preloader';
 import { Title } from 'components/Title/Title';
 
 import styles from './Form.module.scss';
@@ -8,7 +9,15 @@ import { FormProps, FormPropsWithOnChange, FormPropsWithSetter } from './Form.ty
 export function Form(props: FormPropsWithOnChange): JSX.Element;
 export function Form(props: FormPropsWithSetter): JSX.Element;
 
-export function Form({ title, fields, buttons, onSubmit, onChange, setFields }: FormProps) {
+export function Form({
+  title,
+  fields,
+  buttons,
+  onSubmit,
+  onChange,
+  setFields,
+  isLoading,
+}: FormProps) {
   function handlerChange({ name, value }) {
     if (setFields) {
       setFields((prevState) =>
@@ -36,25 +45,32 @@ export function Form({ title, fields, buttons, onSubmit, onChange, setFields }: 
   }
 
   return (
-    <form onSubmit={handlerSubmit}>
-      <Title size="h3" className={styles.title}>
-        {title}
-      </Title>
-      {fields.map((props) => (
-        <FormField
-          key={props.id}
-          className={styles.field}
-          onChange={(value) => handlerChange({ name: props.name, value })}
-          {...props}
-        />
-      ))}
-      <div className={styles.footer}>
-        {buttons.map((props, index) => (
-          <Button {...props} key={index} className={styles.button}>
-            {props.children}
-          </Button>
+    <div className={styles.wrapper}>
+      {isLoading && (
+        <div className={styles.preloader}>
+          <Preloader />
+        </div>
+      )}
+      <form onSubmit={handlerSubmit} className={isLoading ? styles.formLoading : ''}>
+        <Title size="h3" className={styles.title}>
+          {title}
+        </Title>
+        {fields.map((props) => (
+          <FormField
+            key={props.id}
+            className={styles.field}
+            onChange={(value) => handlerChange({ name: props.name, value })}
+            {...props}
+          />
         ))}
-      </div>
-    </form>
+        <div className={styles.footer}>
+          {buttons.map((props, index) => (
+            <Button {...props} key={index} className={styles.button}>
+              {props.children}
+            </Button>
+          ))}
+        </div>
+      </form>
+    </div>
   );
 }
