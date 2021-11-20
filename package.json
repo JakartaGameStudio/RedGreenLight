@@ -10,7 +10,12 @@
     "build:prod": "webpack --mode=production",
     "lint:scripts": "eslint ./ --fix",
     "prepare": "husky install",
-    "husky:pre-commit": "eslint ./src --fix --quiet"
+    "husky:pre-commit": "eslint ./src --fix --quiet",
+    "deploy": "npm-run-all docker-build heroku-login heroku-push heroku-release",
+    "docker-build": "docker build -t web .",
+    "heroku-login": "heroku container:login",
+    "heroku-push": "heroku container:push web -a=jakarta-game",
+    "heroku-release": "heroku container:release web -a=jakarta-game"
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
