@@ -1,8 +1,7 @@
 import { ForumSectionLink } from 'components/ForumSectionLink/ForumSectionLink';
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
-import { ForumSection } from 'types/ForumSection.types';
-
 import { MainList } from 'components/MainList/MainList';
+import { ForumSection } from 'types/ForumSection.types';
 
 const initialData: ForumSection[] = [
   {
