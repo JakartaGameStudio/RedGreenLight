@@ -1,7 +1,5 @@
 import { AuthApi } from 'api';
-import { ApiUserKeys } from 'api/api.types';
-import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
-import { Preloader } from 'components/Preloader/Preloader';
+import { UserResponse, UserResponseKeys } from 'api/api.types';
 import { ProfileAvatar } from 'components/ProfileAvatar/ProfileAvatar';
 import { Title } from 'components/Title/Title';
 import { FormPassword } from 'containers/FormPassword/FormPassword';
@@ -15,7 +13,7 @@ import { ProfileInfo } from './ProfileInfo';
 import { ProfileNav } from './ProfileNav';
 
 export function Profile({ type }: ProfileProps) {
-  const [userData, setUserData] = useState<UsersApiUser | undefined>();
+  const [userData, setUserData] = useState<UserResponse | undefined>();
   const [popupActive, setPopupActive] = useState(false);
 
   useEffect(() => {
@@ -41,7 +39,9 @@ export function Profile({ type }: ProfileProps) {
     setPopupActive(false);
   }
 
-  const title = userData ? userData[ApiUserKeys.displayName] || userData[ApiUserKeys.login] : '';
+  const title = userData
+    ? userData[UserResponseKeys.displayName] || userData[UserResponseKeys.login]
+    : '';
 
   return (
     <>
@@ -61,11 +61,6 @@ export function Profile({ type }: ProfileProps) {
               <ProfileInfo userData={userData} />
               <ProfileNav />
             </>
-          )}
-          {!type && !userData && (
-            <div className={styles.preloader}>
-              <Preloader />
-            </div>
           )}
         </div>
       </div>

@@ -1,24 +1,23 @@
-import { ApiUserKeys } from 'api/api.types';
-import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
-import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
+import { UserResponse, UserResponseKeys } from 'api/api.types';
+import { formFieldsDictionary } from 'constans/formFieldsDictionary';
 
 import styles from './Profile.module.scss';
 
-const KEYS = [
-  ApiUserKeys.firstName,
-  ApiUserKeys.secondName,
-  ApiUserKeys.displayName,
-  ApiUserKeys.login,
-  ApiUserKeys.phone,
-  ApiUserKeys.email,
-];
+const FIELDS = {
+  [UserResponseKeys.firstName]: formFieldsDictionary.firstName,
+  [UserResponseKeys.secondName]: formFieldsDictionary.secondName,
+  [UserResponseKeys.displayName]: formFieldsDictionary.displayName,
+  [UserResponseKeys.login]: formFieldsDictionary.login,
+  [UserResponseKeys.phone]: formFieldsDictionary.phone,
+  [UserResponseKeys.email]: formFieldsDictionary.email,
+};
 
-export function ProfileInfo({ userData }: { userData: UsersApiUser }) {
+export function ProfileInfo({ userData }: { userData: UserResponse }) {
   return (
     <>
-      {KEYS.map((key) => (
-        <dl className={styles.field} key={apiFieldsDictionary[key]}>
-          <dt className={styles.fieldLabel}>{apiFieldsDictionary[key]}</dt>
+      {Object.entries(FIELDS).map(([key, label]) => (
+        <dl className={styles.field} key={label}>
+          <dt className={styles.fieldLabel}>{label}</dt>
           <dd>{userData[key]}</dd>
         </dl>
       ))}

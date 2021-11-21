@@ -1,6 +1,6 @@
-import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
+import { UserResponse } from 'api/api.types';
 
 export type PopupAvatarFormProps = {
   onClose(): void;
-  onSubmit(data: UsersApiUser): void;
+  onSubmit(data: UserResponse): void;
 };

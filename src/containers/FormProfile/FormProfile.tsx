@@ -1,28 +1,28 @@
 import { UsersApi } from 'api';
-import { ApiUserKeys } from 'api/api.types';
+import { UserUpdateRequestKeys } from 'api/UsersApi/UsersApi.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
-import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
+import { formFieldsDictionary } from 'constans/formFieldsDictionary';
 import { useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
 
 import { FormProfileProps } from './FormProfile.types';
 
-const KEYS = [
-  ApiUserKeys.firstName,
-  ApiUserKeys.secondName,
-  ApiUserKeys.displayName,
-  ApiUserKeys.login,
-  ApiUserKeys.phone,
-  ApiUserKeys.email,
-];
+const FIELDS = {
+  [UserUpdateRequestKeys.firstName]: formFieldsDictionary.firstName,
+  [UserUpdateRequestKeys.secondName]: formFieldsDictionary.secondName,
+  [UserUpdateRequestKeys.displayName]: formFieldsDictionary.displayName,
+  [UserUpdateRequestKeys.login]: formFieldsDictionary.login,
+  [UserUpdateRequestKeys.phone]: formFieldsDictionary.phone,
+  [UserUpdateRequestKeys.email]: formFieldsDictionary.email,
+};
 
 export function FormProfile({ userData, onSubmit }: FormProfileProps) {
   const [fields, setFields] = useState<FormProps['fields']>(
-    KEYS.map((key) => ({
+    Object.entries(FIELDS).map(([key, label]) => ({
       id: `FormProfile[${key}]`,
       name: key,
-      placeholder: apiFieldsDictionary[key],
+      placeholder: label,
       value: userData[key],
     })),
   );

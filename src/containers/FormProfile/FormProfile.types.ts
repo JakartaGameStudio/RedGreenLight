@@ -1,6 +1,6 @@
-import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
+import { UserResponse } from 'api/api.types';
 
 export type FormProfileProps = {
-  onSubmit(userData: UsersApiUser): void;
-  userData: UsersApiUser;
+  onSubmit(userData: UserResponse): void;
+  userData: UserResponse;
 };

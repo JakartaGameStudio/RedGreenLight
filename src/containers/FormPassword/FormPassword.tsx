@@ -1,30 +1,33 @@
 import { UsersApi } from 'api';
-import { ApiUserKeys } from 'api/api.types';
+import { ChangePasswordRequestKeys } from 'api/UsersApi/UsersApi.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
-import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
+import { formFieldsDictionary } from 'constans/formFieldsDictionary';
 import { useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormPassword() {
   const [fields, setFields] = useState<FormProps['fields']>([
     {
-      id: `FormPassword[${[ApiUserKeys.oldPassword]}]`,
-      name: ApiUserKeys.oldPassword,
-      placeholder: apiFieldsDictionary[ApiUserKeys.oldPassword],
+      id: `FormPassword[${[ChangePasswordRequestKeys.oldPassword]}]`,
+      name: ChangePasswordRequestKeys.oldPassword,
+      placeholder: formFieldsDictionary.oldPassword,
       type: 'password',
+      required: true,
     },
     {
-      id: `FormPassword[${[ApiUserKeys.newPassword]}]`,
-      name: ApiUserKeys.newPassword,
-      placeholder: apiFieldsDictionary[ApiUserKeys.newPassword],
+      id: `FormPassword[${[ChangePasswordRequestKeys.newPassword]}]`,
+      name: ChangePasswordRequestKeys.newPassword,
+      placeholder: formFieldsDictionary.newPassword,
       type: 'password',
+      required: true,
     },
     {
       id: `FormPassword[confirmPassword]`,
       name: 'confirmPassword',
-      placeholder: 'Новый пароль еще раз',
+      placeholder: formFieldsDictionary.newPasswordConfirm,
       type: 'password',
+      required: true,
     },
   ]);
   const [isLoading, setLoading] = useState(false);

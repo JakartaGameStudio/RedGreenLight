@@ -1,4 +1,4 @@
-import { ApiUserKeys } from 'api/api.types';
+import { UserResponseKeys } from 'api/api.types';
 import classNames from 'classnames';
 import { getAvatarUrl } from 'helpers/getAvatarUrl';
 
@@ -10,8 +10,8 @@ export function ProfileAvatar({ userData, onClick, className }: ProfileAvatarPro
     <div className={classNames(styles.avatar, className)} onClick={onClick}>
       {userData && (
         <img
-          src={getAvatarUrl(userData[ApiUserKeys.avatar])}
-          alt={userData[ApiUserKeys.displayName]}
+          src={getAvatarUrl(userData[UserResponseKeys.avatar])}
+          alt={userData[UserResponseKeys.displayName]}
           className={styles.image}
         />
       )}

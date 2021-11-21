@@ -1,5 +1,4 @@
 import { UsersApi } from 'api';
-import { ApiUserKeys } from 'api/api.types';
 import { Button } from 'components/Button/Button';
 import { useState } from 'react';
 
@@ -12,10 +11,7 @@ export function PopupAvatarForm({ onSubmit, onClose }: PopupAvatarFormProps) {
   function handlerSubmit(event) {
     event.preventDefault();
 
-    const data = new FormData();
-
-    data.append(ApiUserKeys.avatar, value);
-    UsersApi.updateAvatar(data).then((userData) => {
+    UsersApi.updateAvatar(value).then((userData) => {
       onSubmit(userData);
     });
   }

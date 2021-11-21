@@ -1,17 +1,17 @@
-import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
+import { UserResponse } from 'api/api.types';
 import { ApiHelper } from 'helpers/ApiHelper';
 
-import { AuthApiSignInRequest, AuthApiSignUpRequest, AuthApiSignUpResponse } from './AuthApi.types';
+import { SignInRequest, SignUpRequest, SignUpResponse } from './AuthApi.types';
 
 export const AuthApi = {
-  async getUser(): Promise<UsersApiUser> {
-    const response = await ApiHelper.get('/auth/user');
+  async getUser() {
+    const response = await ApiHelper.get<UserResponse>('/auth/user');
 
     return response.data;
   },
 
-  async signUp(data: AuthApiSignUpRequest) {
-    const response = await ApiHelper.post<AuthApiSignUpResponse>('/auth/signup', data, {
+  async signUp(data: SignUpRequest) {
+    const response = await ApiHelper.post<SignUpResponse>('/auth/signup', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -20,7 +20,7 @@ export const AuthApi = {
     return response.data;
   },
 
-  signIn(data: AuthApiSignInRequest) {
+  signIn(data: SignInRequest) {
     return ApiHelper.post('/auth/signin', data, {
       headers: {
         'Content-Type': 'application/json',

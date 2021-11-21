@@ -1,8 +1,8 @@
 import { AuthApi } from 'api';
-import { ApiUserKeys } from 'api/api.types';
+import { SignUpRequestKeys } from 'api/AuthApi/AuthApi.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
-import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
+import { formFieldsDictionary } from 'constans/formFieldsDictionary';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
@@ -12,38 +12,38 @@ export function FormSignUp() {
   const [isLoading, setLoading] = useState(false);
   const [fields, setFields] = useState<FormProps['fields']>([
     {
-      id: `FormSignUp[${ApiUserKeys.firstName}]`,
-      name: ApiUserKeys.firstName,
-      placeholder: apiFieldsDictionary[ApiUserKeys.firstName],
+      id: `FormSignUp[${SignUpRequestKeys.firstName}]`,
+      name: SignUpRequestKeys.firstName,
+      placeholder: formFieldsDictionary.firstName,
     },
     {
-      id: `FormSignUp[${ApiUserKeys.secondName}]`,
-      name: ApiUserKeys.secondName,
-      placeholder: apiFieldsDictionary[ApiUserKeys.secondName],
+      id: `FormSignUp[${SignUpRequestKeys.secondName}]`,
+      name: SignUpRequestKeys.secondName,
+      placeholder: formFieldsDictionary.secondName,
     },
     {
-      id: `FormSignUp[${ApiUserKeys.login}]`,
-      name: ApiUserKeys.login,
-      placeholder: 'Логин',
+      id: `FormSignUp[${SignUpRequestKeys.login}]`,
+      name: SignUpRequestKeys.login,
+      placeholder: formFieldsDictionary.login,
       required: true,
     },
     {
-      id: `FormSignUp[${ApiUserKeys.email}]`,
-      name: ApiUserKeys.email,
-      placeholder: apiFieldsDictionary[ApiUserKeys.email],
+      id: `FormSignUp[${SignUpRequestKeys.email}]`,
+      name: SignUpRequestKeys.email,
+      placeholder: formFieldsDictionary.email,
       type: 'email',
     },
     {
-      id: `FormSignUp[${ApiUserKeys.phone}]`,
-      name: ApiUserKeys.phone,
-      placeholder: apiFieldsDictionary[ApiUserKeys.phone],
+      id: `FormSignUp[${SignUpRequestKeys.phone}]`,
+      name: SignUpRequestKeys.phone,
+      placeholder: formFieldsDictionary.phone,
       type: 'tel',
       required: true,
     },
     {
-      id: `FormSignUp[${ApiUserKeys.password}]`,
-      name: ApiUserKeys.password,
-      placeholder: apiFieldsDictionary[ApiUserKeys.password],
+      id: `FormSignUp[${SignUpRequestKeys.password}]`,
+      name: SignUpRequestKeys.password,
+      placeholder: formFieldsDictionary.password,
       type: 'password',
       required: true,
     },

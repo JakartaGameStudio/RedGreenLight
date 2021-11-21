@@ -1,8 +1,8 @@
 import { AuthApi } from 'api';
-import { ApiUserKeys } from 'api/api.types';
+import { SignInRequestKeys } from 'api/AuthApi/AuthApi.types';
 import { Form } from 'components/Form/Form';
 import { FormProps } from 'components/Form/Form.types';
-import { apiFieldsDictionary } from 'constans/apiFieldsDictionary';
+import { formFieldsDictionary } from 'constans/formFieldsDictionary';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
@@ -12,16 +12,16 @@ export function FormSignIn() {
   const [isLoading, setLoading] = useState(false);
   const [fields, setFields] = useState<FormProps['fields']>([
     {
-      id: `FormSignIn[${ApiUserKeys.login}]`,
-      name: ApiUserKeys.login,
-      placeholder: apiFieldsDictionary[ApiUserKeys.login],
+      id: `FormSignIn[${SignInRequestKeys.login}]`,
+      name: SignInRequestKeys.login,
+      placeholder: formFieldsDictionary.login,
       type: 'text',
       required: true,
     },
     {
-      id: `FormSignIn[${ApiUserKeys.password}]`,
-      name: ApiUserKeys.password,
-      placeholder: apiFieldsDictionary[ApiUserKeys.password],
+      id: `FormSignIn[${SignInRequestKeys.password}]`,
+      name: SignInRequestKeys.password,
+      placeholder: formFieldsDictionary.password,
       type: 'password',
       required: true,
     },

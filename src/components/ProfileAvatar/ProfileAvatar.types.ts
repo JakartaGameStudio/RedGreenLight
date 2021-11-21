@@ -1,7 +1,7 @@
-import { UsersApiUser } from 'api/UsersApi/UsersApi.types';
+import { UserResponse } from 'api/api.types';
 
 export type ProfileAvatarProps = {
   className?: string;
   onClick?(): void;
-  userData?: UsersApiUser;
+  userData?: UserResponse;
 };
