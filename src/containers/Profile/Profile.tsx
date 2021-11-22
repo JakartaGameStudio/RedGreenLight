@@ -6,7 +6,7 @@ import { Title } from 'components/Title/Title';
 import { FormPassword } from 'containers/FormPassword/FormPassword';
 import { FormProfile } from 'containers/FormProfile/FormProfile';
 import { PopupAvatar } from 'containers/PopupAvatar/PopupAvatar';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import styles from './Profile.module.scss';
 import { ProfileProps } from './Profile.types';
@@ -22,9 +22,11 @@ export function Profile({ type }: ProfileProps) {
   const closePopup = useCallback(() => {
     setPopupActive(false);
   }, []);
-  const title = userData
-    ? userData[UserResponseKeys.displayName] || userData[UserResponseKeys.login]
-    : '';
+  const title = useMemo(() => {
+    return userData
+      ? userData[UserResponseKeys.displayName] || userData[UserResponseKeys.login]
+      : '';
+  }, [userData]);
   const renderType = useCallback(() => {
     switch (type) {
       case 'edit':
