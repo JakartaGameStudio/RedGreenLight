@@ -12,18 +12,21 @@ export function FormPassword() {
   const formProps = useForm<FormFieldProps>({
     fields: [
       {
+        id: `FormPassword[${ChangePasswordRequestKeys.oldPassword}]`,
         name: ChangePasswordRequestKeys.oldPassword,
         placeholder: formFieldsDictionary.oldPassword,
         type: 'password',
         required: true,
       },
       {
+        id: `FormPassword[${ChangePasswordRequestKeys.newPassword}]`,
         name: ChangePasswordRequestKeys.newPassword,
         placeholder: formFieldsDictionary.newPassword,
         type: 'password',
         required: true,
       },
       {
+        id: `FormPassword[confirmPassword]`,
         name: 'confirmPassword',
         placeholder: formFieldsDictionary.newPasswordConfirm,
         type: 'password',
