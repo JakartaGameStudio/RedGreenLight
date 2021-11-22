@@ -1,26 +1,12 @@
 import { ButtonProps } from 'components/Button/Button.types';
 import { FormFieldProps } from 'components/FormField/FormField.types';
-import { Dispatch, SetStateAction } from 'react';
+import { FormEventHandler } from 'react';
 
-export type FormFieldData = {
-  name: string;
-  value: string;
-};
-
-export interface Form {
+export type FormProps = {
   buttons: Omit<ButtonProps, 'className'>[];
   fields: Omit<FormFieldProps, 'className' | 'onChange'>[];
   isLoading?: boolean;
-  onSubmit(data: Record<string, string>): void;
+  onChange: FormFieldProps['onChange'];
+  onSubmit: FormEventHandler<HTMLFormElement>;
   title?: string;
-}
-
-export interface FormPropsWithOnChange extends Form {
-  onChange(state: FormFieldData): void;
-}
-
-export interface FormPropsWithSetter extends Form {
-  setFields: Dispatch<SetStateAction<Form['fields']>>;
-}
-
-export type FormProps = FormPropsWithOnChange & FormPropsWithSetter;
+};

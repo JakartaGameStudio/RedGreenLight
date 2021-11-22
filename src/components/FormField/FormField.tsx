@@ -40,7 +40,7 @@ export function FormField({
         required={required}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        onChange={({ target }) => onChange(target.value)}
+        onChange={onChange}
         className={classNames(styles.input, className, {
           [styles.inputActive]: isFocus || value,
           [styles.inputError]: errors.length,

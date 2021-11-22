@@ -5,15 +5,13 @@ import { useState } from 'react';
 import styles from './PopupAvatar.module.scss';
 import { PopupAvatarFormProps } from './PopupAvatar.types';
 
-export function PopupAvatarForm({ onSubmit, onClose }: PopupAvatarFormProps) {
+export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
   const [value, setValue] = useState<File>();
 
   function handlerSubmit(event) {
     event.preventDefault();
 
-    UsersApi.updateAvatar(value).then((userData) => {
-      onSubmit(userData);
-    });
+    UsersApi.updateAvatar(value).then(onClose);
   }
 
   function onChange({ target }) {

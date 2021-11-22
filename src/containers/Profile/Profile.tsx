@@ -30,11 +30,6 @@ export function Profile({ type }: ProfileProps) {
     setPopupActive(true);
   }
 
-  function submitPopup(data) {
-    setUserData(data);
-    setPopupActive(false);
-  }
-
   function closePopup() {
     setPopupActive(false);
   }
@@ -45,16 +40,14 @@ export function Profile({ type }: ProfileProps) {
 
   return (
     <>
-      <PopupAvatar active={popupActive} onClose={closePopup} onSubmit={submitPopup} />
+      <PopupAvatar active={popupActive} onClose={closePopup} />
       <div className={styles.profile}>
         <div className={styles.head}>
           <ProfileAvatar userData={userData} onClick={showPopup} className={styles.avatar} />
           <Title size="h3">{title}</Title>
         </div>
         <div className={styles.body}>
-          {type === 'edit' && (
-            <FormProfile userData={userData} onSubmit={(data) => setUserData(data)} />
-          )}
+          {type === 'edit' && <FormProfile userData={userData} />}
           {type === 'password' && <FormPassword />}
           {!type && userData && (
             <>
