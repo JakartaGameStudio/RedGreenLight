@@ -1,6 +1,6 @@
 import { BorderGame, Game, MainHero, TimeController } from 'game';
 import { FinishLine } from 'game/FinishLine';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import { GameStatus } from './GameContainer.types';
 
@@ -27,7 +27,7 @@ export const useGame = (config) => {
     const _timeController = new TimeController({
       timeout: 2000,
       safePeriod: 500,
-      allowedMoveTime: 3000,
+      allowedMoveTime: 10000,
       totalTime: config.MAX_GAME_TIME,
     });
     const _borderGame = new BorderGame({
@@ -47,7 +47,7 @@ export const useGame = (config) => {
       game: _game,
       finishLine: _finishLine,
     };
-  }, []);
+  }, [config]);
   const gameActions = useMemo(() => {
     return {
       startGame: () => {
@@ -56,14 +56,20 @@ export const useGame = (config) => {
       restartGame: () => {
         game.restart();
       },
-      startBoost: () => {
+      mouseDown: (e: MouseEvent<HTMLCanvasElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+
+        mainHero.direction = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        };
         mainHero.startBoost();
       },
       endBoost: () => {
         mainHero.endBoost();
       },
     };
-  }, []);
+  }, [game, mainHero]);
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement;
@@ -152,7 +158,7 @@ export const useGame = (config) => {
     return () => {
       game.clearAnimate();
     };
-  }, []);
+  }, [borderGame, config, finishLine, game, mainHero, timeController]);
 
   return {
     gameActions,

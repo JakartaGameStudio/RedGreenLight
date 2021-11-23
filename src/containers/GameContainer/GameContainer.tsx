@@ -6,7 +6,7 @@ import { useGame } from './useGame';
 const config = {
   GAME_WIDTH: 1024,
   GAME_HEIGHT: 640,
-  GAME_FIELD_DISTANCE_LENGTH: 300,
+  GAME_FIELD_DISTANCE_LENGTH: 1000,
   HERO_BORDER_MAIN_COLOR: 'rgb(57, 156, 130)',
   HERO_FILL_MAIN_COLOR: 'rgba(57, 156, 130, 0.1)',
   HERO_BORDER_LOSE_COLOR: 'rgb(243, 98, 123)',
@@ -19,17 +19,23 @@ const config = {
   HERO_DEFAULT_RADIUS: 20,
   HERO_DEFAULT_BOOST: 0.00009,
   HERO_DEFAULT_DEBOOST: 0.00002,
-  MAX_GAME_TIME: 10000,
+  MAX_GAME_TIME: 100000,
 };
 
 export const GameContainer = () => {
   const { gameActions, canvasRef, renderTime, gameStatus } = useGame(config);
-  const { startBoost, endBoost, startGame, restartGame } = gameActions;
+  const { mouseDown, endBoost, startGame, restartGame } = gameActions;
 
   return (
-    <div onMouseDown={startBoost} onMouseUp={endBoost}>
+    <div>
       <div>{renderTime}</div>
-      <canvas ref={canvasRef} width={config.GAME_WIDTH} height={config.GAME_HEIGHT} />
+      <canvas
+        ref={canvasRef}
+        width={config.GAME_WIDTH}
+        height={config.GAME_HEIGHT}
+        onMouseDown={mouseDown}
+        onMouseUp={endBoost}
+      />
       {gameStatus !== 'inGame' && (
         <ModalWrapper>
           {gameStatus === GameStatus.beforeGame && <StartWindow startGame={startGame} />}
