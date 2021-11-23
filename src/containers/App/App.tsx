@@ -2,6 +2,7 @@ import './App.module.scss';
 
 import { Page404 } from 'pages/Page404/Page404';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
+import { PageForum } from 'pages/PageForum/PageForum';
 import { PageGame } from 'pages/PageGame/PageGame';
 import { PageIndex } from 'pages/PageIndex/PageIndex';
 import { PageLeaderboards } from 'pages/PageLeaderboards/PageLeaderboards';
@@ -16,6 +17,7 @@ export function App() {
       <Routes>
         <Route path={AppRoutes.index} element={<PageIndex />} />
         <Route path={AppRoutes.game} element={<PageGame />} />
+        <Route path={AppRoutes.forum} element={<PageForum />} />
         <Route path={AppRoutes.leaderBoards} element={<PageLeaderboards />} />
         <Route path={AppRoutes.signIn} element={<PageAuth />} />
         <Route path={AppRoutes.signUp} element={<PageAuth signUp={true} />} />
