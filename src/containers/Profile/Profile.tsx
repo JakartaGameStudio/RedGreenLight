@@ -28,6 +28,10 @@ export function Profile({ type }: ProfileProps) {
       : '';
   }, [userData]);
   const renderType = useCallback(() => {
+    if (!userData) {
+      return <Preloader />;
+    }
+
     switch (type) {
       case 'edit':
         return <FormProfile userData={userData} />;
@@ -35,16 +39,12 @@ export function Profile({ type }: ProfileProps) {
         return <FormPassword />;
     }
 
-    if (userData) {
-      return (
-        <>
-          <ProfileInfo userData={userData} />
-          <ProfileNav />
-        </>
-      );
-    }
-
-    return <Preloader />;
+    return (
+      <>
+        <ProfileInfo userData={userData} />
+        <ProfileNav />
+      </>
+    );
   }, [type, userData]);
 
   useEffect(() => {
