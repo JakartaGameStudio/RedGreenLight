@@ -2,15 +2,15 @@ import { UsersApi } from 'api';
 import { ChangePasswordRequestKeys } from 'api/UsersApi/UsersApi.types';
 import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
-import { formFieldsDictionary } from 'constans/formFieldsDictionary';
+import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormPassword() {
   const [isLoading, setLoading] = useState(false);
-  const formProps = useForm<FormFieldProps>({
-    fields: [
+  const fields = useMemo<FormFieldProps[]>(() => {
+    return [
       {
         id: `FormPassword[${ChangePasswordRequestKeys.oldPassword}]`,
         name: ChangePasswordRequestKeys.oldPassword,
@@ -32,13 +32,16 @@ export function FormPassword() {
         type: 'password',
         required: true,
       },
-    ],
-    onSubmit(data) {
+    ];
+  }, []);
+  const onSubmit = useMemo(() => {
+    return function (data) {
       setLoading(true);
 
       return UsersApi.updatePassword(data).finally(() => setLoading(false));
-    },
-  });
+    };
+  }, []);
+  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
 
   return (
     <Form

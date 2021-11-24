@@ -6,16 +6,21 @@ type Field = {
   value?: any;
 };
 
-export function useForm<F extends Field>({ fields, onSubmit }: { fields: F[]; onSubmit(data) }) {
+type Props<F> = {
+  fields: F[];
+  onSubmit(data);
+};
+
+export function useForm<F extends Field>({ fields, onSubmit }: Props<F>) {
   const [formFields, setFormFields] = useState(fields);
-  const handlerChange = useCallback((event) => {
+  const handleChange = useCallback((event) => {
     const { name, value } = event.target;
 
     return setFormFields((prevState) => {
       return prevState.map((field) => (field.name === name ? { ...field, value: value } : field));
     });
   }, []);
-  const handlerSubmit = useCallback(
+  const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
 
@@ -33,7 +38,7 @@ export function useForm<F extends Field>({ fields, onSubmit }: { fields: F[]; on
   return {
     fields: formFields,
     setFields: setFormFields,
-    onChange: handlerChange,
-    onSubmit: handlerSubmit,
+    onChange: handleChange,
+    onSubmit: handleSubmit,
   };
 }

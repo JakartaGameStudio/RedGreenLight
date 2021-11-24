@@ -1,27 +1,29 @@
 import { UsersApi } from 'api';
 import { Button } from 'components/Button/Button';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import styles from './PopupAvatar.module.scss';
 import { PopupAvatarFormProps } from './PopupAvatar.types';
 
 export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
   const [value, setValue] = useState<File>();
+  const handleSubmit = useMemo(() => {
+    return function (event) {
+      event.preventDefault();
 
-  function handlerSubmit(event) {
-    event.preventDefault();
+      UsersApi.updateAvatar(value).then(onClose);
+    };
+  }, [value, onClose]);
+  const handleChange = useMemo(() => {
+    return function (event) {
+      const file = event.target.files[0];
 
-    UsersApi.updateAvatar(value).then(onClose);
-  }
-
-  function onChange({ target }) {
-    const file = target.files[0];
-
-    setValue(file);
-  }
+      setValue(file);
+    };
+  }, []);
 
   return (
-    <form className={styles.form} onSubmit={handlerSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.label}>
         {value && (
           <>
@@ -32,7 +34,12 @@ export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
         <span className={styles.link}>
           {value ? 'Выбрать другой файл' : 'Выбрать файл на компьютере'}
         </span>
-        <input type="file" className={styles.input} accept=".png,.jpg,.svg" onChange={onChange} />
+        <input
+          type="file"
+          className={styles.input}
+          accept=".png,.jpg,.svg"
+          onChange={handleChange}
+        />
       </label>
       {value && (
         <Button type="submit" className={styles.button}>
