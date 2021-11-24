@@ -7,6 +7,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(paths.html),
       inject: true,
+      publicPath: '/',
     }),
   ],
 };
