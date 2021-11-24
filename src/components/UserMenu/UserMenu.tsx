@@ -37,8 +37,18 @@ export function UserMenu({ userName, className }: UserMenuProps) {
         <nav className={styles.dropdown}>
           <ul className={styles.menu}>
             <li className={styles.menuItem}>
+              <NavLink className={styles.item} to={AppRoutes.profile}>
+                Перейти в профиль
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
               <NavLink className={styles.item} to={AppRoutes.profileEdit}>
-                Изменить даные
+                Изменить данные
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <NavLink className={styles.item} to={AppRoutes.profilePassword}>
+                Изменить пароль
               </NavLink>
             </li>
             <li className={styles.menuItem}>

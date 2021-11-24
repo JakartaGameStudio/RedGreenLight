@@ -1,17 +1,12 @@
 import { ButtonProps } from 'components/Button/Button.types';
 import { FormFieldProps } from 'components/FormField/FormField.types';
-
-export type FormFieldData = {
-  name: string;
-  value: string;
-};
-
-export type FormState = FormFieldData[];
+import { FormEventHandler } from 'react';
 
 export type FormProps = {
   buttons: Omit<ButtonProps, 'className'>[];
   fields: Omit<FormFieldProps, 'className' | 'onChange'>[];
-  onChange?(state: FormState): void;
-  onSubmit(state: FormState): void;
+  isLoading?: boolean;
+  onChange: FormFieldProps['onChange'];
+  onSubmit: FormEventHandler<HTMLFormElement>;
   title?: string;
 };

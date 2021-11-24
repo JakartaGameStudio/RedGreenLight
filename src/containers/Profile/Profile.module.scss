@@ -1,0 +1,55 @@
+@import "~styles/variables/colors.scss";
+
+.head {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.avatar {
+  margin-bottom: 30px;
+}
+
+.body {
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav {
+  display: block;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.navItem {
+  display: block;
+  margin: 5px 0;
+  padding: 0;
+}
+
+.link {
+  font-size: 14px;
+  line-height: 20px;
+  &:hover {
+    color: $color-basic;
+  }
+}
+
+.signOut {
+  color: $color-secondary;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  line-height: 1;
+  color: $color-basic-middle;
+  border-bottom: 1px solid $color-basic-light;
+}
+
+.fieldLabel {
+  color: $color-basic;
+}

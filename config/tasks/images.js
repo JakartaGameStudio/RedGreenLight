@@ -7,7 +7,8 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack'],
+        issuer: /\.(js|ts)x?$/,
+        use: '@svgr/webpack',
       },
     ],
   },
