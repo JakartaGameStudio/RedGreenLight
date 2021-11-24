@@ -1,4 +1,5 @@
 import { LoseWindow, ModalWrapper, StartWindow, WinWindow } from 'components/GameModals/GameModals';
+import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
 import { GameStatus } from './GameContainer.types';
 import { useGame } from './useGame';
@@ -23,12 +24,12 @@ const config = {
 };
 
 export const GameContainer = () => {
-  const { gameActions, canvasRef, renderTime, gameStatus } = useGame(config);
+  const { gameActions, canvasRef, renderTime, gameStatus, score } = useGame(config);
   const { mouseDown, endBoost, startGame, restartGame } = gameActions;
 
   return (
     <div>
-      <div>{renderTime}</div>
+      <div>{changeMsToMinSec(renderTime)}</div>
       <canvas
         ref={canvasRef}
         width={config.GAME_WIDTH}
@@ -40,7 +41,7 @@ export const GameContainer = () => {
         <ModalWrapper>
           {gameStatus === GameStatus.beforeGame && <StartWindow startGame={startGame} />}
           {gameStatus === GameStatus.lose && <LoseWindow restartGame={restartGame} />}
-          {gameStatus === GameStatus.win && <WinWindow restartGame={restartGame} />}
+          {gameStatus === GameStatus.win && <WinWindow restartGame={restartGame} score={score} />}
         </ModalWrapper>
       )}
     </div>

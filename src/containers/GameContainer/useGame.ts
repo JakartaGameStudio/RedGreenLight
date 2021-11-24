@@ -6,8 +6,9 @@ import { GameStatus } from './GameContainer.types';
 
 export const useGame = (config) => {
   const canvasRef = useRef(null);
-  const [renderTime, setRenderTime] = useState('');
+  const [renderTime, setRenderTime] = useState<number | null>(null);
   const [gameStatus, setGameStatus] = useState<keyof typeof GameStatus>(GameStatus.beforeGame);
+  const [score, setScore] = useState<number | null>(null);
   const { mainHero, timeController, finishLine, game, borderGame } = useMemo(() => {
     const _mainHero = new MainHero({
       x: config.HERO_START_POSITION_X,
@@ -127,6 +128,7 @@ export const useGame = (config) => {
 
       if (mainHero.isWon) {
         timeController.stop();
+        setScore(timeController.currentTime);
         setGameStatus('win');
       }
 
@@ -142,9 +144,7 @@ export const useGame = (config) => {
       borderGame.render(ctx);
       mainHero.render(ctx);
       finishLine.render(ctx);
-      const tTime = new Date(timeController.remainingTime);
-
-      setRenderTime(`${tTime.getMinutes()}:${tTime.getSeconds()}`);
+      setRenderTime(timeController.remainingTime);
     };
 
     game.clear = () => ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -152,6 +152,7 @@ export const useGame = (config) => {
     game.restart = () => {
       mainHero.refresh();
       timeController.refresh();
+      setScore(null);
       setGameStatus('inGame');
     };
 
@@ -161,6 +162,7 @@ export const useGame = (config) => {
   }, [borderGame, config, finishLine, game, mainHero, timeController]);
 
   return {
+    score,
     gameActions,
     gameStatus,
     canvasRef,
