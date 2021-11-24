@@ -1,32 +1,35 @@
-export enum UsersApiUserKeys {
-  avatar = 'avatar',
+export enum UserUpdateRequestKeys {
   displayName = 'display_name',
   email = 'email',
   firstName = 'first_name',
-  id = 'id',
   login = 'login',
   phone = 'phone',
   secondName = 'second_name',
 }
 
-export type UsersApiUser = {
-  [UsersApiUserKeys.avatar]: string | null;
-  [UsersApiUserKeys.displayName]: string | null;
-  [UsersApiUserKeys.email]: string;
-  [UsersApiUserKeys.firstName]: string;
-  [UsersApiUserKeys.id]: number;
-  [UsersApiUserKeys.login]: string;
-  [UsersApiUserKeys.phone]: string;
-  [UsersApiUserKeys.secondName]: string;
+export enum ChangePasswordRequestKeys {
+  newPassword = 'newPassword',
+  oldPassword = 'oldPassword',
+}
+
+export enum FindUserRequestKeys {
+  login = 'login',
+}
+
+export type UserUpdateRequest = {
+  [UserUpdateRequestKeys.firstName]: string;
+  [UserUpdateRequestKeys.secondName]: string;
+  [UserUpdateRequestKeys.displayName]: string;
+  [UserUpdateRequestKeys.login]: string;
+  [UserUpdateRequestKeys.email]: string;
+  [UserUpdateRequestKeys.phone]: string;
 };
 
-export type UsersApiUpdateRequest = Omit<UsersApiUser, UsersApiUserKeys.id>;
-
-export type UsersApiPasswordRequest = {
-  newPassword: string;
-  oldPassword: string;
+export type ChangePasswordRequest = {
+  [ChangePasswordRequestKeys.newPassword]: string;
+  [ChangePasswordRequestKeys.oldPassword]: string;
 };
 
-export type UsersApiAvatarRequest = FormData;
-
-export type UsersApiSearchRequest = Pick<UsersApiUser, UsersApiUserKeys.login>;
+export type FindUserRequest = {
+  [FindUserRequestKeys.login]: string;
+};

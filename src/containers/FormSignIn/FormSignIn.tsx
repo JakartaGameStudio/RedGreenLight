@@ -1,30 +1,53 @@
 import { AuthApi } from 'api';
-import { AuthApiSignInKeys } from 'api/AuthApi/AuthApi.types';
+import { SignInRequestKeys } from 'api/AuthApi/AuthApi.types';
 import { Form } from 'components/Form/Form';
-import { FormProps } from 'components/Form/Form.types';
-import { useMemo } from 'react';
+import { FormFieldProps } from 'components/FormField/FormField.types';
+import { formFieldsDictionary } from 'constants/formFieldsDictionary';
+import { useForm } from 'hooks/useForm';
+import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignIn() {
-  const formProps = useMemo<Pick<FormProps, 'fields' | 'buttons'>>(
-    () => ({
-      fields: [
-        {
-          id: `FormSignIn[${AuthApiSignInKeys.login}]`,
-          name: AuthApiSignInKeys.login,
-          placeholder: 'Логин',
-          type: 'text',
-          required: true,
-        },
-        {
-          id: `FormSignIn[${AuthApiSignInKeys.password}]`,
-          name: AuthApiSignInKeys.password,
-          placeholder: 'Пароль',
-          type: 'password',
-          required: true,
-        },
-      ],
-      buttons: [
+  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
+  const fields = useMemo<FormFieldProps[]>(() => {
+    return [
+      {
+        id: `FormSignIn[${SignInRequestKeys.login}]`,
+        name: SignInRequestKeys.login,
+        placeholder: formFieldsDictionary.login,
+        type: 'text',
+        required: true,
+      },
+      {
+        id: `FormSignIn[${SignInRequestKeys.password}]`,
+        name: SignInRequestKeys.password,
+        placeholder: formFieldsDictionary.password,
+        type: 'password',
+        required: true,
+      },
+    ];
+  }, []);
+  const onSubmit = useMemo(() => {
+    return function (data) {
+      setLoading(true);
+
+      return AuthApi.signIn(data)
+        .then(() => {
+          navigate(AppRoutes.game);
+        })
+        .finally(() => setLoading(false));
+    };
+  }, [navigate]);
+  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
+
+  return (
+    <Form
+      {...formProps}
+      title="Вход"
+      isLoading={isLoading}
+      buttons={[
         {
           children: 'Начать игру',
           type: 'submit',
@@ -34,16 +57,7 @@ export function FormSignIn() {
           mod: 'link',
           href: AppRoutes.signUp,
         },
-      ],
-    }),
-    [],
-  );
-
-  function onSubmit(data) {
-    return AuthApi.signIn(data);
-  }
-
-  return (
-    <Form title="Вход" onSubmit={onSubmit} fields={formProps.fields} buttons={formProps.buttons} />
+      ]}
+    />
   );
 }

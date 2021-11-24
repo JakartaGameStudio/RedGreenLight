@@ -1,0 +1,44 @@
+@import "~styles/variables/colors.scss";
+@import "~styles/variables/fonts.scss";
+
+.label {
+  display: block;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.link {
+  font-size: 14px;
+  color: var(--theme-color-basic);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--theme-color-primary);
+  }
+}
+
+.image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 200px;
+}
+
+.input {
+  display: none;
+}
+
+.value {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  margin: 20px 0;
+  color: var(--theme-color-basic);
+}
+
+.button {
+  margin-top: 10px;
+}

@@ -1,4 +1,22 @@
-.form {}
+.wrapper {
+  position: relative;
+}
+
+.formLoading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
 
 .title {
   text-align: center;
@@ -11,4 +29,8 @@
 
 .field {
   margin-bottom: 10px;
+}
+
+.button {
+  margin-top: 10px;
 }

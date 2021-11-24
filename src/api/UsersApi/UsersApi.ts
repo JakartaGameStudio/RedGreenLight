@@ -1,21 +1,19 @@
+import { UserResponse } from 'api/api.types';
+import {
+  ChangePasswordRequest,
+  FindUserRequest,
+  UserUpdateRequest,
+} from 'api/UsersApi/UsersApi.types';
 import { ApiHelper } from 'helpers/ApiHelper';
 
-import {
-  UsersApiAvatarRequest,
-  UsersApiPasswordRequest,
-  UsersApiSearchRequest,
-  UsersApiUpdateRequest,
-  UsersApiUser,
-} from './UsersApi.types';
-
 export const UsersApi = {
-  async getUser(id: number) {
-    const response = await ApiHelper.get<UsersApiUser>(`/user/${id}`);
+  async getUserById(id: number) {
+    const response = await ApiHelper.get<UserResponse>(`/user/${id}`);
 
     return response.data;
   },
-  async updateProfile(data: UsersApiUpdateRequest) {
-    const response = await ApiHelper.put<UsersApiUser>(`/user/profile`, data, {
+  async updateProfile(data: UserUpdateRequest) {
+    const response = await ApiHelper.put<UserResponse>(`/user/profile`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -23,8 +21,8 @@ export const UsersApi = {
 
     return response.data;
   },
-  async updatePassword(data: UsersApiPasswordRequest) {
-    const response = await ApiHelper.put<UsersApiUser>(`/user/password`, data, {
+  async updatePassword(data: ChangePasswordRequest) {
+    const response = await ApiHelper.put(`/user/password`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -32,13 +30,17 @@ export const UsersApi = {
 
     return response.data;
   },
-  async updateAvatar(data: UsersApiAvatarRequest) {
-    const response = await ApiHelper.put<UsersApiUser>(`/user/profile/avatar`, data);
+  async updateAvatar(file: File) {
+    const data = new FormData();
+
+    data.append('avatar', file);
+
+    const response = await ApiHelper.put<UserResponse>(`/user/profile/avatar`, data);
 
     return response.data;
   },
-  async searchUserByLogin(data: UsersApiSearchRequest) {
-    const response = await ApiHelper.post<UsersApiUser[]>(`/user/search`, data, {
+  async searchUserByLogin(data: FindUserRequest) {
+    const response = await ApiHelper.post<UserResponse[]>(`/user/search`, data, {
       headers: {
         'Content-Type': 'application/json',
       },

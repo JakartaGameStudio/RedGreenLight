@@ -1,5 +1,4 @@
-import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
-import { Title } from 'components/Title/Title';
+import { PageError } from 'components/PageError/PageError';
 import { Component } from 'react';
 
 type ErrorBoundaryProps = {
@@ -23,11 +22,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, { hasError: boo
 
   render() {
     if (this.state.hasError) {
-      return (
-        <LayoutContainer>
-          <Title size="h1">Что-то пошло не так. Мы скоро все починим.</Title>
-        </LayoutContainer>
-      );
+      return <PageError title="Что-то пошло не так. Мы скоро все починим." />;
     }
 
     return this.props.children;

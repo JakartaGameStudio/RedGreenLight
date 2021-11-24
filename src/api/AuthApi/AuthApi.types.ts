@@ -1,14 +1,10 @@
-export enum AuthApiSignInKeys {
+export enum SignInRequestKeys {
   login = 'login',
   password = 'password',
 }
 
-export type AuthApiSignInRequest = {
-  [AuthApiSignInKeys.login]: string;
-  [AuthApiSignInKeys.password]: string;
-};
-
-export enum AuthApiSignUpKeys {
+export enum SignUpRequestKeys {
+  displayName = 'display_name',
   email = 'email',
   firstName = 'first_name',
   login = 'login',
@@ -17,20 +13,21 @@ export enum AuthApiSignUpKeys {
   secondName = 'second_name',
 }
 
-export type AuthApiSignUpRequest = {
-  [AuthApiSignUpKeys.email]: string;
-  [AuthApiSignUpKeys.firstName]: string;
-  [AuthApiSignUpKeys.login]: string;
-  [AuthApiSignUpKeys.password]: string;
-  [AuthApiSignUpKeys.phone]: string;
-  [AuthApiSignUpKeys.secondName]: string;
+export type SignInRequest = {
+  [SignInRequestKeys.login]: string;
+  [SignInRequestKeys.password]: string;
 };
 
-export type AuthApiError = {
-  error?: string;
-  reason: string;
+export type SignUpRequest = {
+  [SignUpRequestKeys.firstName]: string;
+  [SignUpRequestKeys.secondName]: string;
+  [SignUpRequestKeys.displayName]: string;
+  [SignUpRequestKeys.login]: string;
+  [SignUpRequestKeys.phone]: string;
+  [SignUpRequestKeys.email]: string;
+  [SignUpRequestKeys.password]: string;
 };
 
-export type AuthApiSignUpResponse = {
+export type SignUpResponse = {
   id: number;
 };
