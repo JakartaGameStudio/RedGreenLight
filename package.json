@@ -11,11 +11,11 @@
     "lint:scripts": "eslint ./ --fix && tsc --noEmit",
     "prepare": "husky install",
     "husky:pre-commit": "npm run lint:scripts",
-    "deploy": "npm-run-all docker-build heroku-login heroku-push heroku-release",
-    "docker-build": "docker build -t web .",
-    "heroku-login": "heroku container:login",
-    "heroku-push": "heroku container:push web -a=jakarta-game",
-    "heroku-release": "heroku container:release web -a=jakarta-game"
+    "deploy": "npm-run-all docker:build heroku:login heroku:push heroku:release",
+    "docker:build": "docker build -t web .",
+    "heroku:login": "heroku login && heroku container:login",
+    "heroku:push": "heroku container:push web -a=jakarta-game",
+    "heroku:release": "heroku container:release web -a=jakarta-game"
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
