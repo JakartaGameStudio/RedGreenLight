@@ -1,21 +1,16 @@
-import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './Popup.module.scss';
 import { PopupProps } from './Popup.types';
 
-//TODO: переделать на HOC c show/hide
-
-export function Popup({ children, active }: PopupProps) {
-  const [isActive, setActive] = useState(active);
-
-  if (!isActive) {
+export function Popup({ children, active, onClose }: PopupProps) {
+  if (!active) {
     return null;
   }
 
   return createPortal(
     <div className={styles.popup}>
-      <div className={styles.overlay} onClick={() => setActive(false)} />
+      <div className={styles.overlay} onClick={onClose} />
       <div className={styles.body}>{children}</div>
     </div>,
     document.body,

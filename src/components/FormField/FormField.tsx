@@ -10,33 +10,21 @@ export function FormField({
   placeholder,
   onChange,
   required,
+  disabled,
   className,
+  readonly,
   value = '',
   errors = [],
   type = 'text',
 }: FormFieldProps) {
-  const [isActive, setActive] = useState(Boolean(value));
-  const [val, setVal] = useState(value);
-
-  function handlerChange({ target }) {
-    setVal(target.value);
-    onChange(target.value);
-  }
-
-  function handlerFocus() {
-    setActive(true);
-  }
-
-  function handlerBlur() {
-    setActive(Boolean(val));
-  }
+  const [isFocus, setIsFocus] = useState(Boolean(value));
 
   return (
     <div className={styles.field}>
       <label
         htmlFor={id}
         className={classNames(styles.label, {
-          [styles.labelActive]: isActive,
+          [styles.labelActive]: isFocus || value,
         })}
       >
         {placeholder}
@@ -45,14 +33,16 @@ export function FormField({
       <input
         id={id}
         name={name}
-        value={val}
+        value={value}
         type={type}
+        disabled={disabled}
+        readOnly={readonly}
         required={required}
-        onFocus={handlerFocus}
-        onBlur={handlerBlur}
-        onChange={handlerChange}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
+        onChange={onChange}
         className={classNames(styles.input, className, {
-          [styles.inputActive]: isActive,
+          [styles.inputActive]: isFocus || value,
           [styles.inputError]: errors.length,
         })}
       />
