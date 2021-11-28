@@ -17,7 +17,8 @@ import { ProfileInfo } from './ProfileInfo';
 import { ProfileNav } from './ProfileNav';
 
 export function Profile({ type }: ProfileProps) {
-  const { user } = useAuth();
+  const { getUser } = useAuth();
+  const user = getUser();
   const dispatch = useStoreDispatch();
   const [popupActive, setPopupActive] = useState(false);
   const showPopup = useCallback(() => {

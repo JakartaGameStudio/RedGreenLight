@@ -10,8 +10,11 @@ import { store } from 'store/store';
 export function useAuth() {
   const dispatch = useStoreDispatch();
   const id = useStoreSelector((state) => state.auth.id);
-  const userSelector = userAdapter.getSelectors().selectById;
-  const storedUser = userSelector(store.getState().users, id);
+  const getUser = useCallback(() => {
+    const userSelector = userAdapter.getSelectors().selectById;
+
+    return userSelector(store.getState().users, id);
+  }, [id]);
   const identify = useCallback(() => {
     AuthApi.getUser().then((userData) => {
       dispatch(
@@ -51,7 +54,7 @@ export function useAuth() {
   useEffect(identify, [identify]);
 
   return {
-    user: storedUser,
+    getUser,
     signIn,
     signUp,
     signOut,

@@ -14,7 +14,8 @@ import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';
 
 export function Header({ className }: HeaderProps) {
-  const { user } = useAuth();
+  const { getUser } = useAuth();
+  const user = getUser();
   const userName = useMemo(() => user?.[UserResponseKeys.login], [user]);
   const avatarSrc = useMemo(() => getAvatarUrl(user?.[UserResponseKeys.avatar]), [user]);
   const menuItems = useMemo(
