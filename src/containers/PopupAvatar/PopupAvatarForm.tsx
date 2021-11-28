@@ -6,6 +6,13 @@ import { PopupAvatarFormProps } from './PopupAvatar.types';
 
 export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
   const [value, setValue] = useState<File>();
+  const handleSubmit = useMemo(() => {
+    return function (event) {
+      event.preventDefault();
+
+      return onSubmit(value);
+    };
+  }, [value, onSubmit]);
   const handleChange = useMemo(() => {
     return function (event) {
       const file = event.target.files[0];
@@ -15,7 +22,7 @@ export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
   }, []);
 
   return (
-    <form className={styles.form} onSubmit={() => onSubmit(value)}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.label}>
         {value && (
           <>

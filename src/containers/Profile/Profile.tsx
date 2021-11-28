@@ -57,9 +57,10 @@ export function Profile({ type }: ProfileProps) {
             changes: data,
           }),
         );
+        closePopup();
       });
     },
-    [user, dispatch],
+    [closePopup, user, dispatch],
   );
 
   return (
