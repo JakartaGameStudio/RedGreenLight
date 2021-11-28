@@ -15,9 +15,8 @@ import { HeaderProps } from './Header.types';
 
 export function Header({ className }: HeaderProps) {
   const { user } = useAuth();
-  const userName = useMemo(() => {
-    return user ? user[UserResponseKeys.displayName] || user[UserResponseKeys.login] : '';
-  }, [user]);
+  const userName = useMemo(() => user?.[UserResponseKeys.login], [user]);
+  const avatarSrc = useMemo(() => getAvatarUrl(user?.[UserResponseKeys.avatar]), [user]);
   const menuItems = useMemo(
     () => [
       {
@@ -49,7 +48,7 @@ export function Header({ className }: HeaderProps) {
               className={styles.user}
               userName={userName}
               image={{
-                src: getAvatarUrl(user[UserResponseKeys.avatar]),
+                src: avatarSrc,
               }}
             />
           ) : (

@@ -12,33 +12,31 @@ export function useAuth() {
   const id = useStoreSelector((state) => state.auth.id);
   const userSelector = userAdapter.getSelectors().selectById;
   const storedUser = userSelector(store.getState().users, id);
-  const signIn = useCallback(
-    async (data) => {
-      await AuthApi.signIn(data);
-      const userData = await AuthApi.getUser();
-
+  const identify = useCallback(() => {
+    AuthApi.getUser().then((userData) => {
       dispatch(
         authReducer.actions.setId({
           id: userData.id,
         }),
       );
       dispatch(userReducer.actions.setOne(userData));
+    });
+  }, [dispatch]);
+  const signIn = useCallback(
+    async (data) => {
+      await AuthApi.signIn(data);
+
+      return identify();
     },
-    [dispatch],
+    [identify],
   );
   const signUp = useCallback(
     async (data) => {
       await AuthApi.signUp(data);
-      const userData = await AuthApi.getUser();
 
-      dispatch(
-        authReducer.actions.setId({
-          id: userData.id,
-        }),
-      );
-      dispatch(userReducer.actions.setOne(userData));
+      return identify();
     },
-    [dispatch],
+    [identify],
   );
   const signOut = useCallback(async () => {
     await AuthApi.signOut();
@@ -50,16 +48,7 @@ export function useAuth() {
     );
   }, [dispatch]);
 
-  useEffect(() => {
-    AuthApi.getUser().then((userData) => {
-      dispatch(
-        authReducer.actions.setId({
-          id: userData.id,
-        }),
-      );
-      dispatch(userReducer.actions.setOne(userData));
-    });
-  }, [dispatch]);
+  useEffect(identify, [identify, dispatch]);
 
   return {
     user: storedUser,
