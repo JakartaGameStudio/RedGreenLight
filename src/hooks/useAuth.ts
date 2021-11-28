@@ -48,7 +48,7 @@ export function useAuth() {
     );
   }, [dispatch]);
 
-  useEffect(identify, [identify, dispatch]);
+  useEffect(identify, [storedUser, identify, dispatch]);
 
   return {
     user: storedUser,
