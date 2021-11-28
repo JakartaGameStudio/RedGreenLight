@@ -1,8 +1,8 @@
-import { AuthApi } from 'api';
 import { SignInRequestKeys } from 'api/AuthApi/AuthApi.types';
 import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
+import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'hooks/useForm';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignIn() {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
   const [isLoading, setLoading] = useState(false);
   const fields = useMemo<FormFieldProps[]>(() => {
     return [
@@ -33,7 +34,7 @@ export function FormSignIn() {
     return function (data) {
       setLoading(true);
 
-      return AuthApi.signIn(data)
+      return signIn(data)
         .then(() => {
           navigate(AppRoutes.game);
         })

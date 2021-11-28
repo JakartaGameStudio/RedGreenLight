@@ -1,19 +1,11 @@
-import { UsersApi } from 'api';
 import { Button } from 'components/Button/Button';
 import { useMemo, useState } from 'react';
 
 import styles from './PopupAvatar.module.scss';
 import { PopupAvatarFormProps } from './PopupAvatar.types';
 
-export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
+export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
   const [value, setValue] = useState<File>();
-  const handleSubmit = useMemo(() => {
-    return function (event) {
-      event.preventDefault();
-
-      UsersApi.updateAvatar(value).then(onClose);
-    };
-  }, [value, onClose]);
   const handleChange = useMemo(() => {
     return function (event) {
       const file = event.target.files[0];
@@ -23,7 +15,7 @@ export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
   }, []);
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={() => onSubmit(value)}>
       <label className={styles.label}>
         {value && (
           <>

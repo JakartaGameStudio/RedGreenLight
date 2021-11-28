@@ -1,19 +1,16 @@
-import { AuthApi } from 'api';
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
 import { Title } from 'components/Title/Title';
+import { useAuth } from 'hooks/useAuth';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function PageSignOut() {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   useEffect(() => {
-    AuthApi.signOut()
-      .then(() => navigate(AppRoutes.index))
-      .catch((error) => {
-        navigate(AppRoutes.error500, { state: { error } });
-      });
+    signOut().finally(() => navigate(AppRoutes.index));
   });
 
   return (

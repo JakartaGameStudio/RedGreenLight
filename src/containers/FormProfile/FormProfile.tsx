@@ -1,11 +1,14 @@
 import { UsersApi } from 'api';
+import { UserResponseKeys } from 'api/api.types';
 import { UserUpdateRequestKeys } from 'api/UsersApi/UsersApi.types';
 import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
+import { useStoreDispatch } from 'hooks/useStoreDispatch';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { userReducer } from 'store/reducers/userReducer/userReducer';
 import { AppRoutes } from 'types/AppRoutes';
 
 import { FormProfileProps } from './FormProfile.types';
@@ -21,6 +24,7 @@ const FIELDS = {
 
 export function FormProfile({ userData }: FormProfileProps) {
   const navigate = useNavigate();
+  const dispatch = useStoreDispatch();
   const fields = useMemo<FormFieldProps[]>(() => {
     return Object.entries(FIELDS).map(([key, label]) => ({
       id: `FormProfile[${key}]`,
@@ -35,11 +39,17 @@ export function FormProfile({ userData }: FormProfileProps) {
 
       return UsersApi.updateProfile(data)
         .then(() => {
+          dispatch(
+            userReducer.actions.updateOne({
+              id: userData[UserResponseKeys.id],
+              changes: data,
+            }),
+          );
           navigate(AppRoutes.profile);
         })
         .finally(() => setLoading(false));
     };
-  }, [navigate]);
+  }, [navigate, dispatch]);
   const formProps = useForm<FormFieldProps>({ fields, onSubmit });
   const [isLoading, setLoading] = useState(false);
 

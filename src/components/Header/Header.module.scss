@@ -1,3 +1,5 @@
+@import "~styles/variables/colors";
+
 .header {
   padding: 40px 0;
   width: 100%;
@@ -30,4 +32,9 @@
   flex: 0 0 auto;
   max-width: 140px;
   margin-left: 30px;
+}
+
+
+.signIn {
+  color: $color-primary;
 }

@@ -1,7 +1,10 @@
+import { UserResponseKeys } from 'api/api.types';
 import classNames from 'classnames';
 import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Menu } from 'components/Menu/Menu';
 import { UserMenu } from 'components/UserMenu/UserMenu';
+import { getAvatarUrl } from 'helpers/getAvatarUrl';
+import { useAuth } from 'hooks/useAuth';
 import Logo from 'images/logo.svg';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +14,10 @@ import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';
 
 export function Header({ className }: HeaderProps) {
+  const { user } = useAuth();
+  const userName = useMemo(() => {
+    return user ? user[UserResponseKeys.displayName] || user[UserResponseKeys.login] : '';
+  }, [user]);
   const menuItems = useMemo(
     () => [
       {
@@ -37,7 +44,19 @@ export function Header({ className }: HeaderProps) {
             <Logo className={styles.logoIcon} />
           </NavLink>
           <Menu className={styles.nav} items={menuItems} />
-          <UserMenu className={styles.user} userName="Очень длинный username" />
+          {user ? (
+            <UserMenu
+              className={styles.user}
+              userName={userName}
+              image={{
+                src: getAvatarUrl(user[UserResponseKeys.avatar]),
+              }}
+            />
+          ) : (
+            <NavLink to={AppRoutes.signIn} className={styles.signIn}>
+              Войти
+            </NavLink>
+          )}
         </div>
       </LayoutContainer>
     </header>

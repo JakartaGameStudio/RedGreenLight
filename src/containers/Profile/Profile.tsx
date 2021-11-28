@@ -1,12 +1,15 @@
-import { AuthApi } from 'api';
-import { UserResponse, UserResponseKeys } from 'api/api.types';
+import { UsersApi } from 'api';
+import { UserResponseKeys } from 'api/api.types';
 import { Preloader } from 'components/Preloader/Preloader';
 import { ProfileAvatar } from 'components/ProfileAvatar/ProfileAvatar';
 import { Title } from 'components/Title/Title';
 import { FormPassword } from 'containers/FormPassword/FormPassword';
 import { FormProfile } from 'containers/FormProfile/FormProfile';
 import { PopupAvatar } from 'containers/PopupAvatar/PopupAvatar';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useAuth } from 'hooks/useAuth';
+import { useStoreDispatch } from 'hooks/useStoreDispatch';
+import { useCallback, useMemo, useState } from 'react';
+import { userReducer } from 'store/reducers/userReducer/userReducer';
 
 import styles from './Profile.module.scss';
 import { ProfileProps } from './Profile.types';
@@ -14,7 +17,8 @@ import { ProfileInfo } from './ProfileInfo';
 import { ProfileNav } from './ProfileNav';
 
 export function Profile({ type }: ProfileProps) {
-  const [userData, setUserData] = useState<UserResponse | undefined>();
+  const { user } = useAuth();
+  const dispatch = useStoreDispatch();
   const [popupActive, setPopupActive] = useState(false);
   const showPopup = useCallback(() => {
     setPopupActive(true);
@@ -23,46 +27,47 @@ export function Profile({ type }: ProfileProps) {
     setPopupActive(false);
   }, []);
   const title = useMemo(() => {
-    return userData
-      ? userData[UserResponseKeys.displayName] || userData[UserResponseKeys.login]
-      : '';
-  }, [userData]);
+    return user ? user[UserResponseKeys.displayName] || user[UserResponseKeys.login] : '';
+  }, [user]);
   const renderType = useCallback(() => {
-    if (!userData) {
+    if (!user) {
       return <Preloader />;
     }
 
     switch (type) {
       case 'edit':
-        return <FormProfile userData={userData} />;
+        return <FormProfile userData={user} />;
       case 'password':
         return <FormPassword />;
     }
 
     return (
       <>
-        <ProfileInfo userData={userData} />
+        <ProfileInfo userData={user} />
         <ProfileNav />
       </>
     );
-  }, [type, userData]);
-
-  useEffect(() => {
-    AuthApi.getUser()
-      .then((data) => {
-        setUserData(data);
-      })
-      .catch((error) => {
-        setUserData(undefined);
+  }, [type, user]);
+  const avatarSubmit = useCallback(
+    (file) => {
+      UsersApi.updateAvatar(file).then((data) => {
+        dispatch(
+          userReducer.actions.updateOne({
+            id: user[UserResponseKeys.id],
+            changes: data,
+          }),
+        );
       });
-  }, []);
+    },
+    [user, dispatch],
+  );
 
   return (
     <>
-      <PopupAvatar active={popupActive} onClose={closePopup} />
+      <PopupAvatar active={popupActive} onClose={closePopup} onSubmit={avatarSubmit} />
       <div className={styles.profile}>
         <div className={styles.head}>
-          <ProfileAvatar userData={userData} onClick={showPopup} className={styles.avatar} />
+          <ProfileAvatar userData={user} onClick={showPopup} className={styles.avatar} />
           <Title size="h3">{title}</Title>
         </div>
         <div className={styles.body}>{renderType()}</div>
