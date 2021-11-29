@@ -28,7 +28,7 @@ export const useGame = (config) => {
     const _timeController = new TimeController({
       timeout: 2000,
       safePeriod: 500,
-      allowedMoveTime: 10000,
+      allowedMoveTime: 5000,
       totalTime: config.MAX_GAME_TIME,
     });
     const _borderGame = new BorderGame({
