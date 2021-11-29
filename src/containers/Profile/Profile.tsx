@@ -52,7 +52,7 @@ export function Profile({ type }: ProfileProps) {
       .then((data) => {
         setUserData(data);
       })
-      .catch((error) => {
+      .catch(() => {
         setUserData(undefined);
       });
   }, []);
