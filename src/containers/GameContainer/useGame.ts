@@ -47,7 +47,7 @@ export const useGame = (config) => {
       game: _game,
       finishLine: _finishLine,
     };
-  }, []);
+  }, [config]);
   const gameActions = useMemo(() => {
     return {
       startGame: () => {
@@ -63,7 +63,7 @@ export const useGame = (config) => {
         mainHero.endBoost();
       },
     };
-  }, []);
+  }, [game, mainHero]);
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement;
@@ -152,7 +152,7 @@ export const useGame = (config) => {
     return () => {
       game.clearAnimate();
     };
-  }, []);
+  }, [config, borderGame, finishLine, game, timeController, mainHero]);
 
   return {
     gameActions,
