@@ -152,7 +152,7 @@ export const useGame = (config) => {
     return () => {
       game.clearAnimate();
     };
-  }, [config, borderGame, finishLine, game, timeController, mainHero]);
+  }, [borderGame, config, finishLine, game, mainHero, timeController]);
 
   return {
     gameActions,
