@@ -25,7 +25,7 @@ export const useGame = (config) => {
       },
     });
     const _background = new Background({
-      widht: config.GAME_WIDTH,
+      width: config.GAME_WIDTH,
       height: config.GAME_HEIGHT,
       color: config.BACKGROUND_BASE_COLOR,
     });

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
 import { GameStatus } from './GameContainer.types';
-import { saveResultLocal } from './saveResultLocal';
+import { storeResult } from './storeResult';
 import { useGame } from './useGame';
 
 const config = {
@@ -35,8 +35,8 @@ export const GameContainer = () => {
   const { startBoost, endBoost, startGame, restartGame } = gameActions;
 
   useEffect(() => {
-    if (gameStatus === 'win') {
-      saveResultLocal(score);
+    if (gameStatus === GameStatus.win) {
+      storeResult(score);
     }
   }, [gameStatus, score]);
 
@@ -52,7 +52,7 @@ export const GameContainer = () => {
         onMouseDown={startBoost}
         onMouseUp={endBoost}
       />
-      {gameStatus !== 'inGame' && (
+      {gameStatus !== GameStatus.inGame && (
         <ModalWrapper>
           {gameStatus === GameStatus.beforeGame && <StartWindow startGame={startGame} />}
           {gameStatus === GameStatus.lose && <LoseWindow restartGame={restartGame} />}
