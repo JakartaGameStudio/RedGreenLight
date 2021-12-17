@@ -1,9 +1,15 @@
-export class Background {
+interface IBackground {
+  color: string;
+  height: number;
+  width: number;
+}
+
+export class Background implements IBackground {
   height: number;
   width: number;
   color: string;
 
-  constructor(params: { color: string; height: number; width: number }) {
+  constructor(params: IBackground) {
     this.color = params.color;
     this.height = params.height;
     this.width = params.width;

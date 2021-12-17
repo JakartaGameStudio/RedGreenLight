@@ -1,15 +1,17 @@
-export class SafeZone {
+interface ISafeZone {
+  color: string;
+  heightGame: number;
+  lengthDistance: number;
+  widthGame: number;
+}
+
+export class SafeZone implements ISafeZone {
   widthGame: number;
   heightGame: number;
   color: string;
   lengthDistance: number;
 
-  constructor(params: {
-    color: string;
-    heightGame: number;
-    lengthDistance: number;
-    widthGame: number;
-  }) {
+  constructor(params: ISafeZone) {
     this.color = params.color;
     this.heightGame = params.heightGame;
     this.widthGame = params.widthGame;

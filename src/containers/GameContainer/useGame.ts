@@ -30,9 +30,9 @@ export const useGame = (config) => {
       color: config.BACKGROUND_BASE_COLOR,
     });
     const _timeController = new TimeController({
-      timeout: 2000,
-      safePeriod: 800,
-      allowedMoveTime: 3000,
+      timeoutValue: 2000,
+      safePeriodValue: 800,
+      allowedMoveTimeValue: 3000,
       totalTime: config.MAX_GAME_TIME,
     });
     const _game = new Game();

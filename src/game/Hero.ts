@@ -1,4 +1,12 @@
-export class Hero {
+export interface IHero {
+  boost: number;
+  deboost: number;
+  radius: number;
+  x: number;
+  y: number;
+}
+
+export class Hero implements IHero {
   x: number;
   y: number;
   baseX: number;
@@ -13,7 +21,7 @@ export class Hero {
   isWon: boolean;
   deboost: number;
 
-  constructor(props: { boost: number; deboost: number; radius: number; x: number; y: number }) {
+  constructor(props: IHero) {
     this.x = this.baseX = props.x;
     this.y = this.baseY = props.y;
     this.radius = props.radius;
