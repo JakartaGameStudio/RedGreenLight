@@ -1,6 +1,7 @@
 import { Button } from 'components/Button/Button';
 import { Title } from 'components/Title/Title';
 import { FC } from 'react';
+import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
 import styles from './GameModals.module.scss';
 
@@ -28,10 +29,10 @@ export const LoseWindow = ({ restartGame }: { restartGame: () => void }) => (
   </>
 );
 
-export const WinWindow = ({ restartGame }: { restartGame: () => void }) => (
+export const WinWindow = ({ restartGame, score }: { restartGame: () => void; score: number }) => (
   <>
     <Title size="h3" className={styles.modalWrapper__title}>
-      Вы выиграли
+      Вы выиграли. Ваше время: {changeMsToMinSec(score)}
     </Title>
     <Button onClick={restartGame}>Начать заново</Button>
   </>

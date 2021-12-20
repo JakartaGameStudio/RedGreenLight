@@ -1,8 +1,18 @@
-export class Hero {
+export interface IHero {
+  boost: number;
+  deboost: number;
+  radius: number;
+  x: number;
+  y: number;
+}
+
+export class Hero implements IHero {
   x: number;
   y: number;
   baseX: number;
   baseY: number;
+  directionX: number;
+  directionY: number;
   radius: number;
   inBoost: boolean;
   boost: number;
@@ -11,7 +21,7 @@ export class Hero {
   isWon: boolean;
   deboost: number;
 
-  constructor(props: { boost: number; deboost: number; radius: number; x: number; y: number }) {
+  constructor(props: IHero) {
     this.x = this.baseX = props.x;
     this.y = this.baseY = props.y;
     this.radius = props.radius;
@@ -21,10 +31,22 @@ export class Hero {
     this.speed = 0;
     this.isLost = false;
     this.isWon = false;
+    this.directionX = 0;
+    this.directionY = 0;
   }
 
   get leftBorder() {
     return this.x - this.radius / 2;
+  }
+
+  set direction(coord: { x: number; y: number }) {
+    const sinA =
+      (coord.y - this.y) /
+        Math.sqrt(Math.pow(coord.y - this.y, 2) + Math.pow(coord.x - this.x, 2)) || 0;
+    const cosA = Math.sqrt(1 - Math.pow(sinA, 2)) || 0;
+
+    this.directionX = cosA;
+    this.directionY = sinA;
   }
 
   move(timeFraction: number) {
@@ -38,7 +60,8 @@ export class Hero {
       this.speed -= timeFraction * this.deboost;
     }
 
-    this.x += timeFraction * this.speed;
+    this.x += timeFraction * this.speed * this.directionX;
+    this.y += timeFraction * this.speed * this.directionY;
   }
 
   public startBoost() {
