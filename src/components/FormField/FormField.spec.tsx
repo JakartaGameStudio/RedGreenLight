@@ -6,6 +6,7 @@ import { FormField } from './FormField';
 describe('<FormField />', () => {
   test('should render readonly input', () => {
     render(<FormField name="Place" placeholder="Placeholder" id="myId" readonly />);
+
     const field = screen.getByLabelText('Placeholder');
 
     expect(field).toBeInTheDocument();
@@ -32,7 +33,5 @@ describe('<FormField />', () => {
     expect(field).toHaveValue('');
     fireEvent.change(field, { target: { value: 'Test value' } });
     expect(field).toHaveValue('Test value');
-    fireEvent.change(field, { target: { value: 'New test value' } });
-    expect(field).toHaveValue('New test value');
   });
 });

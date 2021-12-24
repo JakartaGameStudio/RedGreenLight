@@ -5,12 +5,12 @@ import { Menu } from './Menu';
 
 const menuItems = [
   {
-    text: 'Пункт1',
-    url: '/punct1',
+    text: 'item1',
+    url: '/item1',
   },
   {
-    text: 'Пункт2',
-    url: '/punct2',
+    text: 'item2',
+    url: '/item2',
   },
 ];
 
