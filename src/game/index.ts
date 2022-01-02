@@ -1,6 +1,7 @@
-import { BorderGame } from './BorderGame';
+import { Background } from './Background';
 import { Game } from './Game';
 import { MainHero } from './MainHero';
+import { SafeZone } from './SafeZone';
 import { TimeController } from './TimeController';
 
-export { BorderGame, Game, MainHero, TimeController };
+export { Game, MainHero, TimeController, Background, SafeZone };
