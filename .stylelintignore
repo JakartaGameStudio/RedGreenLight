@@ -1,0 +1,7 @@
+/dist
+/build
+/.next
+/.idea
+/.vscode
+/node_modules
+**/reset.*
