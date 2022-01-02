@@ -1,23 +1,20 @@
-import { UserResponseKeys } from 'api/api.types';
 import classNames from 'classnames';
 import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Menu } from 'components/Menu/Menu';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { getAvatarUrl } from 'helpers/getAvatarUrl';
-import { useAuth } from 'hooks/useAuth';
 import Logo from 'images/logo.svg';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
+import { profileApi } from 'services/redux';
+import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
 import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';
 
 export function Header({ className }: HeaderProps) {
-  const { getUser } = useAuth();
-  const user = getUser();
-  const userName = useMemo(() => user?.[UserResponseKeys.login], [user]);
-  const avatarSrc = useMemo(() => getAvatarUrl(user?.[UserResponseKeys.avatar]), [user]);
+  const { data } = profileApi.useGetProfileQuery();
   const menuItems = useMemo(
     () => [
       {
@@ -44,12 +41,12 @@ export function Header({ className }: HeaderProps) {
             <Logo className={styles.logoIcon} />
           </NavLink>
           <Menu className={styles.nav} items={menuItems} />
-          {user ? (
+          {data ? (
             <UserMenu
               className={styles.user}
-              userName={userName}
+              userName={data[UserResponseKeys.login]}
               image={{
-                src: avatarSrc,
+                src: getAvatarUrl(data[UserResponseKeys.avatar]),
               }}
             />
           ) : (

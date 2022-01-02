@@ -1,5 +1,5 @@
-import { UserResponse, UserResponseKeys } from 'api/api.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
+import { UserResponse, UserResponseKeys } from 'types/Api';
 
 import styles from './Profile.module.scss';
 

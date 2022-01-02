@@ -1,4 +1,11 @@
-export class TimeController {
+interface ITimeController {
+  allowedMoveTimeValue: number | (() => number);
+  safePeriodValue: number | (() => number);
+  timeoutValue: number | (() => number);
+  totalTime: number;
+}
+
+export class TimeController implements ITimeController {
   stopAllowedMoveTime: number;
   currentTime: number;
   cycleTime: number;
@@ -10,15 +17,10 @@ export class TimeController {
   totalTime: number;
   isStop: boolean;
 
-  constructor(obj: {
-    allowedMoveTime: number | (() => number);
-    safePeriod: number | (() => number);
-    timeout: number | (() => number);
-    totalTime: number;
-  }) {
-    this.timeoutValue = obj.timeout;
-    this.safePeriodValue = obj.safePeriod;
-    this.allowedMoveTimeValue = obj.allowedMoveTime;
+  constructor(obj: ITimeController) {
+    this.timeoutValue = obj.timeoutValue;
+    this.safePeriodValue = obj.safePeriodValue;
+    this.allowedMoveTimeValue = obj.allowedMoveTimeValue;
     this.totalTime = obj.totalTime;
     this.stopAllowedMoveTime = 0;
     this.cycleTime = 0;

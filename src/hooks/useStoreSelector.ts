@@ -1,5 +1,5 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import { store } from 'store/store';
+import { store } from 'services/redux/store';
 
 type StoreState = ReturnType<typeof store.getState>;
 

@@ -2,7 +2,8 @@ import { ErrorBoundary } from 'components/ErrorBoundary/ErrorBoundary';
 import { App } from 'containers/App/App';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import { store } from 'services/redux';
+import { startServiceWorker } from 'services/startServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -12,3 +13,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
+
+startServiceWorker();

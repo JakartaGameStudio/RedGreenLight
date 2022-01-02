@@ -77,7 +77,7 @@
     "max-params": [
       "error",
       {
-        "max": 2
+        "max": 3
       }
     ],
     "curly": "error",

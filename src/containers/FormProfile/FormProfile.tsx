@@ -1,17 +1,12 @@
-import { UsersApi } from 'api';
-import { UserResponseKeys } from 'api/api.types';
-import { UserUpdateRequestKeys } from 'api/UsersApi/UsersApi.types';
 import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
-import { useStoreDispatch } from 'hooks/useStoreDispatch';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userReducer } from 'store/reducers/userReducer/userReducer';
+import { profileApi } from 'services/redux';
+import { UserUpdateRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
-
-import { FormProfileProps } from './FormProfile.types';
 
 const FIELDS = {
   [UserUpdateRequestKeys.firstName]: formFieldsDictionary.firstName,
@@ -22,36 +17,22 @@ const FIELDS = {
   [UserUpdateRequestKeys.email]: formFieldsDictionary.email,
 };
 
-export function FormProfile({ userData }: FormProfileProps) {
+export function FormProfile() {
+  const { data } = profileApi.useGetProfileQuery();
+  const [updateProfile, { isLoading }] = profileApi.useUpdateProfileMutation();
   const navigate = useNavigate();
-  const dispatch = useStoreDispatch();
   const fields = useMemo<FormFieldProps[]>(() => {
     return Object.entries(FIELDS).map(([key, label]) => ({
       id: `FormProfile[${key}]`,
       name: key,
       placeholder: label,
-      value: userData[key],
+      value: data[key],
     }));
-  }, [userData]);
-  const onSubmit = useMemo(() => {
-    return function (data) {
-      setLoading(true);
-
-      return UsersApi.updateProfile(data)
-        .then(() => {
-          dispatch(
-            userReducer.actions.updateOne({
-              id: userData[UserResponseKeys.id],
-              changes: data,
-            }),
-          );
-          navigate(AppRoutes.profile);
-        })
-        .finally(() => setLoading(false));
-    };
-  }, [navigate, dispatch]);
+  }, [data]);
+  const onSubmit = function (formData) {
+    return updateProfile(formData).finally(() => navigate(AppRoutes.profile));
+  };
   const formProps = useForm<FormFieldProps>({ fields, onSubmit });
-  const [isLoading, setLoading] = useState(false);
 
   return (
     <Form

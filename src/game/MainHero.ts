@@ -1,4 +1,20 @@
-import { Hero } from './Hero';
+import { Hero, IHero } from './Hero';
+
+export interface IMainHero extends IHero {
+  boost: number;
+  deboost: number;
+  loseStyle: {
+    fill: string;
+    stroke: string;
+  };
+  mainStyle: {
+    fill: string;
+    stroke: string;
+  };
+  radius: number;
+  x: number;
+  y: number;
+}
 
 export class MainHero extends Hero {
   mainStyle: {
@@ -11,21 +27,7 @@ export class MainHero extends Hero {
     stroke: string;
   };
 
-  constructor(params: {
-    boost: number;
-    deboost: number;
-    loseStyle: {
-      fill: string;
-      stroke: string;
-    };
-    mainStyle: {
-      fill: string;
-      stroke: string;
-    };
-    radius: number;
-    x: number;
-    y: number;
-  }) {
+  constructor(params: IMainHero) {
     super(params);
     this.mainStyle = params.mainStyle;
     this.loseStyle = params.loseStyle;

@@ -1,16 +1,18 @@
 import { Button } from 'components/Button/Button';
+import { Preloader } from 'components/Preloader/Preloader';
 import { useMemo, useState } from 'react';
+import { profileApi } from 'services/redux';
 
 import styles from './PopupAvatar.module.scss';
 import { PopupAvatarFormProps } from './PopupAvatar.types';
 
 export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
+  const [updateAvatar, { isLoading }] = profileApi.useUpdateAvatarMutation();
   const [value, setValue] = useState<File>();
   const handleSubmit = useMemo(() => {
     return function (event) {
       event.preventDefault();
-
-      return onSubmit(value);
+      updateAvatar(value).finally(onSubmit);
     };
   }, [value, onSubmit]);
   const handleChange = useMemo(() => {
@@ -20,6 +22,10 @@ export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
       setValue(file);
     };
   }, []);
+
+  if (isLoading) {
+    return <Preloader />;
+  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

@@ -1,6 +1,6 @@
-import { UserResponseKeys } from 'api/api.types';
 import classNames from 'classnames';
 import { getAvatarUrl } from 'helpers/getAvatarUrl';
+import { UserResponseKeys } from 'types/Api';
 
 import styles from './ProfileAvatar.module.scss';
 import { ProfileAvatarProps } from './ProfileAvatar.types';
