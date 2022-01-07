@@ -1,9 +1,9 @@
 import classNames from 'classnames';
+import { Image } from 'components/Image/Image';
 import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Menu } from 'components/Menu/Menu';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { getAvatarUrl } from 'helpers/getAvatarUrl';
-import Logo from 'images/logo.svg';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { profileApi } from 'services/redux';
@@ -38,7 +38,7 @@ export function Header({ className }: HeaderProps) {
       <LayoutContainer>
         <div className={styles.inner}>
           <NavLink className={styles.logo} to={AppRoutes.index}>
-            <Logo className={styles.logoIcon} />
+            <Image src="/images/logo.svg" className={styles.logoIcon} />
           </NavLink>
           <Menu className={styles.nav} items={menuItems} />
           {data ? (

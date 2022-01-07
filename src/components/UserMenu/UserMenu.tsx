@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Image } from 'components/Image/Image';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
@@ -29,7 +30,11 @@ export function UserMenu({ userName, className, image }: UserMenuProps) {
       <div className={styles.head} title={userName}>
         <div className={styles.username}>{userName}</div>
         <div className={styles.avatar}>
-          {image && <img src={image.src} alt={userName} className={styles.avatarImage} />}
+          {image ? (
+            <Image {...image} className={styles.avatarImage} alt={userName} />
+          ) : (
+            <Image src="/images/icons/user.svg" className={styles.avatarImage} alt={userName} />
+          )}
         </div>
       </div>
       {isActive && (

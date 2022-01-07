@@ -1,7 +1,7 @@
+import { ImageProps } from 'components/Image/Image.types';
+
 export type UserMenuProps = {
   className?: string;
-  image?: {
-    src: string;
-  };
+  image?: ImageProps;
   userName: string;
 };

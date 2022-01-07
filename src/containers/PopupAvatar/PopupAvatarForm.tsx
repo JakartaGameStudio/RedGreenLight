@@ -1,4 +1,5 @@
 import { Button } from 'components/Button/Button';
+import { Image } from 'components/Image/Image';
 import { Preloader } from 'components/Preloader/Preloader';
 import { useMemo, useState } from 'react';
 import { profileApi } from 'services/redux';
@@ -32,7 +33,7 @@ export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
       <label className={styles.label}>
         {value && (
           <>
-            <img src={URL.createObjectURL(value)} alt="Аватар" className={styles.image} />
+            <Image src={URL.createObjectURL(value)} alt="Аватар" className={styles.image} />
             <span className={styles.value}>{value.name}</span>
           </>
         )}
