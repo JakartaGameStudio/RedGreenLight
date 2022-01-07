@@ -4,13 +4,18 @@ import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authApi } from 'services/redux';
-import { SignInRequestKeys } from 'types/Api';
+import { userApi } from 'services/redux';
+import { BadRequestError, SignInRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignIn() {
   const navigate = useNavigate();
-  const [signIn, { isLoading }] = authApi.useSignInMutation();
+  const [signIn, { isLoading, error }] = userApi.useSignInMutation();
+  const errorMessage = useMemo(() => {
+    if (error && 'data' in error) {
+      return (error.data as BadRequestError).reason;
+    }
+  }, [error]);
   const fields = useMemo<FormFieldProps[]>(() => {
     return [
       {
@@ -29,10 +34,9 @@ export function FormSignIn() {
       },
     ];
   }, []);
-  const onSubmit = function (data) {
-    return signIn(data).then(() => {
-      navigate(AppRoutes.game);
-    });
+  const onSubmit = async function (fieldsData) {
+    await signIn(fieldsData);
+    navigate(AppRoutes.game);
   };
   const formProps = useForm<FormFieldProps>({ fields, onSubmit });
 
@@ -40,6 +44,7 @@ export function FormSignIn() {
     <Form
       {...formProps}
       title="Вход"
+      error={errorMessage}
       isLoading={isLoading}
       buttons={[
         {

@@ -2,13 +2,13 @@ import { Button } from 'components/Button/Button';
 import { Image } from 'components/Image/Image';
 import { Preloader } from 'components/Preloader/Preloader';
 import { useMemo, useState } from 'react';
-import { profileApi } from 'services/redux';
+import { userApi } from 'services/redux';
 
 import styles from './PopupAvatar.module.scss';
 import { PopupAvatarFormProps } from './PopupAvatar.types';
 
 export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
-  const [updateAvatar, { isLoading }] = profileApi.useUpdateAvatarMutation();
+  const [updateAvatar, { isLoading }] = userApi.useUpdateAvatarMutation();
   const [value, setValue] = useState<File>();
   const handleSubmit = useMemo(() => {
     return function (event) {

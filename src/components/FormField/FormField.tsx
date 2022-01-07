@@ -20,7 +20,7 @@ export function FormField({
   const [isFocus, setIsFocus] = useState(Boolean(value));
 
   return (
-    <div className={styles.field}>
+    <div className={classNames(styles.field, className)}>
       <label
         htmlFor={id}
         className={classNames(styles.label, {
@@ -41,12 +41,12 @@ export function FormField({
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={onChange}
-        className={classNames(styles.input, className, {
+        className={classNames(styles.input, {
           [styles.inputActive]: isFocus || value,
           [styles.inputError]: errors.length,
         })}
       />
-      {errors.map((error, index) => (
+      {[].concat(errors).map((error, index) => (
         <div key={index} className={styles.error}>
           {error}
         </div>

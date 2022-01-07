@@ -1,5 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ApiEndpoints, FindUserRequest, UserResponse, UserResponseKeys } from 'types/Api';
+import {
+  ApiEndpoints,
+  ApiMethods,
+  FindUserRequest,
+  UserResponse,
+  UserResponseKeys,
+} from 'types/Api';
 
 export const usersApi = createApi({
   reducerPath: 'users',
@@ -11,8 +17,8 @@ export const usersApi = createApi({
   endpoints: (builder) => ({
     getUserById: builder.query<UserResponse, { id: number }>({
       query: ({ id }) => ({
-        method: 'GET',
-        url: `/user/${id}`,
+        method: ApiMethods.get,
+        url: `${ApiEndpoints.user}/${id}`,
       }),
       providesTags: (result) =>
         result
@@ -25,8 +31,8 @@ export const usersApi = createApi({
     getUsersByLogin: builder.query<UserResponse[], FindUserRequest>({
       query: (body) => ({
         body,
-        method: 'POST',
-        url: '/user/search',
+        method: ApiMethods.post,
+        url: ApiEndpoints.userSearch,
         headers: {
           'Content-Type': 'application/json',
         },

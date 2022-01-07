@@ -1,6 +1,21 @@
 export enum ApiEndpoints {
+  avatar = '/user/profile/avatar',
   baseURL = 'https://ya-praktikum.tech/api/v2',
+  identify = '/auth/user',
+  password = '/user/password',
+  profile = '/user/profile',
   resources = 'https://ya-praktikum.tech/api/v2/resources',
+  signin = '/auth/signin',
+  signout = '/auth/logout',
+  signup = '/auth/signup',
+  user = '/user',
+  userSearch = '/user/search',
+}
+
+export enum ApiMethods {
+  get = 'GET',
+  post = 'POST',
+  put = 'PUT',
 }
 
 export enum UserUpdateRequestKeys {

@@ -4,13 +4,13 @@ import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authApi } from 'services/redux';
+import { userApi } from 'services/redux';
 import { SignUpRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignUp() {
   const navigate = useNavigate();
-  const [signUp, { isLoading }] = authApi.useSignUpMutation();
+  const [signUp, { isLoading }] = userApi.useSignUpMutation();
   const fields = useMemo<FormFieldProps[]>(() => {
     return [
       {

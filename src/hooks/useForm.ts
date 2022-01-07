@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type Field = {
   [key: string]: any;
@@ -34,6 +34,10 @@ export function useForm<F extends Field>({ fields, onSubmit }: Props<F>) {
     },
     [formFields, onSubmit],
   );
+
+  useEffect(() => {
+    setFormFields(fields);
+  }, [fields]);
 
   return {
     fields: formFields,

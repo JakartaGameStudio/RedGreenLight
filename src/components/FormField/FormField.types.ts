@@ -3,7 +3,7 @@ import { ChangeEventHandler } from 'react';
 export type FormFieldProps = {
   className?: string;
   disabled?: boolean;
-  errors?: string[];
+  errors?: string | string[];
   id?: string;
   name: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;

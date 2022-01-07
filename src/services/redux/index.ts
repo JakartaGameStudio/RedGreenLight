@@ -1,7 +1,5 @@
 export { store } from './store';
 
-export { authApi } from './api/authApi';
-
-export { profileApi } from './api/profileApi';
+export { userApi } from './api/userApi';
 
 export { usersApi } from './api/usersApi';

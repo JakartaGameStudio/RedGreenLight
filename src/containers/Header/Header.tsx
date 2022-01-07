@@ -6,7 +6,7 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 import { getAvatarUrl } from 'helpers/getAvatarUrl';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { profileApi } from 'services/redux';
+import { userApi } from 'services/redux';
 import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
@@ -14,7 +14,7 @@ import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';
 
 export function Header({ className }: HeaderProps) {
-  const { data } = profileApi.useGetProfileQuery();
+  const { data } = userApi.useGetUserQuery();
   const menuItems = useMemo(
     () => [
       {

@@ -5,7 +5,7 @@ import { FormPassword } from 'containers/FormPassword/FormPassword';
 import { FormProfile } from 'containers/FormProfile/FormProfile';
 import { PopupAvatar } from 'containers/PopupAvatar/PopupAvatar';
 import { useCallback, useMemo, useState } from 'react';
-import { profileApi } from 'services/redux';
+import { userApi } from 'services/redux';
 import { UserResponseKeys } from 'types/Api';
 
 import styles from './Profile.module.scss';
@@ -14,7 +14,7 @@ import { ProfileInfo } from './ProfileInfo';
 import { ProfileNav } from './ProfileNav';
 
 export function Profile({ type }: ProfileProps) {
-  const { data, isLoading } = profileApi.useGetProfileQuery();
+  const { data, isLoading } = userApi.useGetUserQuery();
   const [popupActive, setPopupActive] = useState(false);
   const showPopup = useCallback(() => {
     setPopupActive(true);
@@ -25,7 +25,7 @@ export function Profile({ type }: ProfileProps) {
   const title = useMemo(() => {
     return data ? data[UserResponseKeys.displayName] || data[UserResponseKeys.login] : '';
   }, [data]);
-  const renderType = useCallback(() => {
+  const renderProfile = useCallback(() => {
     if (isLoading) {
       return <Preloader />;
     }
@@ -35,15 +35,15 @@ export function Profile({ type }: ProfileProps) {
         return <FormProfile />;
       case 'password':
         return <FormPassword />;
+      default:
+        return (
+          <>
+            <ProfileInfo userData={data} />
+            <ProfileNav />
+          </>
+        );
     }
-
-    return (
-      <>
-        <ProfileInfo userData={data} />
-        <ProfileNav />
-      </>
-    );
-  }, [type, data]);
+  }, [type, data, isLoading]);
 
   return (
     <>
@@ -53,7 +53,7 @@ export function Profile({ type }: ProfileProps) {
           <ProfileAvatar userData={data} onClick={showPopup} className={styles.avatar} />
           <Title size="h3">{title}</Title>
         </div>
-        <div className={styles.body}>{renderType()}</div>
+        <div className={styles.body}>{renderProfile()}</div>
       </div>
     </>
   );

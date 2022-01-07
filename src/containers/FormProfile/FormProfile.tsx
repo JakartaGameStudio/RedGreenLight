@@ -4,7 +4,7 @@ import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { profileApi } from 'services/redux';
+import { userApi } from 'services/redux';
 import { UserUpdateRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
@@ -18,8 +18,8 @@ const FIELDS = {
 };
 
 export function FormProfile() {
-  const { data } = profileApi.useGetProfileQuery();
-  const [updateProfile, { isLoading }] = profileApi.useUpdateProfileMutation();
+  const { data } = userApi.useGetUserQuery();
+  const [updateProfile, { isLoading }] = userApi.useUpdateProfileMutation();
   const navigate = useNavigate();
   const fields = useMemo<FormFieldProps[]>(() => {
     return Object.entries(FIELDS).map(([key, label]) => ({
