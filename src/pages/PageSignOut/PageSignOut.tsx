@@ -11,7 +11,7 @@ export function PageSignOut() {
 
   useEffect(() => {
     signOut().finally(() => navigate(AppRoutes.index));
-  });
+  }, [navigate, signOut]);
 
   return (
     <LayoutPage title="Прощай 🥺">
