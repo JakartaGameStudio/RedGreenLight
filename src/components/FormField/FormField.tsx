@@ -46,7 +46,7 @@ export function FormField({
           [styles.inputError]: errors.length,
         })}
       />
-      {[].concat(errors).map((error, index) => (
+      {errors.map((error, index) => (
         <div key={index} className={styles.error}>
           {error}
         </div>

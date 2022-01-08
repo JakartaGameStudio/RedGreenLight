@@ -5,7 +5,7 @@ export type FormFieldProps = {
   placeholder: string;
   className?: string;
   disabled?: boolean;
-  errors?: string | string[];
+  errors?: string[];
   id?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   readonly?: boolean;

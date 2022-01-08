@@ -30,11 +30,12 @@ export function UserMenu({ userName, className, image }: UserMenuProps) {
       <div className={styles.head} title={userName}>
         <div className={styles.username}>{userName}</div>
         <div className={styles.avatar}>
-          {image ? (
-            <Image {...image} className={styles.avatarImage} alt={userName} />
-          ) : (
-            <Image src="/images/icons/user.svg" className={styles.avatarImage} alt={userName} />
-          )}
+          <Image
+            src="/images/icons/user.svg"
+            {...image}
+            className={styles.avatarImage}
+            alt={userName}
+          />
         </div>
       </div>
       {isActive && (
