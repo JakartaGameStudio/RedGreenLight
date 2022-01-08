@@ -99,7 +99,11 @@
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/interface": [
+      "error",
+      "asc",
+      { "caseSensitive": true, "natural": false, "requiredFirst": true }
+    ],
     "typescript-sort-keys/string-enum": "error",
     "sort-class-members/sort-class-members": "off",
     "simple-import-sort/imports": "error",

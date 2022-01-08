@@ -111,6 +111,6 @@ export type FindUserRequest = {
 };
 
 export type BadRequestError = {
-  error?: string;
   reason: string;
+  error?: string;
 };

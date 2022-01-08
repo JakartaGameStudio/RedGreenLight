@@ -15,7 +15,7 @@ export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
       event.preventDefault();
       updateAvatar(value).finally(onSubmit);
     };
-  }, [value, onSubmit]);
+  }, [value, onSubmit, updateAvatar]);
   const handleChange = useMemo(() => {
     return function (event) {
       const file = event.target.files[0];
