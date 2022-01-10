@@ -34,11 +34,12 @@ export function FormSignIn() {
       },
     ];
   }, []);
-  const onSubmit = async function (fieldsData) {
-    await signIn(fieldsData);
-    navigate(AppRoutes.game);
-  };
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
+  const formProps = useForm<FormFieldProps>({
+    fields,
+    onSubmit(fieldsData) {
+      signIn(fieldsData).then(() => navigate(AppRoutes.game));
+    },
+  });
 
   return (
     <Form

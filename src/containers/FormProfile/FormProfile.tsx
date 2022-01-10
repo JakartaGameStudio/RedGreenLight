@@ -2,6 +2,7 @@ import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
+import { useIdentify } from 'hooks/useIdentify';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userApi } from 'services/redux';
@@ -18,7 +19,7 @@ const FIELDS = {
 };
 
 export function FormProfile() {
-  const { data } = userApi.useGetUserQuery();
+  const [userData] = useIdentify();
   const [updateProfile, { isLoading }] = userApi.useUpdateProfileMutation();
   const navigate = useNavigate();
   const fields = useMemo<FormFieldProps[]>(() => {
@@ -26,9 +27,9 @@ export function FormProfile() {
       id: `FormProfile[${key}]`,
       name: key,
       placeholder: label,
-      value: data[key],
+      value: userData[key],
     }));
-  }, [data]);
+  }, [userData]);
   const onSubmit = function (formData) {
     return updateProfile(formData).finally(() => navigate(AppRoutes.profile));
   };

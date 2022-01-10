@@ -34,6 +34,13 @@ export const userApi = createApi({
         body,
         method: ApiMethods.post,
         url: ApiEndpoints.signin,
+        responseHandler: (response) => {
+          if (response.ok) {
+            return response.text();
+          }
+
+          return response.json();
+        },
       }),
       invalidatesTags: ['Profile'],
     }),
@@ -41,6 +48,13 @@ export const userApi = createApi({
       query: () => ({
         method: 'POST',
         url: ApiEndpoints.signout,
+        responseHandler: (response) => {
+          if (response.ok) {
+            return response.text();
+          }
+
+          return response.json();
+        },
       }),
       invalidatesTags: ['Profile'],
     }),

@@ -4,8 +4,8 @@ import { Title } from 'components/Title/Title';
 import { FormPassword } from 'containers/FormPassword/FormPassword';
 import { FormProfile } from 'containers/FormProfile/FormProfile';
 import { PopupAvatar } from 'containers/PopupAvatar/PopupAvatar';
+import { useIdentify } from 'hooks/useIdentify';
 import { useCallback, useMemo, useState } from 'react';
-import { userApi } from 'services/redux';
 import { UserResponseKeys } from 'types/Api';
 
 import styles from './Profile.module.scss';
@@ -14,7 +14,7 @@ import { ProfileInfo } from './ProfileInfo';
 import { ProfileNav } from './ProfileNav';
 
 export function Profile({ type }: ProfileProps) {
-  const { data, isLoading } = userApi.useGetUserQuery();
+  const [userData] = useIdentify();
   const [popupActive, setPopupActive] = useState(false);
   const showPopup = useCallback(() => {
     setPopupActive(true);
@@ -23,10 +23,12 @@ export function Profile({ type }: ProfileProps) {
     setPopupActive(false);
   }, []);
   const title = useMemo(() => {
-    return data ? data[UserResponseKeys.displayName] || data[UserResponseKeys.login] : '';
-  }, [data]);
+    return userData
+      ? userData[UserResponseKeys.displayName] || userData[UserResponseKeys.login]
+      : '';
+  }, [userData]);
   const renderProfile = useCallback(() => {
-    if (isLoading) {
+    if (!userData) {
       return <Preloader />;
     }
 
@@ -38,19 +40,19 @@ export function Profile({ type }: ProfileProps) {
       default:
         return (
           <>
-            <ProfileInfo userData={data} />
+            <ProfileInfo userData={userData} />
             <ProfileNav />
           </>
         );
     }
-  }, [type, data, isLoading]);
+  }, [type, userData]);
 
   return (
     <>
       <PopupAvatar active={popupActive} onClose={closePopup} onSubmit={closePopup} />
       <div className={styles.profile}>
         <div className={styles.head}>
-          <ProfileAvatar userData={data} onClick={showPopup} className={styles.avatar} />
+          <ProfileAvatar userData={userData} onClick={showPopup} className={styles.avatar} />
           <Title size="h3">{title}</Title>
         </div>
         <div className={styles.body}>{renderProfile()}</div>

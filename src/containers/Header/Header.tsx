@@ -4,9 +4,9 @@ import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Menu } from 'components/Menu/Menu';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { getAvatarUrl } from 'helpers/getAvatarUrl';
+import { useIdentify } from 'hooks/useIdentify';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { userApi } from 'services/redux';
 import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
@@ -14,7 +14,7 @@ import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';
 
 export function Header({ className }: HeaderProps) {
-  const { data } = userApi.useGetUserQuery();
+  const [userData] = useIdentify();
   const menuItems = useMemo(
     () => [
       {
@@ -41,12 +41,12 @@ export function Header({ className }: HeaderProps) {
             <Image src="/images/logo.svg" className={styles.logoIcon} />
           </NavLink>
           <Menu className={styles.nav} items={menuItems} />
-          {data ? (
+          {userData ? (
             <UserMenu
               className={styles.user}
-              userName={data[UserResponseKeys.login]}
+              userName={userData[UserResponseKeys.login]}
               image={{
-                src: getAvatarUrl(data[UserResponseKeys.avatar]),
+                src: getAvatarUrl(userData[UserResponseKeys.avatar]),
               }}
             />
           ) : (

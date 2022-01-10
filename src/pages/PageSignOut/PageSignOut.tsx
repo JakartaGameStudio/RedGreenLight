@@ -10,7 +10,7 @@ export function PageSignOut() {
   const [signOut] = userApi.useSignOutMutation();
 
   useEffect(() => {
-    signOut().finally(() => navigate(AppRoutes.index));
+    signOut().then(() => navigate(AppRoutes.index));
   }, [navigate, signOut]);
 
   return (
