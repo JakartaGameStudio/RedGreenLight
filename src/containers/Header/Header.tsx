@@ -3,12 +3,12 @@ import { Image } from 'components/Image/Image';
 import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Menu } from 'components/Menu/Menu';
 import { UserMenu } from 'components/UserMenu/UserMenu';
-import { getAvatarUrl } from 'helpers/getAvatarUrl';
 import { useIdentify } from 'hooks/useIdentify';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
+import { getAvatarUrl } from 'utils/getAvatarUrl';
 
 import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';

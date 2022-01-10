@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Image } from 'components/Image/Image';
-import { getAvatarUrl } from 'helpers/getAvatarUrl';
 import { UserResponseKeys } from 'types/Api';
+import { getAvatarUrl } from 'utils/getAvatarUrl';
 
 import styles from './ProfileAvatar.module.scss';
 import { ProfileAvatarProps } from './ProfileAvatar.types';

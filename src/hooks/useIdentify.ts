@@ -4,5 +4,5 @@ export function useIdentify() {
   const { data, isSuccess, isLoading, error } = userApi.useGetUserQuery();
   const userData = isSuccess ? data : undefined;
 
-  return [userData, { isLoading, error }] as const;
+  return [userData, { isSuccess, isLoading, error }] as const;
 }

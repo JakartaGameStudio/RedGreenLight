@@ -36,7 +36,7 @@ const initialData: LeaderboardsPlayer[] = [
   },
 ];
 
-export function PageLeaderboards() {
+export function PageLeaderBoards() {
   return (
     <LayoutPage title="Рейтинг игроков">
       <MainList>
