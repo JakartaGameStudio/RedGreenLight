@@ -3,14 +3,14 @@ import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { userApi } from 'services/redux';
 import { BadRequestError, SignInRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormSignIn() {
-  const navigate = useNavigate();
-  const [signIn, { isLoading, error }] = userApi.useSignInMutation();
+  const { state } = useLocation();
+  const [signIn, { isLoading, error, isSuccess }] = userApi.useSignInMutation();
   const errorMessage = useMemo(() => {
     if (error && 'data' in error) {
       return (error.data as BadRequestError).reason;
@@ -36,10 +36,12 @@ export function FormSignIn() {
   }, []);
   const formProps = useForm<FormFieldProps>({
     fields,
-    onSubmit(fieldsData) {
-      signIn(fieldsData).then(() => navigate(AppRoutes.game));
-    },
+    onSubmit: signIn,
   });
+
+  if (isSuccess) {
+    return <Navigate to={state?.from || AppRoutes.game} />;
+  }
 
   return (
     <Form

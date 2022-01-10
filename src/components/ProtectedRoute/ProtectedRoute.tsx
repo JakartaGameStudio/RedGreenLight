@@ -1,9 +1,23 @@
 import { useIdentify } from 'hooks/useIdentify';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function ProtectedRoute() {
-  const [userData] = useIdentify();
+  const [userData, { isLoading }] = useIdentify();
+  const { pathname } = useLocation();
 
-  return userData ? <Outlet /> : <Navigate to={AppRoutes.signIn} />;
+  if (isLoading) {
+    return null;
+  }
+
+  return userData ? (
+    <Outlet />
+  ) : (
+    <Navigate
+      to={AppRoutes.signIn}
+      state={{
+        from: pathname,
+      }}
+    />
+  );
 }
