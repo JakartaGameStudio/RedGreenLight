@@ -24,13 +24,14 @@
 
 .title,
 .error {
-  text-align: center;
   margin-bottom: 20px;
+
+  text-align: center;
 }
 
 .error {
-  font-size: 14px;
   color: $color-secondary;
+  font-size: 14px;
 }
 
 .footer {

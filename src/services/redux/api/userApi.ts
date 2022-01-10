@@ -44,7 +44,7 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['Profile'],
     }),
-    signOut: builder.mutation<void, void>({
+    signOut: builder.mutation<string, void>({
       query: () => ({
         method: 'POST',
         url: ApiEndpoints.signout,
