@@ -1,17 +1,20 @@
-@import "~styles/variables/colors.scss";
+@import '~styles/variables/colors.scss';
 
 .button {
   display: block;
   width: 100%;
+  padding: 14px 20px;
+
   color: $color-content;
-  background: $color-primary;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
   font-size: 16px;
   line-height: 20px;
-  padding: 14px 20px;
   text-align: center;
+
+  background: $color-primary;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
   user-select: none;
 
   &:disabled {
@@ -21,6 +24,7 @@
 
 .button--light {
   color: $color-primary;
+
   background: $color-primary-light;
 }
 
@@ -30,11 +34,13 @@
 
 .button--warning-light {
   color: $color-secondary;
+
   background: $color-secondary-light;
 }
 
 .button--link {
   color: $color-primary;
+
   background: none;
 
   &:hover {

@@ -1,27 +1,29 @@
-@import "~styles/variables/fonts";
-@import "~styles/variables/colors";
+@import '~styles/variables/fonts';
+@import '~styles/variables/colors';
 
 .modalWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  left: 0;
   top: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   z-index: 100;
-  background: rgba(#000, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: auto;
+
+  background: rgba(#000, 0.4);
+
   overflow-scrolling: touch;
-  -webkit-overflow-scrolling: touch;
-  animation: popup 0.3s ease-out;
 
   &__body {
     width: 300px;
-    padding: 20px 20px;
-    border-radius: 10px;
+    padding: 20px;
+
     background-color: $color-content;
+    border-radius: 10px;
   }
 
   &__title {
