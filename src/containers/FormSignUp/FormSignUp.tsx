@@ -3,14 +3,15 @@ import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { userApi } from 'services/redux';
 import { SignUpRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
-export function FormSignUp() {
-  const navigate = useNavigate();
-  const [signUp, { isLoading }] = userApi.useSignUpMutation();
+import { FormSignUpProps } from './FormSignUp.types';
+
+export function FormSignUp({ from }: FormSignUpProps) {
+  const [signUp, { isLoading, isSuccess }] = userApi.useSignUpMutation();
   const fields = useMemo<FormFieldProps[]>(() => {
     return [
       {
@@ -51,12 +52,11 @@ export function FormSignUp() {
       },
     ];
   }, []);
-  const onSubmit = function (data) {
-    return signUp(data).then(() => {
-      navigate(AppRoutes.game);
-    });
-  };
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
+  const formProps = useForm<FormFieldProps>({ fields, onSubmit: signUp });
+
+  if (isSuccess) {
+    return <Navigate to={from || AppRoutes.game} />;
+  }
 
   return (
     <Form

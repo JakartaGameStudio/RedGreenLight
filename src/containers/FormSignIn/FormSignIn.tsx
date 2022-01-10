@@ -3,13 +3,14 @@ import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
 import { useMemo } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { userApi } from 'services/redux';
 import { BadRequestError, SignInRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
-export function FormSignIn() {
-  const { state } = useLocation();
+import { FormSignInProps } from './FormSignIn.types';
+
+export function FormSignIn({ from }: FormSignInProps) {
   const [signIn, { isLoading, error, isSuccess }] = userApi.useSignInMutation();
   const errorMessage = useMemo(() => {
     if (error && 'data' in error) {
@@ -40,7 +41,7 @@ export function FormSignIn() {
   });
 
   if (isSuccess) {
-    return <Navigate to={state?.from || AppRoutes.game} />;
+    return <Navigate to={from || AppRoutes.game} />;
   }
 
   return (
