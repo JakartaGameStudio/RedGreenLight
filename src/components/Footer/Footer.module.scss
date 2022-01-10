@@ -1,8 +1,9 @@
-@import "~styles/variables/colors.scss";
+@import '~styles/variables/colors.scss';
 
 .footer {
-  font-size: 12px;
-  color: $color-basic-middle;
   padding: 30px 0;
+
+  color: $color-basic-middle;
+  font-size: 12px;
   text-align: center;
 }

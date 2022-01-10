@@ -1,4 +1,4 @@
-@import "~styles/variables/colors.scss";
+@import '~styles/variables/colors.scss';
 
 .avatar {
   display: inline-block;
@@ -8,15 +8,9 @@
   font-size: 0;
   line-height: 0;
   border-radius: 50%;
-  background: $color-basic-light url("~images/icons/user.svg") center no-repeat;
+  background: $color-basic-light url('~images/icons/user.svg') center no-repeat;
   background-size: 50%;
   cursor: pointer;
-
-  &:hover {
-    .button {
-      opacity: 1;
-    }
-  }
 }
 
 .icon {
@@ -25,7 +19,7 @@
   bottom: 0;
   position: absolute;
   border-radius: inherit;
-  background: $color-content url("~images/icons/camera.svg") center center no-repeat;
+  background: $color-content url('~images/icons/camera.svg') center center no-repeat;
   background-size: 70%;
   width: 25px;
   height: 25px;
@@ -60,4 +54,10 @@
   object-fit: cover;
   border-radius: inherit;
   transition: opacity 0.2s ease-out;
+}
+
+.avatar:hover {
+  .button {
+    opacity: 1;
+  }
 }
