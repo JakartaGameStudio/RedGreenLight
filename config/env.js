@@ -3,6 +3,7 @@ const build = './build';
 const paths = {
   src,
   build,
+  publicPath: '/',
   static: './static',
   html: './public/index.html',
 };
