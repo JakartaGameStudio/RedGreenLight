@@ -10,9 +10,11 @@ export function ProtectedRoute() {
     return null;
   }
 
-  return userData ? (
-    <Outlet />
-  ) : (
+  if (userData) {
+    return <Outlet />;
+  }
+
+  return (
     <Navigate
       to={AppRoutes.signIn}
       state={{

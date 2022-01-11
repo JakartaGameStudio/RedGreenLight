@@ -1,11 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {
-  ApiEndpoints,
-  ApiMethods,
-  FindUserRequest,
-  UserResponse,
-  UserResponseKeys,
-} from 'types/Api';
+import { ApiEndpoints, ApiMethods, FindUserRequest, UserResponse } from 'types/Api';
 
 export const usersApi = createApi({
   reducerPath: 'users',
@@ -20,13 +14,6 @@ export const usersApi = createApi({
         method: ApiMethods.get,
         url: `${ApiEndpoints.user}/${id}`,
       }),
-      providesTags: (result) =>
-        result
-          ? [
-              { type: 'Users', id: result[UserResponseKeys.id] },
-              { type: 'Users', id: 'LIST' },
-            ]
-          : [{ type: 'Users', id: 'LIST' }],
     }),
     getUsersByLogin: builder.query<UserResponse[], FindUserRequest>({
       query: (body) => ({
@@ -37,13 +24,6 @@ export const usersApi = createApi({
           'Content-Type': 'application/json',
         },
       }),
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map((item) => ({ type: 'Users', id: item[UserResponseKeys.id] } as const)),
-              { type: 'Users', id: 'LIST' },
-            ]
-          : [{ type: 'Users', id: 'LIST' }],
     }),
   }),
 });
