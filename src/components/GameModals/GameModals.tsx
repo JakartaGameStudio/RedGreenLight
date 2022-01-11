@@ -5,6 +5,8 @@ import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
 import styles from './GameModals.module.scss';
 
+type HeroType = 'SLOW_HERO' | 'FAST_HERO';
+
 export const ModalWrapper: FC = ({ children }) => (
   <div className={styles.modalWrapper}>
     <div className={styles.modalWrapper__body}>{children}</div>
@@ -17,6 +19,13 @@ export const StartWindow = ({ startGame }: { startGame: () => void }) => (
       Начни игру
     </Title>
     <Button onClick={startGame}>Играть</Button>
+  </>
+);
+
+export const ChoiceHeroWindow = ({ setHeroType }: { setHeroType: (hero: HeroType) => void }) => (
+  <>
+    <Button onClick={() => setHeroType('FAST_HERO')}>Быстрый</Button>
+    <Button onClick={() => setHeroType('SLOW_HERO')}>Медленный</Button>
   </>
 );
 
