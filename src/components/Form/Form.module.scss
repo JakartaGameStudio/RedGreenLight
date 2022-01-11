@@ -1,3 +1,5 @@
+@import 'src/styles/variables/colors';
+
 .wrapper {
   position: relative;
 }
@@ -20,10 +22,16 @@
   height: 100%;
 }
 
-.title {
+.title,
+.error {
   margin-bottom: 20px;
 
   text-align: center;
+}
+
+.error {
+  color: $color-secondary;
+  font-size: 14px;
 }
 
 .footer {

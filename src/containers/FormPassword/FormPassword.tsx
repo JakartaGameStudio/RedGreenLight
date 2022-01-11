@@ -1,14 +1,14 @@
-import { UsersApi } from 'api';
-import { ChangePasswordRequestKeys } from 'api/UsersApi/UsersApi.types';
 import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { userApi } from 'services/redux';
+import { ChangePasswordRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
 export function FormPassword() {
-  const [isLoading, setLoading] = useState(false);
+  const [updatePassword, { isLoading }] = userApi.useUpdatePasswordMutation();
   const fields = useMemo<FormFieldProps[]>(() => {
     return [
       {
@@ -34,14 +34,7 @@ export function FormPassword() {
       },
     ];
   }, []);
-  const onSubmit = useMemo(() => {
-    return function (data) {
-      setLoading(true);
-
-      return UsersApi.updatePassword(data).finally(() => setLoading(false));
-    };
-  }, []);
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
+  const formProps = useForm<FormFieldProps>({ fields, onSubmit: updatePassword });
 
   return (
     <Form

@@ -1,12 +1,16 @@
 import { ErrorBoundary } from 'components/ErrorBoundary/ErrorBoundary';
 import { App } from 'containers/App/App';
-import { startServiceWorker } from 'helpers/startServiceWorker';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { store } from 'services/redux';
+import { startServiceWorker } from 'services/startServiceWorker';
 
 ReactDOM.render(
-  <ErrorBoundary>
-    <App />
-  </ErrorBoundary>,
+  <Provider store={store}>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </Provider>,
   document.getElementById('root'),
 );
 

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import UserIcon from 'images/icons/user.svg';
+import { Image } from 'components/Image/Image';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
@@ -7,7 +7,7 @@ import { AppRoutes } from 'types/AppRoutes';
 import styles from './UserMenu.module.scss';
 import { UserMenuProps } from './UserMenu.types';
 
-export function UserMenu({ userName, className }: UserMenuProps) {
+export function UserMenu({ userName, className, image }: UserMenuProps) {
   const [isActive, setActive] = useState(false);
 
   useEffect(() => {
@@ -29,8 +29,13 @@ export function UserMenu({ userName, className }: UserMenuProps) {
     <div className={classNames(styles.wrapper, className)} onClick={onClick}>
       <div className={styles.head} title={userName}>
         <div className={styles.username}>{userName}</div>
-        <div className={styles.icon}>
-          <UserIcon width="1em" height="1em" />
+        <div className={styles.avatar}>
+          <Image
+            src="/images/icons/user.svg"
+            {...image}
+            className={styles.avatarImage}
+            alt={userName}
+          />
         </div>
       </div>
       {isActive && (

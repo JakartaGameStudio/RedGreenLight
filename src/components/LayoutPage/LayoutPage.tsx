@@ -1,7 +1,7 @@
 import { Footer } from 'components/Footer/Footer';
-import { Header } from 'components/Header/Header';
 import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Title } from 'components/Title/Title';
+import { Header } from 'containers/Header/Header';
 
 import styles from './LayoutPage.module.scss';
 import { LayoutPageProps } from './LayoutPage.types';

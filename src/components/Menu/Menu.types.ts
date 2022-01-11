@@ -4,6 +4,6 @@ export type MenuItem = {
 };
 
 export type MenuProps = {
-  className?: string;
   items: MenuItem[];
+  className?: string;
 };

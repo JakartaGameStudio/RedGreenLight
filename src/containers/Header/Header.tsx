@@ -1,16 +1,20 @@
 import classNames from 'classnames';
+import { Image } from 'components/Image/Image';
 import { LayoutContainer } from 'components/LayoutContainer/LayoutContainer';
 import { Menu } from 'components/Menu/Menu';
 import { UserMenu } from 'components/UserMenu/UserMenu';
-import Logo from 'images/logo.svg';
+import { useIdentify } from 'hooks/useIdentify';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
+import { getAvatarUrl } from 'utils/getAvatarUrl';
 
 import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';
 
 export function Header({ className }: HeaderProps) {
+  const [userData] = useIdentify();
   const menuItems = useMemo(
     () => [
       {
@@ -34,10 +38,22 @@ export function Header({ className }: HeaderProps) {
       <LayoutContainer>
         <div className={styles.inner}>
           <NavLink className={styles.logo} to={AppRoutes.index}>
-            <Logo className={styles.logoIcon} />
+            <Image src="/images/logo.svg" className={styles.logoIcon} />
           </NavLink>
           <Menu className={styles.nav} items={menuItems} />
-          <UserMenu className={styles.user} userName="Очень длинный username" />
+          {userData ? (
+            <UserMenu
+              className={styles.user}
+              userName={userData[UserResponseKeys.login]}
+              image={{
+                src: getAvatarUrl(userData[UserResponseKeys.avatar]),
+              }}
+            />
+          ) : (
+            <NavLink to={AppRoutes.signIn} className={styles.signIn}>
+              Войти
+            </NavLink>
+          )}
         </div>
       </LayoutContainer>
     </header>

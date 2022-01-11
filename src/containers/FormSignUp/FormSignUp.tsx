@@ -1,16 +1,17 @@
-import { AuthApi } from 'api';
-import { SignUpRequestKeys } from 'api/AuthApi/AuthApi.types';
 import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
+import { Navigate } from 'react-router-dom';
+import { userApi } from 'services/redux';
+import { SignUpRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
-export function FormSignUp() {
-  const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
+import { FormSignUpProps } from './FormSignUp.types';
+
+export function FormSignUp({ from }: FormSignUpProps) {
+  const [signUp, { isLoading, isSuccess }] = userApi.useSignUpMutation();
   const fields = useMemo<FormFieldProps[]>(() => {
     return [
       {
@@ -51,18 +52,11 @@ export function FormSignUp() {
       },
     ];
   }, []);
-  const onSubmit = useMemo(() => {
-    return function (data) {
-      setLoading(true);
+  const formProps = useForm<FormFieldProps>({ fields, onSubmit: signUp });
 
-      return AuthApi.signUp(data)
-        .then(() => {
-          navigate(AppRoutes.game);
-        })
-        .finally(() => setLoading(false));
-    };
-  }, [navigate]);
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
+  if (isSuccess) {
+    return <Navigate to={from || AppRoutes.game} />;
+  }
 
   return (
     <Form

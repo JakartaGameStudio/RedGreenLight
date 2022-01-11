@@ -16,7 +16,7 @@ module.exports = merge(
     },
     resolve: {
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.scss', '.css', '.json'],
-      modules: ['node_modules', $.paths.src],
+      modules: ['node_modules', $.paths.src, $.paths.static],
     },
     optimization: {
       chunkIds: 'named',

@@ -1,3 +1,5 @@
+@import '~styles/variables/colors.scss';
+
 .avatar {
   position: relative;
 
@@ -8,7 +10,7 @@
   font-size: 0;
   line-height: 0;
 
-  background: var(--theme-color-basic-light) url('~images/icons/user.svg') center no-repeat;
+  background: $color-basic-light url('~images/icons/user.svg') center no-repeat;
   background-size: 50%;
   border-radius: 50%;
   cursor: pointer;
@@ -23,7 +25,7 @@
   width: 25px;
   height: 25px;
 
-  background: var(--theme-color-content) url('~images/icons/camera.svg') center center no-repeat;
+  background: $color-content url('~images/icons/camera.svg') center center no-repeat;
   background-size: 70%;
   border-radius: inherit;
 }
@@ -40,7 +42,7 @@
   height: 100%;
   padding: 0;
 
-  color: var(--theme-color-content);
+  color: $color-content;
   font-size: 14px;
   line-height: 20px;
 
