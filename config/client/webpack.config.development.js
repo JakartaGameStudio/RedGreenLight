@@ -6,11 +6,10 @@ module.exports = merge({
   optimization: {
     minimize: false,
   },
-  devServer: {
-    hot: true,
-    static: {
-      publicPath: $.paths.server.base,
-    },
-    historyApiFallback: { index: '/', disableDotRule: true },
-  },
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    'css-hot-loader/hotModuleReplacement',
+    'client',
+  ],
 });

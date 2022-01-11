@@ -1,11 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const paths = require('../paths');
 const path = require('path');
+const env = require('../../env');
 
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(paths.html),
+      template: path.resolve(env.paths.html),
       inject: true,
       publicPath: '/',
     }),
