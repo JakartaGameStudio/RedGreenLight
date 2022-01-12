@@ -2,17 +2,17 @@ import { App } from 'containers/App/App';
 import { Request, Response } from 'express';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { HistoryRouter } from 'redux-first-history/rr6';
+import { StaticRouter } from 'react-router-dom/server';
 import { configureBaseStore } from 'services/redux/rootStore';
 
 export const serverRenderMiddleware = (req: Request, res: Response) => {
   const location = req.url;
-  const { store, history } = configureBaseStore(location);
+  const { store } = configureBaseStore();
   const jsx = (
     <Provider store={store}>
-      <HistoryRouter history={history}>
+      <StaticRouter location={location}>
         <App />
-      </HistoryRouter>
+      </StaticRouter>
     </Provider>
   );
   const reactHtml = renderToString(jsx);
@@ -34,6 +34,7 @@ function getHtml(reactHtml: string, reduxState = {}) {
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link href="main.css" rel="stylesheet">
       <title>Jakarta Games Studio | Red Green Light</title>
       <style type="text/css">
         :root {

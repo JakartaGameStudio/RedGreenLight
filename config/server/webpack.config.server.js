@@ -8,13 +8,14 @@ const tasks = require('../tasks');
 module.exports = merge(tasks.server.files, tasks.server.scripts, tasks.server.styles, {
   name: 'server',
   target: 'node',
+  context: path.resolve(env.paths.src),
   node: { __dirname: false },
-  entry: ['server'],
+  entry: 'server',
+  devtool: 'source-map',
   output: {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
     path: path.resolve(env.paths.build),
-    publicPath: '/static/',
   },
   resolve: {
     modules: [env.paths.src, 'node_modules'],

@@ -3,7 +3,19 @@ module.exports = {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        loader: 'null-loader',
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[folder]__[local]_[hash:base64:3]',
+                exportOnlyLocals: true,
+              },
+              importLoaders: 1,
+            },
+          },
+          'sass-loader',
+        ],
       },
     ],
   },

@@ -1,10 +1,10 @@
 import { App } from 'containers/App/App';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import { HistoryRouter } from 'redux-first-history/rr6';
+import { BrowserRouter } from 'react-router-dom';
 import { configureBaseStore } from 'services/redux/rootStore';
 
-const { store, history } = configureBaseStore(window.__INITIAL_STATE__);
+const { store } = configureBaseStore();
 
 declare global {
   interface Window {
@@ -14,9 +14,9 @@ declare global {
 
 hydrate(
   <Provider store={store}>
-    <HistoryRouter history={history}>
+    <BrowserRouter>
       <App />
-    </HistoryRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );
