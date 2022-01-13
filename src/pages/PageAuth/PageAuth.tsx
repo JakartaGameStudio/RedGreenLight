@@ -7,14 +7,19 @@ import { useLocation } from 'react-router-dom';
 import styles from './PageAuth.module.scss';
 import { PageAuthProps } from './PageAuth.types';
 
+type LocationState = {
+  from: string;
+};
+
 export function PageAuth({ signUp }: PageAuthProps) {
-  const { state } = useLocation();
+  const location = useLocation();
+  const { from } = location.state as LocationState;
 
   return (
     <div className={styles.page}>
       <Header className={styles.header} />
       <div className={styles.form}>
-        {signUp ? <FormSignUp from={state?.from} /> : <FormSignIn from={state?.from} />}
+        {signUp ? <FormSignUp from={from} /> : <FormSignIn from={from} />}
       </div>
       <Footer />
     </div>

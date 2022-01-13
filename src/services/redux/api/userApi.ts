@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import fetch from 'isomorphic-fetch';
 import {
   ApiEndpoints,
   ApiMethods,
@@ -16,6 +17,7 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: ApiEndpoints.baseURL,
     credentials: 'include',
+    fetchFn: fetch,
   }),
   endpoints: (builder) => ({
     signUp: builder.mutation<SignUpResponse, SignUpRequest>({

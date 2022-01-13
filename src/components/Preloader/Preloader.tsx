@@ -1,6 +1,6 @@
 import Lottie from 'lottie-react';
 
-import data from './Preloader.json';
+import data from './Pre.json';
 import styles from './Preloader.module.scss';
 
 export function Preloader() {
