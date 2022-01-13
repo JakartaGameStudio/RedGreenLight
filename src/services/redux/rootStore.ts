@@ -2,11 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { userApi, usersApi } from '.';
 
-export const isServer = !(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-);
+export const isServer = typeof window === 'undefined';
 
 export function configureBaseStore() {
   const store = configureStore({
