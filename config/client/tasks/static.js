@@ -1,11 +1,11 @@
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
-const env = require('../../env');
+const paths = require('../../paths');
 
 module.exports = {
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: path.resolve(env.paths.static), to: path.resolve(env.paths.build) }],
+      patterns: [{ from: path.resolve(paths.static), to: path.resolve(paths.build) }],
     }),
   ],
 };
