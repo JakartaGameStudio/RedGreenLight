@@ -1,10 +1,11 @@
 import { LoseWindow, ModalWrapper, StartWindow, WinWindow } from 'components/GameModals/GameModals';
 import { Title } from 'components/Title/Title';
 import { useEffect } from 'react';
+import { userApi } from 'services/redux';
 import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
 import { GameStatus } from './GameContainer.types';
-import { storeResult } from './storeResult';
+import { saveResults } from './saveResults';
 import { useGame } from './useGame';
 
 const config = {
@@ -33,12 +34,16 @@ const config = {
 export const GameContainer = () => {
   const { gameActions, canvasRef, renderTime, gameStatus, score } = useGame(config);
   const { startBoost, endBoost, startGame, restartGame } = gameActions;
+  const { data } = userApi.useGetUserQuery();
 
   useEffect(() => {
-    if (gameStatus === GameStatus.win) {
-      storeResult(score);
+    if (data && data.login && gameStatus === GameStatus.win) {
+      saveResults({
+        login: data.login,
+        result: score,
+      });
     }
-  }, [gameStatus, score]);
+  }, [score, data, gameStatus]);
 
   return (
     <div>

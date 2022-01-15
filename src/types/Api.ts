@@ -2,6 +2,7 @@ export enum ApiEndpoints {
   avatar = '/user/profile/avatar',
   baseURL = 'https://ya-praktikum.tech/api/v2',
   identify = '/auth/user',
+  leaderboard = '/leaderboard',
   password = '/user/password',
   profile = '/user/profile',
   resources = 'https://ya-praktikum.tech/api/v2/resources',
@@ -108,6 +109,17 @@ export type ChangePasswordRequest = {
 
 export type FindUserRequest = {
   [FindUserRequestKeys.login]: string;
+};
+
+export type GameResult = {
+  login: string;
+  result: number;
+};
+
+export type LeaderboardRequest = {
+  cursor: 0;
+  limit: 5;
+  ratingFieldName: 'time';
 };
 
 export type BadRequestError = {
