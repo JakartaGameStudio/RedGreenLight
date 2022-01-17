@@ -22,11 +22,11 @@ export const App = hot(() => {
       <Route path={AppRoutes.signIn} element={<PageAuth />} />
       <Route path={AppRoutes.signUp} element={<PageAuth signUp={true} />} />
       <Route path={AppRoutes.signOut} element={<PageSignOut />} />
+      <Route path={AppRoutes.leaderBoards} element={<PageLeaderBoards />} />
       <Route element={<ProtectedRoute />}>
         <Route path={AppRoutes.profile} element={<PageProfile />} />
         <Route path={AppRoutes.profileEdit} element={<PageProfile type="edit" />} />
         <Route path={AppRoutes.profilePassword} element={<PageProfile type="password" />} />
-        <Route path={AppRoutes.leaderBoards} element={<PageLeaderBoards />} />
       </Route>
       <Route path="*" element={<Page404 />} />
     </Routes>

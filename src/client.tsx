@@ -3,6 +3,7 @@ import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureBaseStore } from 'services/redux/rootStore';
+import { startServiceWorker } from 'services/startServiceWorker';
 
 const { store } = configureBaseStore();
 
@@ -20,3 +21,5 @@ hydrate(
   </Provider>,
   document.getElementById('root'),
 );
+
+startServiceWorker();
