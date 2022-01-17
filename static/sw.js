@@ -5,19 +5,18 @@ const URLS = [
 ];
 const TEAM_NAME = 'jakarta';
 const RATING_FIELD_NAME = 'result';
-const CURSOR = 0;
-const LIMIT = 5;
 const MAX_SCORE = 1000000;
 const DATABASE_NAME = 'gameResult';
-const LEADER_PATH = 'https://ya-praktikum.tech/api/v2/leaderboard'
+const LEADERBOARD_API_ENDPOINT = 'https://ya-praktikum.tech/api/v2/leaderboard'
 const OBJECT_STORE_NAME = 'results'
 
 
-this.addEventListener("install", event => {
+this.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
     .then(cache => {
-      console.log("Opened cache");
+      console.log('Opened cache');
+
       return cache.addAll(URLS);
     })
     .catch(err => {
@@ -27,8 +26,8 @@ this.addEventListener("install", event => {
   );
 });
 
-this.addEventListener("sync", event => {
-  if(event.tag == 'save-results') {
+this.addEventListener('sync', event => {
+  if (event.tag == 'save-results') {
     event.waitUntil(syncIt());
   }
 })
@@ -41,7 +40,7 @@ this.addEventListener('fetch', event => {
   );
 });
 
-this.addEventListener("activate", function(event) {
+this.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -61,6 +60,7 @@ function syncIt() {
       ratingFieldName: RATING_FIELD_NAME,
       teamName: TEAM_NAME,
     }
+
     return sendToServer(body)
   }).catch((err) => {
     return err;
@@ -68,13 +68,15 @@ function syncIt() {
 }
 
 function getDataFromDB() {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     const db = indexedDB.open(DATABASE_NAME);
+
     db.onsuccess = function() {
         this.result.transaction(OBJECT_STORE_NAME).objectStore(OBJECT_STORE_NAME).getAll().onsuccess = function(event) {
             resolve(event.target.result[0]);
         }
     }
+
     db.onerror = function(err) {
         reject(err);
     }
@@ -82,7 +84,7 @@ function getDataFromDB() {
 }
 
 function sendToServer(response) {
-  return fetch(LEADER_PATH, {
+  return fetch(LEADERBOARD_API_ENDPOINT, {
           method: 'POST',
           body: JSON.stringify(response),
           credentials: 'include',
@@ -91,7 +93,7 @@ function sendToServer(response) {
           }
   }).then((result) => {
       return result.text();
-  }).catch(function(err) {
+  }).catch((err) => {
       return err;
   })
 }
