@@ -1,27 +1,4 @@
-import { App } from 'containers/App/App';
-import { Request, Response } from 'express';
-import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router-dom/server';
-import { configureBaseStore } from 'services/redux/rootStore';
-
-export const serverRenderMiddleware = (req: Request, res: Response) => {
-  const location = req.url;
-  const { store } = configureBaseStore();
-  const jsx = (
-    <Provider store={store}>
-      <StaticRouter location={location}>
-        <App />
-      </StaticRouter>
-    </Provider>
-  );
-  const reactHtml = renderToString(jsx);
-  const reduxState = store.getState();
-
-  res.send(getHtml(reactHtml, reduxState));
-};
-
-function getHtml(reactHtml: string, reduxState = {}) {
+export function ssrGetTemplate(reactHtml: string, reduxState = {}) {
   return `
     <!DOCTYPE html>
     <html lang="ru">

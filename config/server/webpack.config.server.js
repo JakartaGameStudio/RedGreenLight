@@ -4,19 +4,20 @@ const nodeExternals = require('webpack-node-externals');
 const { merge } = require('webpack-merge');
 const paths = require('../paths');
 const tasks = require('../tasks');
-
-module.exports = merge(
+const env = require('../env');
+const configDev = require('./webpack.config.development');
+const configProd = require('./webpack.config.production');
+const configBase = merge(
   tasks.server.ignore,
   tasks.server.svgr,
   tasks.server.scripts,
   tasks.server.styles,
   {
     name: 'server',
+    entry: 'server',
     target: 'node',
     context: path.resolve(paths.src),
     node: { __dirname: false },
-    entry: 'server',
-    devtool: 'source-map',
     output: {
       filename: 'server.js',
       libraryTarget: 'commonjs2',
@@ -28,6 +29,7 @@ module.exports = merge(
       plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
     },
     externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
-    optimization: { nodeEnv: false },
   },
 );
+
+module.exports = merge(configBase, env.isProd ? configProd : configDev);

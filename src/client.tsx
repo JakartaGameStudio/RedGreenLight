@@ -2,16 +2,17 @@ import { App } from 'containers/App/App';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { configureBaseStore } from 'services/redux/rootStore';
+import { configureInitialStore } from 'services/redux/configureInitialStore';
 import { startServiceWorker } from 'services/startServiceWorker';
-
-const { store } = configureBaseStore();
 
 declare global {
   interface Window {
-    __INITIAL_STATE__: any;
+    __INITIAL_STATE__: unknown;
   }
 }
+
+const preloadedState = window.__INITIAL_STATE__;
+const store = configureInitialStore({ preloadedState });
 
 hydrate(
   <Provider store={store}>
