@@ -1,25 +1,25 @@
 import { Footer } from 'components/Footer/Footer';
-import { Image } from 'components/Image/Image';
 import { FormSignIn } from 'containers/FormSignIn/FormSignIn';
 import { FormSignUp } from 'containers/FormSignUp/FormSignUp';
 import { Header } from 'containers/Header/Header';
+import LogoYandex from 'images/icons/ya.svg?icon';
 import { useLocation } from 'react-router-dom';
 import { userApi } from 'services/redux';
+import { AppRoutes } from 'types/AppRoutes';
 
 import styles from './PageAuth.module.scss';
 import { PageAuthProps } from './PageAuth.types';
 
-type LocationState = {
-  from: string;
+type LocationWithState = {
+  state?: {
+    from?: string;
+  };
 };
 
-const REDIRECT_URI = 'https://localhost:9001';
-
 export function PageAuth({ signUp }: PageAuthProps) {
-  const location = useLocation();
-  const state = location.state as LocationState;
-  const from = state ? state.from : undefined;
-  const { data } = userApi.useOAuthGetIdQuery(REDIRECT_URI);
+  const location: LocationWithState = useLocation();
+  const from = location?.state?.from;
+  const { data } = userApi.useOAuthGetIdQuery(AppRoutes.oauthRedirectUri);
 
   return (
     <div className={styles.page}>
@@ -35,10 +35,10 @@ export function PageAuth({ signUp }: PageAuthProps) {
               <a
                 className={styles.oauthItem}
                 target="_blank"
-                href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${REDIRECT_URI}`}
+                href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${AppRoutes.oauthRedirectUri}`}
                 rel="noreferrer"
               >
-                <Image src="/images/yandex-logo.svg" className={styles.oauthItemImage} />
+                <LogoYandex />
               </a>
             </li>
           </ul>
