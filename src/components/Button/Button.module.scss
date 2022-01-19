@@ -20,6 +20,12 @@
   &:disabled {
     cursor: not-allowed;
   }
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.95;
+  }
 }
 
 .button--light {
@@ -42,8 +48,4 @@
   color: $color-primary;
 
   background: none;
-
-  &:hover {
-    color: $color-basic;
-  }
 }

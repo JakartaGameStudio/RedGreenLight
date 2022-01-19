@@ -4,6 +4,7 @@ import {
   ApiEndpoints,
   ApiMethods,
   ChangePasswordRequest,
+  ServiceId,
   SignInRequest,
   SignUpRequest,
   SignUpResponse,
@@ -20,6 +21,15 @@ export const userApi = createApi({
     fetchFn: fetch,
   }),
   endpoints: (builder) => ({
+    oAuthGetId: builder.query<ServiceId, string>({
+      query: (url) => ({
+        params: {
+          redirect_uri: url,
+        },
+        method: ApiMethods.get,
+        url: ApiEndpoints.oAuthServiceId,
+      }),
+    }),
     signUp: builder.mutation<SignUpResponse, SignUpRequest>({
       query: (body) => ({
         body,
