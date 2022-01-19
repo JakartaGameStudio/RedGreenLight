@@ -3,8 +3,8 @@
   "name": "reed.green.light",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run build:prod && npm run server",
-    "dev": "npm run build && npm run server",
+    "start": "npm-run-all build:prod server",
+    "dev": "npm-run-all build server",
     "server": "nodemon ./server/index.js --watch ./build/server.js",
     "clean": "rimraf build",
     "build": "webpack --mode=development",
