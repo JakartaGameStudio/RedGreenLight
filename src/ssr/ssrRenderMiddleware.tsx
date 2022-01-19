@@ -9,9 +9,7 @@ import { ssrGetTemplate } from 'ssr/ssrGetTemplate';
 export const ssrRenderMiddleware = (req: Request, res: Response) => {
   const location = req.url;
   const store = configureInitialStore({
-    router: {
-      location,
-    },
+    test: 'test',
   });
   const jsx = (
     <Provider store={store}>

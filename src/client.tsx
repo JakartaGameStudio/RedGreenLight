@@ -12,7 +12,7 @@ declare global {
 }
 
 const preloadedState = window.__INITIAL_STATE__;
-const store = configureInitialStore({ preloadedState });
+const store = configureInitialStore(preloadedState);
 
 hydrate(
   <Provider store={store}>
