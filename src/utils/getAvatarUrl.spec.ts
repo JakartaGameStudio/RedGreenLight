@@ -4,7 +4,7 @@ import { getAvatarUrl } from './getAvatarUrl';
 
 describe('getAvatarUrl', () => {
   test('should return avatar path', () => {
-    expect(getAvatarUrl('avatar')).toBe(`${ApiEndpoints.resources}/avatar`);
+    expect(getAvatarUrl('avatar')).toBe(`${ApiEndpoints.baseURL}${ApiEndpoints.resources}/avatar`);
   });
 
   test('should return undefined if param is falsy', () => {

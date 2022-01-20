@@ -7,7 +7,7 @@ export enum ApiEndpoints {
   oAuthServiceId = '/oauth/yandex/service-id',
   password = '/user/password',
   profile = '/user/profile',
-  resources = 'https://ya-praktikum.tech/api/v2/resources',
+  resources = '/resources',
   signin = '/auth/signin',
   signout = '/auth/logout',
   signup = '/auth/signup',
