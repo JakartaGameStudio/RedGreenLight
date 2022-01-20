@@ -9,6 +9,7 @@ export const userSupApi = createApi({
     credentials: 'include',
     fetchFn: fetch,
   }),
+  tagTypes: ['UserSup'],
   endpoints: (builder) => ({
     login: builder.mutation<{ status: string }, { userId: number }>({
       query: (body) => ({
@@ -16,8 +17,8 @@ export const userSupApi = createApi({
         method: ApiMethods.post,
         url: ApiEndpoints.loginSup,
       }),
+      invalidatesTags: ['UserSup'],
     }),
-
     logout: builder.mutation<void, void>({
       query: () => ({
         method: ApiMethods.get,

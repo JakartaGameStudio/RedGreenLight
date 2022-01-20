@@ -1,6 +1,5 @@
 import { Switcher } from 'components/Switcher/Switcher';
 import { useChangeColorScheme } from 'hooks/useChangeColorScheme';
-import { useGetServerThemeId } from 'hooks/useGetServerThemeId';
 import { useLocalThemeId } from 'hooks/useLocalThemeId';
 // eslint-disable-next-line import/no-unresolved
 import Cookies from 'js-cookie';
@@ -11,7 +10,8 @@ import { Themes } from 'types/Themes';
 export function ThemeSwitherUnMemo() {
   const isLogin = !!Cookies.get('access_token');
   const [updateServerTheme] = themesApi.useChangeMutation();
-  const serverThemeId = useGetServerThemeId(isLogin);
+  const { data } = themesApi.useGetQuery();
+  const serverThemeId = data;
   const [localThemeId, setLocalThemeId] = useLocalThemeId();
   const changeColorScheme = useChangeColorScheme();
   const updateThemeId = (themeId: number) => {
