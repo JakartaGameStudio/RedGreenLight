@@ -1,0 +1,13 @@
+@import '~styles/variables/colors.scss';
+
+.switcher {
+  margin-bottom: 10px;
+  &_item {
+    border: none;
+
+    margin: 1px;
+    &.active {
+      background: $color-primary-middle;
+    }
+  }
+}

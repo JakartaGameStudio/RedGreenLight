@@ -13,7 +13,8 @@ type LocationState = {
 
 export function PageAuth({ signUp }: PageAuthProps) {
   const location = useLocation();
-  const { from } = location.state as LocationState;
+  const state = location.state as LocationState;
+  const from = state?.from;
 
   return (
     <div className={styles.page}>

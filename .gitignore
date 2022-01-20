@@ -10,3 +10,4 @@ npm-debug.log
 *.sublime-*
 .sass-cache
 node_modules/
+postgresdata

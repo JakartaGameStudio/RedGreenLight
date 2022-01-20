@@ -4,6 +4,8 @@ const nodeExternals = require('webpack-node-externals');
 const { merge } = require('webpack-merge');
 const paths = require('../paths');
 const tasks = require('../tasks');
+const webpack = require('webpack');
+const { resolve, join } = require('path');
 
 module.exports = merge(tasks.server.files, tasks.server.scripts, tasks.server.styles, {
   name: 'server',
@@ -22,6 +24,12 @@ module.exports = merge(tasks.server.files, tasks.server.scripts, tasks.server.st
     extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      localStorage: resolve(join(__dirname, '../mock/localStorage.mock')),
+      document: resolve(join(__dirname, '../mock/document.mock')),
+    }),
+  ],
   externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
   optimization: { nodeEnv: false },
 });
