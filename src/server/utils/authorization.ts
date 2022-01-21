@@ -9,7 +9,7 @@ export const authorization = (req: Request, res: Response, next: NextFunction) =
   }
 
   try {
-    const data = jwt.verify(token, 'MY_SECRET_KEY') as { userId: number };
+    const data = jwt.verify(token, process.env.SECRET_KEY) as { userId: number };
 
     res.locals.userId = data.userId;
 

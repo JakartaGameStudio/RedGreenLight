@@ -6,7 +6,8 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://postgres:newPassword@postgres:5432/redgreen
+      env_file:
+        ./dev.env
     ports:
       - "9001:9001"
     restart: always
@@ -20,14 +21,10 @@ services:
       - ./postgresdata:/var/lib/postgresql/data
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: newPassword
-      POSTGRES_DB: redgreen
+      env_file:
+        ./dev.env
     networks:
       - awesome
-
-volumes:
-    pgadmin-data:
 
 networks:
     awesome:

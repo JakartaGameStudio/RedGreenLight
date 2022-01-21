@@ -6,6 +6,7 @@ const paths = require('../paths');
 const tasks = require('../tasks');
 const webpack = require('webpack');
 const { resolve, join } = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = merge(tasks.server.files, tasks.server.scripts, tasks.server.styles, {
   name: 'server',
@@ -29,6 +30,7 @@ module.exports = merge(tasks.server.files, tasks.server.scripts, tasks.server.st
       localStorage: resolve(join(__dirname, '../mock/localStorage.mock')),
       document: resolve(join(__dirname, '../mock/document.mock')),
     }),
+    new Dotenv(),
   ],
   externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
   optimization: { nodeEnv: false },

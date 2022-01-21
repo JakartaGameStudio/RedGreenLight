@@ -38,14 +38,6 @@ app.use('/api', router);
 app.get('/*', serverRenderMiddleware);
 
 const startServer = (port: number) => {
-  // const httpsServer = https.createServer(
-  //   {
-  //     key: fs.readFileSync(join(__dirname, 'server.key'), 'utf-8'),
-  //     cert: fs.readFileSync(join(__dirname, 'server.cert'), 'utf-8'),
-  //   },
-  //   app,
-  // );
-
   app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log('Application is started on localhost:', port);

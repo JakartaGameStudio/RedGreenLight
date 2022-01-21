@@ -6,7 +6,7 @@ export class UserAPI {
   public static login = async (request: Request, response: Response) => {
     try {
       const { userId } = request.body;
-      const token = jwt.sign({ userId: userId }, 'MY_SECRET_KEY');
+      const token = jwt.sign({ userId: userId }, process.env.SECRET_KEY);
       const record = await UserService.find({ userId: Number(userId) });
 
       if (!record) {
