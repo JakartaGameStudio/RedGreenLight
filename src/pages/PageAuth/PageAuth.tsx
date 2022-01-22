@@ -34,7 +34,6 @@ export function PageAuth({ signUp }: PageAuthProps) {
             <li className={styles.oauthListItem}>
               <a
                 className={styles.oauthItem}
-                target="_blank"
                 href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${AppRoutes.oauthRedirectUri}`}
                 rel="noreferrer"
               >

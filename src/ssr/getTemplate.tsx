@@ -1,4 +1,4 @@
-export function ssrGetTemplate(reactHtml: string, reduxState = {}) {
+export function getTemplate(reactHtml: string, reduxState = {}) {
   return `
     <!DOCTYPE html>
     <html lang="ru">
