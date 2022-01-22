@@ -18,7 +18,7 @@ module.exports = merge(
     entry: 'server',
     target: 'node',
     mode: env.isProd ? 'production' : 'development',
-    watch: !env.isProd,
+    //watch: !env.isProd,
     optimization: {
       minimize: env.isProd,
     },

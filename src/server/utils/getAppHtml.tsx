@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 import { configureInitialStore } from 'services/redux/configureInitialStore';
+
 import { getTemplate } from './getTemplate';
 
 export function getAppHtml(req: Request) {
