@@ -1,9 +1,11 @@
-import { ImageProps } from '../Image/Image.types';
+import { ImageProps } from 'components/Image/Image.types';
 
 export type ForumTopicProps = {
-  count: number;
+  author: {
+    image?: ImageProps;
+    name: string;
+  };
   date: Date;
   href: string;
-  image: ImageProps;
   title: string;
 };
