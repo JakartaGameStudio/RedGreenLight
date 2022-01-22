@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import { Image } from 'components/Image/Image';
+import UserIcon from 'images/icons/user.svg?icon';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 import { getAvatarUrl } from 'utils/getAvatarUrl';
-import UserIcon from 'images/icons/user.svg?icon';
+
 import styles from './UserMenu.module.scss';
 import { UserMenuProps } from './UserMenu.types';
 
