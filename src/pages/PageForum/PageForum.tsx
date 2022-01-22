@@ -1,40 +1,19 @@
-import { ForumSectionLink } from 'components/ForumSectionLink/ForumSectionLink';
+import { ForumTopic } from 'components/ForumTopic/ForumTopic';
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
-import { MainList } from 'components/MainList/MainList';
-import { ForumSection } from 'types/ForumSection.types';
-
-const initialData: ForumSection[] = [
-  {
-    id: 1,
-    messagesCount: 2,
-    name: 'Новые игры',
-    slug: 'novye_igry',
-    themesCount: 234,
-  },
-  {
-    id: 2,
-    messagesCount: 234,
-    name: 'Новые игры',
-    slug: 'novye_igry',
-    themesCount: 3,
-  },
-  {
-    id: 3,
-    messagesCount: 2,
-    name: 'Новые игры',
-    slug: 'novye_igry',
-    themesCount: 3,
-  },
-];
 
 export function PageForum() {
   return (
     <LayoutPage title="Форум">
-      <MainList>
-        {initialData.map((section) => (
-          <ForumSectionLink key={section.id} section={section} />
-        ))}
-      </MainList>
+      <ForumTopic
+        key={1}
+        title="asdasd"
+        image={{
+          src: '',
+        }}
+        href="/"
+        date={new Date()}
+        count={2}
+      />
     </LayoutPage>
   );
 }
