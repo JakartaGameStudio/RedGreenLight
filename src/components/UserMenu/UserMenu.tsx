@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 import { getAvatarUrl } from 'utils/getAvatarUrl';
-
+import UserIcon from 'images/icons/user.svg?icon';
 import styles from './UserMenu.module.scss';
 import { UserMenuProps } from './UserMenu.types';
 
@@ -40,7 +40,7 @@ export function UserMenu({ userData, className }: UserMenuProps) {
               alt={userName}
             />
           ) : (
-            <Image src="/images/icons/user.svg" />
+            <UserIcon className={styles.userIcon} />
           )}
         </div>
       </div>
