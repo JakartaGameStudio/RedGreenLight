@@ -70,7 +70,7 @@ export function FormSignUp({ from }: FormSignUpProps) {
         },
         {
           children: 'Уже зарегистирован?',
-          mod: 'link',
+          mods: ['link'],
           href: AppRoutes.signIn,
         },
       ]}

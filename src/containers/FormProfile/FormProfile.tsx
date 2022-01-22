@@ -46,7 +46,7 @@ export function FormProfile() {
           type: 'submit',
         },
         {
-          mod: 'warning-light',
+          mods: ['warning-light'],
           children: 'Отмена',
           href: AppRoutes.profile,
         },

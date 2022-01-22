@@ -57,7 +57,7 @@ export function FormSignIn({ from }: FormSignInProps) {
         },
         {
           children: 'Нет аккаунта?',
-          mod: 'link',
+          mods: ['link'],
           href: AppRoutes.signUp,
         },
       ]}
