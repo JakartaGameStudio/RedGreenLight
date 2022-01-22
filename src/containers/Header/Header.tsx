@@ -6,9 +6,7 @@ import { useIdentify } from 'hooks/useIdentify';
 import LogoImage from 'images/logo.svg';
 import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
-import { getAvatarUrl } from 'utils/getAvatarUrl';
 
 import styles from './Header.module.scss';
 import { HeaderProps } from './Header.types';
@@ -42,13 +40,7 @@ export function Header({ className }: HeaderProps) {
           </NavLink>
           <Menu className={styles.nav} items={menuItems} />
           {userData ? (
-            <UserMenu
-              className={styles.user}
-              userName={userData[UserResponseKeys.login]}
-              image={{
-                src: getAvatarUrl(userData[UserResponseKeys.avatar]),
-              }}
-            />
+            <UserMenu className={styles.user} userData={userData} />
           ) : (
             <NavLink to={AppRoutes.signIn} className={styles.signIn}>
               Войти
