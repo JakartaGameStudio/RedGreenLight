@@ -8,20 +8,20 @@ import { themesApi } from 'services/redux/api/themesApi';
 import { Themes } from 'types/Themes';
 
 export function ThemeSwitherUnMemo() {
-  const isLogin = !!Cookies.get('access_token');
+  const isLoginIn = !!Cookies.get('access_token');
   const [updateServerTheme] = themesApi.useChangeMutation();
   const { data } = themesApi.useGetQuery();
   const serverThemeId = data;
   const [localThemeId, setLocalThemeId] = useLocalThemeId();
   const changeColorScheme = useChangeColorScheme();
   const updateThemeId = (themeId: number) => {
-    if (isLogin) {
+    if (isLoginIn) {
       updateServerTheme({ themeId });
     }
 
     setLocalThemeId(themeId.toString());
   };
-  const themeId = isLogin ? serverThemeId : +localThemeId;
+  const themeId = isLoginIn ? serverThemeId : +localThemeId;
 
   useEffect(() => {
     changeColorScheme(themeId);

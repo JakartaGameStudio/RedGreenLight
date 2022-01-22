@@ -1,6 +1,7 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
 import { UserTheme } from './models/UserTheme';
+
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
 const sequelizeOptions: SequelizeOptions = {
   host: 'localhost',
