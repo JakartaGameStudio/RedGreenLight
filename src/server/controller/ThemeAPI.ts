@@ -8,7 +8,7 @@ export class ThemeAPI {
     try {
       const record = await UserService.find({ userId: Number(userId) });
 
-      response.status(200).json(record);
+      return response.status(200).json(record);
     } catch {
       return response.sendStatus(400);
     }
@@ -21,7 +21,7 @@ export class ThemeAPI {
     try {
       await UserService.update({ userId: Number(userId), themeId: Number(themeId) });
 
-      response.status(200).json({ message: 'Successfully changed' });
+      return response.status(200).json({ message: 'Successfully changed' });
     } catch {
       return response.sendStatus(400);
     }
