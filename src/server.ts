@@ -32,7 +32,7 @@ app.use('/api', router);
 
 app.use(express.static(path.resolve(__dirname, '../build')));
 
-app.get('/*', async (req: Request, res: Response) => {
+app.get('/*', (req: Request, res: Response) => {
   const html = getAppHtml(req);
 
   res.send(html);
