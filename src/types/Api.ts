@@ -1,8 +1,11 @@
 export enum ApiEndpoints {
   avatar = '/user/profile/avatar',
   baseURL = 'https://ya-praktikum.tech/api/v2',
+  changeTheme = '/theme/change',
   identify = '/auth/user',
   leaderboard = '/leaderboard',
+  loginSup = '/user/login',
+  logoutSup = '/user/logout',
   oAuth = '/oauth/yandex',
   oAuthServiceId = '/oauth/yandex/service-id',
   password = '/user/password',
@@ -11,6 +14,8 @@ export enum ApiEndpoints {
   signin = '/auth/signin',
   signout = '/auth/logout',
   signup = '/auth/signup',
+  supportURL = 'http://localhost:3000/api',
+  theme = '/theme',
   user = '/user',
   userSearch = '/user/search',
 }

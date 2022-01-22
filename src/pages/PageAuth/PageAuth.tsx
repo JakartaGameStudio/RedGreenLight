@@ -10,15 +10,14 @@ import { AppRoutes } from 'types/AppRoutes';
 import styles from './PageAuth.module.scss';
 import { PageAuthProps } from './PageAuth.types';
 
-type LocationWithState = {
-  state?: {
-    from?: string;
-  };
+type LocationState = {
+  from: string;
 };
 
 export function PageAuth({ signUp }: PageAuthProps) {
-  const location: LocationWithState = useLocation();
-  const from = location?.state?.from;
+  const location = useLocation();
+  const state = location.state as LocationState;
+  const from = state?.from;
   const { data } = userApi.useOAuthGetIdQuery(AppRoutes.oauthRedirectUri);
 
   return (

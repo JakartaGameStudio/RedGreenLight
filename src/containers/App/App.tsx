@@ -1,6 +1,7 @@
 import './App.module.scss';
 
 import { ProtectedRoute } from 'components/ProtectedRoute/ProtectedRoute';
+import { useSupIdentify } from 'hooks/useSupIdentify';
 import { Page404 } from 'pages/Page404/Page404';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageForum } from 'pages/PageForum/PageForum';
@@ -14,6 +15,8 @@ import { Route, Routes } from 'react-router-dom';
 import { AppRoutes } from 'types/AppRoutes';
 
 export const App = hot(() => {
+  useSupIdentify();
+
   return (
     <Routes>
       <Route path={AppRoutes.index} element={<PageIndex />} />

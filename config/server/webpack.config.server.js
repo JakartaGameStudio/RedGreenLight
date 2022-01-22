@@ -4,6 +4,9 @@ const { merge } = require('webpack-merge');
 const paths = require('../paths');
 const tasks = require('../tasks');
 const env = require('../env');
+const webpack = require('webpack');
+const { resolve, join } = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = merge(
   tasks.server.ignore,
@@ -30,6 +33,13 @@ module.exports = merge(
       modules: [paths.src, paths.static, 'node_modules'],
       extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        localStorage: resolve(join(__dirname, '../mock/localStorage.mock')),
+        document: resolve(join(__dirname, '../mock/document.mock')),
+      }),
+      new Dotenv(),
+    ],
     externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
   },
 );

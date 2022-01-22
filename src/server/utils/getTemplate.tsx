@@ -12,24 +12,9 @@ export function getTemplate(reactHtml: string, reduxState = {}) {
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
       <link href="main.css" rel="stylesheet">
+      <link rel="stylesheet" data-style="dark" href="dark.css" media="(prefers-color-scheme: dark)">
+      <link rel="stylesheet" data-style="light" href="light.css" media="(prefers-color-scheme: light)">
       <title>Jakarta Games Studio | Red Green Light</title>
-      <style type="text/css">
-        :root {
-          --theme-color-content: #FFF;
-
-          --theme-color-basic: #000;
-          --theme-color-basic-middle: #696969;
-          --theme-color-basic-light: #EAEAEA;
-
-          --theme-color-primary: #0CABB0;
-          --theme-color-primary-middle: #76C5C8;
-          --theme-color-primary-light: #E2F2EE;
-
-          --theme-color-secondary: #DD0B61;
-          --theme-color-secondary-middle: #DE75A0;
-          --theme-color-secondary-light: #FEEFF2;
-        }
-      </style>
     </head>
     <body>
       <div id="root">${reactHtml}</div>
