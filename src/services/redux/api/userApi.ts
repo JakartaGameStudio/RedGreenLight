@@ -4,6 +4,8 @@ import {
   ApiEndpoints,
   ApiMethods,
   ChangePasswordRequest,
+  OauthSignInRequest,
+  ServiceId,
   SignInRequest,
   SignUpRequest,
   SignUpResponse,
@@ -20,6 +22,26 @@ export const userApi = createApi({
     fetchFn: fetch,
   }),
   endpoints: (builder) => ({
+    oAuthGetId: builder.query<ServiceId, string>({
+      query: (url) => ({
+        params: {
+          redirect_uri: url,
+        },
+        method: ApiMethods.get,
+        url: ApiEndpoints.oAuthServiceId,
+      }),
+    }),
+    oAuthSignIn: builder.mutation<void, OauthSignInRequest>({
+      query: ({ code, redirect_uri }) => ({
+        method: ApiMethods.post,
+        url: ApiEndpoints.oAuthSignIn,
+        body: {
+          code,
+          redirect_uri,
+        },
+      }),
+      invalidatesTags: ['Profile'],
+    }),
     signUp: builder.mutation<SignUpResponse, SignUpRequest>({
       query: (body) => ({
         body,

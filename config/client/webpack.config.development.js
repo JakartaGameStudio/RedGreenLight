@@ -1,4 +1,5 @@
 const { merge } = require('webpack-merge');
+const webpack = require('webpack');
 
 module.exports = merge({
   mode: 'development',
@@ -12,4 +13,5 @@ module.exports = merge({
   optimization: {
     minimize: false,
   },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });

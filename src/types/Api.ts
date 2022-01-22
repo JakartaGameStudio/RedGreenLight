@@ -6,13 +6,15 @@ export enum ApiEndpoints {
   leaderboard = '/leaderboard',
   loginSup = '/user/login',
   logoutSup = '/user/logout',
+  oAuthServiceId = '/oauth/yandex/service-id',
+  oAuthSignIn = '/oauth/yandex',
   password = '/user/password',
   profile = '/user/profile',
-  resources = 'https://ya-praktikum.tech/api/v2/resources',
+  resources = '/resources',
   signin = '/auth/signin',
   signout = '/auth/logout',
   signup = '/auth/signup',
-  supportURL = 'http://localhost:9001/api',
+  supportURL = 'http://localhost:3000/api',
   theme = '/theme',
   user = '/user',
   userSearch = '/user/search',
@@ -130,4 +132,13 @@ export type LeaderboardRequest = {
 export type BadRequestError = {
   reason: string;
   error?: string;
+};
+
+export type OauthSignInRequest = {
+  code: string;
+  redirect_uri: string;
+};
+
+export type ServiceId = {
+  service_id: string;
 };

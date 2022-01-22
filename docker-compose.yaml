@@ -7,9 +7,9 @@ services:
       - postgres
     environment:
       env_file:
-        ./dev.env
+        ./.env
     ports:
-      - "9001:9001"
+      - "3000:3000"
     restart: always
     networks:
       - awesome
@@ -22,7 +22,7 @@ services:
     restart: always
     environment:
       env_file:
-        ./dev.env
+        ./.env
     networks:
       - awesome
 

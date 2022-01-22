@@ -2,12 +2,13 @@
 
 .switcher {
   margin-bottom: 10px;
-  &_item {
-    margin: 1px;
+}
 
-    border: none;
-    &.active {
-      background: $color-primary-middle;
-    }
+.item {
+  margin: 1px;
+
+  border: none;
+  &.active {
+    background: $color-primary-middle;
   }
 }

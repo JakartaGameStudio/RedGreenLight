@@ -9,6 +9,7 @@ module.exports = {
   server: {
     scripts: require('./server/tasks/scripts'),
     styles: require('./server/tasks/styles'),
-    files: require('./server/tasks/files'),
+    ignore: require('./server/tasks/ignore'),
+    svgr: require('./server/tasks/svgr'),
   },
 };

@@ -5,7 +5,6 @@ const configProd = require('./webpack.config.production');
 const env = require('../env');
 const paths = require('../paths');
 const tasks = require('../tasks');
-const webpack = require('webpack');
 const configBase = merge(
   tasks.client.styles,
   tasks.client.images,
@@ -24,7 +23,6 @@ const configBase = merge(
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.scss', '.css', '.json'],
       modules: ['node_modules', paths.src, paths.static],
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
   },
 );
 
