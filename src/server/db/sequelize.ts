@@ -1,5 +1,7 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
+import { Comment } from './models/Comment';
+import { Topic } from './models/Topic';
 import { UserTheme } from './models/UserTheme';
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
 const sequelizeOptions: SequelizeOptions = {
@@ -13,4 +15,4 @@ const sequelizeOptions: SequelizeOptions = {
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
-sequelize.addModels([UserTheme]);
+sequelize.addModels([UserTheme, Topic, Comment]);

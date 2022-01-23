@@ -1,45 +1,36 @@
 import { Request, Response } from 'express';
-import { TopicService } from 'server/db/services/TopicService';
-import slugCreator from 'slug';
+import { CommentService } from 'server/db/services/CommentService';
 
 export class CommentAPI {
-  public static getReplies = (req: Request, response: Response) => {
+  public static getReplies = async (req: Request, response: Response) => {
     try {
-      //const { slug } = req.params;
-      //const topic = await CommentService.request({});
-      // if (topic) {
-      //   response.status(200).json(topic);
-      // } else {
-      //   response.sendStatus(404);
-      // }
+      const { id } = req.params;
+      const replies = await CommentService.request({
+        parentCommentId: +id,
+      });
+
+      response.status(200).json({ replies });
     } catch (err) {
       response.status(400).send(err);
-    }
-  };
-
-  public static request = async (request: Request, response: Response) => {
-    try {
-      const topics = await TopicService.request();
-
-      response.status(200).json({ topics: topics });
-    } catch {
-      return response.sendStatus(400);
     }
   };
 
   public static create = async (request: Request, response: Response) => {
     try {
       const { userId } = response.locals;
-      const { title } = request.body;
-      const slugTitle = slugCreator(title);
-      const topic = await TopicService.create({
-        title,
+      const { text, topicId, parentCommentId } = request.body;
+      const comment = await CommentService.create({
         creatorId: userId,
-        slug: slugTitle,
+        parentCommentId,
+        text,
+        topicId,
       });
 
-      response.status(200).json({ slug: topic.slug });
-    } catch {
+      response.status(200).json(comment);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+
       return response.sendStatus(400);
     }
   };

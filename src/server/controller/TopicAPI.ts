@@ -6,7 +6,11 @@ export class TopicAPI {
   public static findBySlug = async (req: Request, response: Response) => {
     try {
       const { slug } = req.params;
-      const topic = await TopicService.find({ slug: slug });
+      const { userId } = response.locals;
+      const topic = await TopicService.find({ slug, userId });
+
+      // eslint-disable-next-line no-console
+      console.log(topic);
 
       if (topic) {
         response.status(200).json(topic);
@@ -14,6 +18,9 @@ export class TopicAPI {
         response.sendStatus(404);
       }
     } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+
       response.status(400).send(err);
     }
   };
@@ -23,7 +30,10 @@ export class TopicAPI {
       const topics = await TopicService.request();
 
       response.status(200).json({ topics: topics });
-    } catch {
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+
       return response.sendStatus(400);
     }
   };
@@ -39,8 +49,11 @@ export class TopicAPI {
         slug: slugTitle,
       });
 
-      response.status(200).json({ slug: topic.slug });
-    } catch {
+      response.status(200).json({ slug: topic.slug, id: topic.id });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+
       return response.sendStatus(400);
     }
   };

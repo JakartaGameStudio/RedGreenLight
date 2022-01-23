@@ -8,7 +8,7 @@ Response:
     title: string,
     creationDate: date,
     creatorId: number,
-    commentsCount: number //не сделал
+    commentsCount: number 
   }]
 }
 _____________________________________________
@@ -22,17 +22,12 @@ Response:
   title: string,
   creationDate: date,
   creatorId: number,
-  commentsCount: number,
   comments: [{
     id: number,
     text: string,
     creationDate: date,
     topicId: number,
     creatorId: number,
-    replyCount: number,
-    likes: number,
-    dislikes: number,
-    userEmotion: 'like' | 'dislike' | null
   }]
 }
 _____________________________________________
@@ -41,7 +36,6 @@ POST /topic
 
 Request:
 {
-  creatorId: number,
   title: number,
 }
 
@@ -63,10 +57,6 @@ Response:
     creationDate: date,
     creatorId: number,
     parentCommentId: number | null,
-    replyCount: number,
-    likes: number,
-    dislikes: number,
-    userEmotion: 'like' | 'dislike' | null
   }]
 }
 
@@ -77,7 +67,6 @@ POST /comment
 Request:
 {
   topicId: number,
-  creatorId: number,
   text: number,
   parentCommentId: number | null,
 }
@@ -89,27 +78,5 @@ Response:
     creationDate: date,
     topicId: number,
     creatorId: number,
-    replyCount: number,
-    likes: number,
-    dislikes: number,
     parentCommentId: number | null,
-    userEmotion: 'like' | 'dislike' | null
-}
-
-_____________________________________________
-
-POST /emotion
-
-Request:
-{
-  creatorId: number,
-  commentId: number,
-  emotionType: 'like' | 'dislike' | null,
-}
-
-Response:
-{
-    commentId: number,
-    likes: number,
-    dislikes: number,
 }
