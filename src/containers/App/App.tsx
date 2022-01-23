@@ -10,11 +10,29 @@ import { PageIndex } from 'pages/PageIndex/PageIndex';
 import { PageLeaderBoards } from 'pages/PageLeaderBoards/PageLeaderBoards';
 import { PageProfile } from 'pages/PageProfile/PageProfile';
 import { PageSignOut } from 'pages/PageSignOut/PageSignOut';
+import { useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { userApi } from 'services/redux';
 import { AppRoutes } from 'types/AppRoutes';
 
 export const App = hot(() => {
+  const { search } = useLocation();
+  const navigate = useNavigate();
+  const [oAuthSignIn] = userApi.useOAuthSignInMutation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const oAuthCode = params.get('code');
+
+    if (oAuthCode) {
+      oAuthSignIn({
+        code: oAuthCode,
+        redirect_uri: AppRoutes.oauthRedirectUri,
+      }).finally(() => navigate(AppRoutes.index));
+    }
+  }, [navigate, oAuthSignIn, search]);
+
   useSupIdentify();
 
   return (

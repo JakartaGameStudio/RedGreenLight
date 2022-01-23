@@ -7,11 +7,13 @@ import styles from './ProfileAvatar.module.scss';
 import { ProfileAvatarProps } from './ProfileAvatar.types';
 
 export function ProfileAvatar({ userData, onClick, className }: ProfileAvatarProps) {
+  const imageSrc = getAvatarUrl(userData[UserResponseKeys.avatar]);
+
   return (
     <div className={classNames(styles.avatar, className)} onClick={onClick}>
-      {userData && (
+      {imageSrc && (
         <Image
-          src={getAvatarUrl(userData[UserResponseKeys.avatar])}
+          src={imageSrc}
           alt={userData[UserResponseKeys.displayName]}
           className={styles.image}
         />

@@ -1,4 +1,6 @@
-import s from './switcher.module.scss';
+import classNames from 'classnames';
+
+import styles from './switcher.module.scss';
 
 type SwitcherItem = {
   onClick: (value: number) => void;
@@ -11,13 +13,18 @@ type SwitcherProps = {
 };
 
 export function Switcher({ items, activeId }: SwitcherProps) {
+  const handleSwitchTheme = (item: SwitcherItem) =>
+    activeId !== item.value && item.onClick(item.value);
+
   return (
-    <div className={s.switcher}>
+    <div className={styles.switcher}>
       {items.map((item) => (
         <button
-          className={`${s.switcher_item} ${activeId === item.value ? s.active : ''}`}
+          className={classNames(styles.item, {
+            [styles.active]: activeId === item.value,
+          })}
           key={item.value}
-          onClick={() => activeId !== item.value && item.onClick(item.value)}
+          onClick={() => handleSwitchTheme(item)}
         >
           {item.text}
         </button>
