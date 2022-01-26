@@ -8,7 +8,7 @@ Response:
     title: string,
     creationDate: date,
     creatorId: number,
-    commentsCount: number 
+    commentsCount: string
   }]
 }
 _____________________________________________
@@ -28,6 +28,10 @@ Response:
     creationDate: date,
     topicId: number,
     creatorId: number,
+    repliesCount: string,
+    dislikesCount: string,
+    likesCount: string,
+    userEmotion: string,
   }]
 }
 _____________________________________________
@@ -50,13 +54,17 @@ GET /comment/${id}
 
 Response:
 {
-  replys: [{
+  replies: [{
     id: number,
     text: string,
     topicId: number,
     creationDate: date,
     creatorId: number,
     parentCommentId: number | null,
+    repliesCount: string,
+    dislikesCount: string,
+    likesCount: string,
+    userEmotion: string,
   }]
 }
 
@@ -79,4 +87,19 @@ Response:
     topicId: number,
     creatorId: number,
     parentCommentId: number | null,
+}
+_____________________________________________
+
+POST /emotion
+
+Request:
+{
+  creatorId: number,
+  commentId: number,
+  emotion: 'like' | 'dislike' | null,
+}
+
+Response:
+{
+  result: 'success'
 }

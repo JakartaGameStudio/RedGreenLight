@@ -4,13 +4,17 @@ import { CommentService } from 'server/db/services/CommentService';
 export class CommentAPI {
   public static getReplies = async (req: Request, response: Response) => {
     try {
+      const { userId } = response.locals;
       const { id } = req.params;
       const replies = await CommentService.request({
         parentCommentId: +id,
+        userId,
       });
 
       response.status(200).json({ replies });
     } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
       response.status(400).send(err);
     }
   };

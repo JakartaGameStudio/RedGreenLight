@@ -1,4 +1,7 @@
+import { Sequelize } from 'sequelize-typescript';
+
 import { Comment } from '../models/Comment';
+import { Emotion } from '../models/Emotion';
 import { Topic } from '../models/Topic';
 import { BaseRESTService } from './BaseRESTService';
 
@@ -14,34 +17,81 @@ type CreateRequest = {
 };
 
 export class TopicService implements BaseRESTService {
-  public static find = ({ slug }: FindRequest) => {
+  public static find = ({ slug, userId }: FindRequest) => {
     return Topic.findOne({
       attributes: ['id', 'slug', 'title', 'creatorId', 'creationDate'],
       where: { slug },
       include: [
         {
           model: Comment,
+          required: false,
           where: { parentCommentId: null },
+          attributes: [
+            'id',
+            'text',
+            'creationDate',
+            'topicId',
+            'creatorId',
+            [Sequelize.fn('COUNT', Sequelize.col('comments->likes.id')), 'likesCount'],
+            [Sequelize.fn('COUNT', Sequelize.col('comments->dislikes.id')), 'dislikesCount'],
+            [Sequelize.fn('COUNT', Sequelize.col('comments->replies.id')), 'repliesCount'],
+            [Sequelize.fn('MAX', Sequelize.col('comments->userEmotions.emotion')), 'userEmotion'],
+          ],
+          include: [
+            {
+              model: Comment,
+              attributes: [],
+            },
+            {
+              model: Emotion,
+              attributes: [],
+              required: false,
+              as: 'likes',
+              where: {
+                emotion: 'like',
+              },
+            },
+            {
+              model: Emotion,
+              attributes: [],
+              required: false,
+              as: 'dislikes',
+              where: {
+                emotion: 'dislike',
+              },
+            },
+            {
+              model: Emotion,
+              attributes: [],
+              required: false,
+              as: 'userEmotions',
+              where: {
+                creatorId: userId,
+              },
+            },
+          ],
         },
       ],
+      group: ['Topic.id', 'comments.id'],
     });
   };
 
   public static request = () => {
     return Topic.findAll({
+      attributes: [
+        'id',
+        'slug',
+        'title',
+        'creatorId',
+        'creationDate',
+        [Sequelize.fn('COUNT', Sequelize.col('comments.id')), 'commentsCount'],
+      ],
       include: {
         model: Comment,
+        attributes: [],
       },
-    }).then((topics) =>
-      topics.map((topic) => ({
-        creationDate: topic.creationDate,
-        creatorId: topic.creatorId,
-        id: topic.id,
-        slug: topic.slug,
-        title: topic.title,
-        commentsCount: topic.comments.length,
-      })),
-    );
+      group: ['Topic.id'],
+    });
   };
 
   public static create = (data: CreateRequest) => {

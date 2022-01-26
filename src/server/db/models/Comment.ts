@@ -5,11 +5,13 @@ import {
   CreatedAt,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
 
+import { Emotion } from './Emotion';
 import { Topic } from './Topic';
 
 interface CreateAttributes {
@@ -51,9 +53,22 @@ export class Comment extends Model<CreateAttributes> {
   })
   topicId: number;
 
+  @ForeignKey(() => Comment)
   @Column({
     type: DataType.INTEGER,
     field: 'parent_comment_id',
   })
   parentCommentId: number;
+
+  @HasMany(() => Comment)
+  replies: Comment[];
+
+  @HasMany(() => Emotion)
+  likes: Emotion[];
+
+  @HasMany(() => Emotion)
+  dislikes: Emotion[];
+
+  @HasMany(() => Emotion)
+  userEmotions: Emotion[];
 }

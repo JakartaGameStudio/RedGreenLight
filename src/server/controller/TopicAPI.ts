@@ -9,9 +9,6 @@ export class TopicAPI {
       const { userId } = response.locals;
       const topic = await TopicService.find({ slug, userId });
 
-      // eslint-disable-next-line no-console
-      console.log(topic);
-
       if (topic) {
         response.status(200).json(topic);
       } else {

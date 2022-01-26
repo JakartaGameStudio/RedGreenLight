@@ -4,5 +4,5 @@ try {
 
   startServer(port);
 } catch (e) {
-  console.info('Server waiting webpack build');
+  console.info('Server waiting webpack build', e);
 }
