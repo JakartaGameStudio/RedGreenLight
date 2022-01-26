@@ -14,6 +14,7 @@ import { isProd } from '../config/env';
 (async function () {
   try {
     await sequelize.authenticate();
+
     await sequelize.sync({ force: true });
     console.info('Database is connected');
   } catch (error) {
