@@ -5,6 +5,7 @@ import {
   ApiMethods,
   ChangePasswordRequest,
   OauthSignInRequest,
+  SecondaryApiEndpoints,
   ServiceId,
   SignInRequest,
   SignUpRequest,
@@ -85,9 +86,17 @@ export const userApi = createApi({
     getUser: builder.query<UserResponse, void>({
       query: () => ({
         method: ApiMethods.get,
-        url: ApiEndpoints.identify,
+        url: `${SecondaryApiEndpoints.baseURL}${SecondaryApiEndpoints.user}`,
       }),
       providesTags: ['Profile'],
+    }),
+    changeThemeId: builder.mutation<{ status: string }, { themeId: number }>({
+      query: (body) => ({
+        body,
+        method: ApiMethods.put,
+        url: `${SecondaryApiEndpoints.baseURL}${SecondaryApiEndpoints.changeTheme}`,
+      }),
+      invalidatesTags: ['Profile'],
     }),
     updateProfile: builder.mutation<UserResponse, UserUpdateRequest>({
       query: (body) => ({
