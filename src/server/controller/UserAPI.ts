@@ -1,28 +1,40 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import { UserService } from 'server/db/services/UserService';
 
 export class UserAPI {
-  public static login = async (request: Request, response: Response) => {
+  public static changeTheme = async (request: Request, response: Response) => {
     try {
-      const { userId } = request.body;
-      const token = jwt.sign({ userId: userId }, process.env.SECRET_KEY);
-      const record = await UserService.find({ userId: Number(userId) });
+      const { user } = response.locals;
+      const { themeId } = request.body;
 
-      if (!record) {
-        await UserService.create({ userId: Number(userId) });
-      }
+      await UserService.update({ userId: user.id, themeId });
 
-      return response.cookie('access_token', token).status(200).json({ status: 'success' });
+      return response.status(200).json({ status: 'success' });
     } catch (err) {
       return response.status(400).json(err);
     }
   };
 
-  public static logout = (request: Request, response: Response) => {
-    return response
-      .clearCookie('access_token')
-      .status(200)
-      .json({ message: 'Successfully logged out 😏 🍀' });
+  public static get = async (request: Request, response: Response) => {
+    try {
+      const { user } = response.locals;
+      const userData = {
+        userId: user.id,
+        name: user.display_name || user.login,
+        avatar: user.avatar,
+      };
+      const [currentUser, created] = await UserService.findOrCreate(userData);
+
+      if (!created) {
+        await UserService.update(userData);
+      }
+
+      user.theme_id = currentUser.themeId;
+
+      response.status(200).json(user);
+    } catch (error) {
+      console.info(error);
+      response.status(400).send(error);
+    }
   };
 }

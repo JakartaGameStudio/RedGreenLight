@@ -1,12 +1,11 @@
 import { Router } from 'express';
 import { UserAPI } from 'server/controller/UserAPI';
-import { authMiddleware } from 'server/middleware/authMiddleware';
+import { authenticationMiddleware } from 'server/middleware/authenticationMiddleware';
 
 export const userRoutes = (router: Router) => {
   const userRouter: Router = Router();
 
-  userRouter.get('/logout', authMiddleware, UserAPI.logout);
-  userRouter.post('/login', UserAPI.login);
-
+  userRouter.get('/', authenticationMiddleware, UserAPI.get);
+  userRouter.put('/changeThemeId', authenticationMiddleware, UserAPI.changeTheme);
   router.use('/user', userRouter);
 };

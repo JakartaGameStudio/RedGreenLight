@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
 export const useLocalThemeId = () => {
-  const [localThemeId, setLocalThemeId] = useState<string | undefined>();
+  const [localThemeId, setLocalThemeId] = useState<number | undefined>();
 
   useEffect(() => {
-    setLocalThemeId(localStorage.getItem('themeId') || '0');
+    setLocalThemeId(+localStorage.getItem('themeId') || 0);
   }, []);
   useEffect(() => {
-    localStorage.setItem('themeId', localThemeId);
+    localStorage.setItem('themeId', localThemeId?.toString());
   }, [localThemeId]);
 
   return [localThemeId, setLocalThemeId] as const;
