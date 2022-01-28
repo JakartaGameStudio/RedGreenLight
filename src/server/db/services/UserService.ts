@@ -1,35 +1,40 @@
 import { Themes } from 'types/Themes';
 
-import { UserTheme } from '../models/UserTheme';
+import { User } from '../models/User';
 import { BaseRESTService } from './BaseRESTService';
 
-interface FindRequest {
+type FindRequest = {
   userId: number;
-}
+};
 
-type CreateRequest = FindRequest;
+type UpdateRequest = Partial<CreateRequest>;
 
-interface UpdateRequest {
-  themeId: number;
+type CreateRequest = {
+  avatar: string | null;
+  name: string;
   userId: number;
-}
+  themeId?: number;
+};
 
 export class UserService implements BaseRESTService {
   public static find = ({ userId }: FindRequest) => {
-    return UserTheme.findByPk(userId);
-  };
-
-  public static create = (data: CreateRequest) => {
-    return UserTheme.create({
-      ...data,
-      themeId: Themes.light,
-    });
+    return User.findByPk(userId);
   };
 
   public static update = (data: UpdateRequest) => {
-    return UserTheme.update(data, {
+    return User.update(data, {
       where: {
         userId: data.userId,
+      },
+    });
+  };
+
+  public static findOrCreate = (data: CreateRequest) => {
+    return User.findOrCreate({
+      where: { userId: data.userId },
+      defaults: {
+        ...data,
+        themeId: Themes.default,
       },
     });
   };

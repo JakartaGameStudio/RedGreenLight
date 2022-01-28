@@ -1,7 +1,6 @@
 import './App.module.scss';
 
 import { ProtectedRoute } from 'components/ProtectedRoute/ProtectedRoute';
-import { useSupIdentify } from 'hooks/useSupIdentify';
 import { Page404 } from 'pages/Page404/Page404';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageForum } from 'pages/PageForum/PageForum';
@@ -32,8 +31,6 @@ export const App = hot(() => {
       }).finally(() => navigate(AppRoutes.index));
     }
   }, [navigate, oAuthSignIn, search]);
-
-  useSupIdentify();
 
   return (
     <Routes>

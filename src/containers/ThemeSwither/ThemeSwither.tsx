@@ -1,31 +1,35 @@
 import { Switcher } from 'components/Switcher/Switcher';
 import { useChangeColorScheme } from 'hooks/useChangeColorScheme';
+import { useIdentify } from 'hooks/useIdentify';
 import { useLocalThemeId } from 'hooks/useLocalThemeId';
-// eslint-disable-next-line import/no-unresolved
-import Cookies from 'js-cookie';
 import { memo, useEffect } from 'react';
-import { themesApi } from 'services/redux/api/themesApi';
+import { userApi } from 'services/redux';
+import { UserResponseKeys } from 'types/Api';
 import { Themes } from 'types/Themes';
 
 export function ThemeSwitherUnMemo() {
-  const isLoginIn = !!Cookies.get('access_token');
-  const [updateServerTheme] = themesApi.useChangeMutation();
-  const { data } = themesApi.useGetQuery();
-  const serverThemeId = data;
+  const [userData] = useIdentify();
+  const serverThemeId = userData ? userData[UserResponseKeys.themeId] : undefined;
+  const [changeServerThemeId] = userApi.useChangeThemeIdMutation();
   const [localThemeId, setLocalThemeId] = useLocalThemeId();
   const changeColorScheme = useChangeColorScheme();
   const updateThemeId = (themeId: number) => {
-    if (isLoginIn) {
-      updateServerTheme({ themeId });
+    if (userData) {
+      changeServerThemeId({ themeId });
     }
 
-    setLocalThemeId(themeId.toString());
+    setLocalThemeId(themeId);
   };
-  const themeId = isLoginIn ? serverThemeId : +localThemeId;
 
   useEffect(() => {
-    changeColorScheme(themeId);
-  }, [changeColorScheme, themeId]);
+    changeColorScheme(localThemeId);
+  }, [changeColorScheme, localThemeId]);
+
+  useEffect(() => {
+    if (serverThemeId !== undefined) {
+      setLocalThemeId(serverThemeId);
+    }
+  }, [serverThemeId, setLocalThemeId]);
 
   const items = [
     {
@@ -45,7 +49,7 @@ export function ThemeSwitherUnMemo() {
     },
   ];
 
-  return <Switcher activeId={themeId} items={items} />;
+  return <Switcher activeId={localThemeId} items={items} />;
 }
 
 export const ThemeSwither = memo(ThemeSwitherUnMemo);
