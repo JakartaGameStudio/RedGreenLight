@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 
 import { Comment } from '../models/Comment';
 import { Emotion } from '../models/Emotion';
+import { User } from '../models/User';
 import { BaseRESTService } from './BaseRESTService';
 
 type RequestRequest = {
@@ -64,8 +65,12 @@ export class CommentService implements BaseRESTService {
             creatorId: userId,
           },
         },
+        {
+          model: User,
+          attributes: ['userId', 'name', 'avatar'],
+        },
       ],
-      group: ['Comment.id'],
+      group: ['Comment.id', 'creator.user_id'],
     });
   };
 

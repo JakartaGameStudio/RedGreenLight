@@ -4,24 +4,24 @@ import { EmotiontService } from 'server/db/services/EmotiontService';
 export class EmotionAPI {
   public static createOrUpdate = async (request: Request, response: Response) => {
     try {
-      const { userId } = response.locals;
+      const { user } = response.locals;
       const { commentId, emotion } = request.body;
       const emotionRow = await EmotiontService.find({
         commentId,
-        creatorId: userId,
+        creatorId: user.id,
       });
 
       if (emotionRow) {
         await EmotiontService.update({
           commentId,
           emotion,
-          creatorId: userId,
+          creatorId: user.id,
         });
       } else {
         await EmotiontService.create({
           commentId,
           emotion,
-          creatorId: userId,
+          creatorId: user.id,
         });
       }
 

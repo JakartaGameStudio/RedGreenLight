@@ -9,6 +9,11 @@ Response:
     creationDate: date,
     creatorId: number,
     commentsCount: string
+    creator: {
+      userId: number,
+      name: string,
+      avatar: string,
+    }
   }]
 }
 _____________________________________________
@@ -22,6 +27,11 @@ Response:
   title: string,
   creationDate: date,
   creatorId: number,
+  creator: {
+    userId: number,
+    name: string,
+    avatar: string,
+  }
   comments: [{
     id: number,
     text: string,
@@ -32,6 +42,11 @@ Response:
     dislikesCount: string,
     likesCount: string,
     userEmotion: string,
+    creator: {
+      userId: number,
+      name: string,
+      avatar: string,
+    }
   }]
 }
 _____________________________________________
@@ -65,6 +80,11 @@ Response:
     dislikesCount: string,
     likesCount: string,
     userEmotion: string,
+    creator: {
+      userId: number,
+      name: string,
+      avatar: string,
+    }
   }]
 }
 

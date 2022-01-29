@@ -6,8 +6,8 @@ export class TopicAPI {
   public static findBySlug = async (req: Request, response: Response) => {
     try {
       const { slug } = req.params;
-      const { userId } = response.locals;
-      const topic = await TopicService.find({ slug, userId });
+      const { user } = response.locals;
+      const topic = await TopicService.find({ slug, userId: user.id });
 
       if (topic) {
         response.status(200).json(topic);
@@ -37,12 +37,12 @@ export class TopicAPI {
 
   public static create = async (request: Request, response: Response) => {
     try {
-      const { userId } = response.locals;
+      const { user } = response.locals;
       const { title } = request.body;
       const slugTitle = slugCreator(title);
       const topic = await TopicService.create({
         title,
-        creatorId: userId,
+        creatorId: user.id,
         slug: slugTitle,
       });
 

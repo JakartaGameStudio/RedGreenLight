@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Comment } from '../models/Comment';
 import { Emotion } from '../models/Emotion';
 import { Topic } from '../models/Topic';
+import { User } from '../models/User';
 import { BaseRESTService } from './BaseRESTService';
 
 interface FindRequest {
@@ -69,10 +70,18 @@ export class TopicService implements BaseRESTService {
                 creatorId: userId,
               },
             },
+            {
+              model: User,
+              attributes: ['userId', 'name', 'avatar'],
+            },
           ],
         },
+        {
+          model: User,
+          attributes: ['userId', 'name', 'avatar'],
+        },
       ],
-      group: ['Topic.id', 'comments.id'],
+      group: ['Topic.id', 'comments.id', 'creator.user_id', 'comments->creator.user_id'],
     });
   };
 
@@ -86,11 +95,17 @@ export class TopicService implements BaseRESTService {
         'creationDate',
         [Sequelize.fn('COUNT', Sequelize.col('comments.id')), 'commentsCount'],
       ],
-      include: {
-        model: Comment,
-        attributes: [],
-      },
-      group: ['Topic.id'],
+      include: [
+        {
+          model: Comment,
+          attributes: [],
+        },
+        {
+          model: User,
+          attributes: ['userId', 'name', 'avatar'],
+        },
+      ],
+      group: ['Topic.id', 'creator.user_id'],
     });
   };
 

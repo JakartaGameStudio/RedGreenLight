@@ -1,9 +1,11 @@
 import {
   AllowNull,
   AutoIncrement,
+  BelongsTo,
   Column,
   CreatedAt,
   DataType,
+  ForeignKey,
   HasMany,
   Index,
   Model,
@@ -13,6 +15,7 @@ import {
 } from 'sequelize-typescript';
 
 import { Comment } from './Comment';
+import { User } from './User';
 
 interface TopicAttributes {
   creatorId: number;
@@ -40,6 +43,7 @@ export class Topic extends Model<TopicAttributes> {
   @Column(DataType.STRING)
   title: string;
 
+  @ForeignKey(() => User)
   @AllowNull(false)
   @Column(DataType.INTEGER)
   creatorId: number;
@@ -49,4 +53,7 @@ export class Topic extends Model<TopicAttributes> {
 
   @HasMany(() => Comment)
   comments: Comment[];
+
+  @BelongsTo(() => User)
+  creator: User;
 }

@@ -1,6 +1,7 @@
 import {
   AllowNull,
   AutoIncrement,
+  BelongsTo,
   Column,
   CreatedAt,
   DataType,
@@ -13,6 +14,7 @@ import {
 
 import { Emotion } from './Emotion';
 import { Topic } from './Topic';
+import { User } from './User';
 
 interface CreateAttributes {
   creatorId: number;
@@ -35,6 +37,7 @@ export class Comment extends Model<CreateAttributes> {
   @Column(DataType.STRING)
   text: string;
 
+  @ForeignKey(() => User)
   @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
@@ -71,4 +74,7 @@ export class Comment extends Model<CreateAttributes> {
 
   @HasMany(() => Emotion)
   userEmotions: Emotion[];
+
+  @BelongsTo(() => User)
+  creator: User;
 }

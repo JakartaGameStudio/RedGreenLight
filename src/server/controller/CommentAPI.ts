@@ -4,11 +4,11 @@ import { CommentService } from 'server/db/services/CommentService';
 export class CommentAPI {
   public static getReplies = async (req: Request, response: Response) => {
     try {
-      const { userId } = response.locals;
+      const { user } = response.locals;
       const { id } = req.params;
       const replies = await CommentService.request({
         parentCommentId: +id,
-        userId,
+        userId: user.id,
       });
 
       response.status(200).json({ replies });
@@ -21,10 +21,10 @@ export class CommentAPI {
 
   public static create = async (request: Request, response: Response) => {
     try {
-      const { userId } = response.locals;
+      const { user } = response.locals;
       const { text, topicId, parentCommentId } = request.body;
       const comment = await CommentService.create({
-        creatorId: userId,
+        creatorId: user.id,
         parentCommentId,
         text,
         topicId,
