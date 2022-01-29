@@ -12,3 +12,5 @@ npm-debug.log
 node_modules/
 postgresdata
 dev.env
+static/cert.pem
+static/key.pem

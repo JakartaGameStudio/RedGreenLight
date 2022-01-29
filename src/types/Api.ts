@@ -1,11 +1,8 @@
 export enum ApiEndpoints {
   avatar = '/user/profile/avatar',
   baseURL = 'https://ya-praktikum.tech/api/v2',
-  changeTheme = '/theme/change',
   identify = '/auth/user',
   leaderboard = '/leaderboard',
-  loginSup = '/user/login',
-  logoutSup = '/user/logout',
   oAuthServiceId = '/oauth/yandex/service-id',
   oAuthSignIn = '/oauth/yandex',
   password = '/user/password',
@@ -14,10 +11,14 @@ export enum ApiEndpoints {
   signin = '/auth/signin',
   signout = '/auth/logout',
   signup = '/auth/signup',
-  supportURL = 'http://localhost:3000/api',
-  theme = '/theme',
   user = '/user',
   userSearch = '/user/search',
+}
+
+export enum SecondaryApiEndpoints {
+  baseURL = 'https://redgreen.ya-praktikum.tech:3000/api',
+  changeTheme = '/user/changeThemeId',
+  user = '/user',
 }
 
 export enum ApiMethods {
@@ -68,6 +69,7 @@ export enum UserResponseKeys {
   login = 'login',
   phone = 'phone',
   secondName = 'second_name',
+  themeId = 'theme_id',
 }
 
 export type UserResponse = {
@@ -79,6 +81,7 @@ export type UserResponse = {
   [UserResponseKeys.login]: string;
   [UserResponseKeys.phone]: string;
   [UserResponseKeys.secondName]: string;
+  [UserResponseKeys.themeId]: number;
 };
 
 export type SignInRequest = {

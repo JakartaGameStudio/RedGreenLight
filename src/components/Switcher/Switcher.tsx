@@ -13,6 +13,9 @@ type SwitcherProps = {
 };
 
 export function Switcher({ items, activeId }: SwitcherProps) {
+  const handleSwitchTheme = (item: SwitcherItem) =>
+    activeId !== item.value && item.onClick(item.value);
+
   return (
     <div className={styles.switcher}>
       {items.map((item) => (
@@ -21,7 +24,7 @@ export function Switcher({ items, activeId }: SwitcherProps) {
             [styles.active]: activeId === item.value,
           })}
           key={item.value}
-          onClick={() => activeId !== item.value && item.onClick(item.value)}
+          onClick={() => handleSwitchTheme(item)}
         >
           {item.text}
         </button>
