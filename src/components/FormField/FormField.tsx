@@ -30,22 +30,41 @@ export function FormField({
         {placeholder}
         {required && <span className={styles.required}>*</span>}
       </label>
-      <input
-        id={id}
-        name={name}
-        value={value}
-        type={type}
-        disabled={disabled}
-        readOnly={readonly}
-        required={required}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
-        onChange={onChange}
-        className={classNames(styles.input, {
-          [styles.inputActive]: isFocus || value,
-          [styles.inputError]: errors.length,
-        })}
-      />
+      {type !== 'textarea' ? (
+        <input
+          id={id}
+          name={name}
+          value={value}
+          type={type}
+          disabled={disabled}
+          readOnly={readonly}
+          required={required}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={onChange}
+          className={classNames(styles.input, {
+            [styles.inputActive]: isFocus || value,
+            [styles.inputError]: errors.length,
+          })}
+        />
+      ) : (
+        <textarea
+          id={id}
+          name={name}
+          value={value}
+          disabled={disabled}
+          readOnly={readonly}
+          required={required}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={onChange}
+          className={classNames(styles.textarea, {
+            [styles.inputActive]: isFocus || value,
+            [styles.inputError]: errors.length,
+          })}
+        />
+      )}
+
       {errors.map((error, index) => (
         <div key={index} className={styles.error}>
           {error}

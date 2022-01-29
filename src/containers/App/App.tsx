@@ -5,6 +5,7 @@ import { useSupIdentify } from 'hooks/useSupIdentify';
 import { Page404 } from 'pages/Page404/Page404';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageForum } from 'pages/PageForum/PageForum';
+import { PageForumCreate } from 'pages/PageForumCreate/PageForumCreate';
 import { PageGame } from 'pages/PageGame/PageGame';
 import { PageIndex } from 'pages/PageIndex/PageIndex';
 import { PageLeaderBoards } from 'pages/PageLeaderBoards/PageLeaderBoards';
@@ -45,6 +46,7 @@ export const App = hot(() => {
       <Route path={AppRoutes.leaderBoards} element={<PageLeaderBoards />} />
       <Route element={<ProtectedRoute />}>
         <Route path={AppRoutes.forum} element={<PageForum />} />
+        <Route path={AppRoutes.forumCreate} element={<PageForumCreate />} />
         <Route path={AppRoutes.profile} element={<PageProfile />} />
         <Route path={AppRoutes.profileEdit} element={<PageProfile type="edit" />} />
         <Route path={AppRoutes.profilePassword} element={<PageProfile type="password" />} />

@@ -7,9 +7,9 @@ export type FormFieldProps = {
   disabled?: boolean;
   errors?: string[];
   id?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   readonly?: boolean;
   required?: boolean;
-  type?: 'text' | 'email' | 'number' | 'password' | 'tel';
+  type?: 'text' | 'email' | 'number' | 'password' | 'tel' | 'textarea';
   value?: string;
 };

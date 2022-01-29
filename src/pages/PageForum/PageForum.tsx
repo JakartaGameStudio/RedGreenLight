@@ -4,6 +4,7 @@ import { ForumTopic } from 'components/ForumTopic/ForumTopic';
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
 import { Title } from 'components/Title/Title';
 import React from 'react';
+import { AppRoutes } from 'types/AppRoutes';
 
 import styles from './PageForum.module.scss';
 const items = [
@@ -37,8 +38,8 @@ export function PageForum() {
         <Title size="h1" className={styles.title}>
           Форум
         </Title>
-        <Button className={styles.button} mods={['link', 'inline']}>
-          Открыть топик
+        <Button href={AppRoutes.forumCreate} className={styles.button} mods={['link', 'inline']}>
+          Создать тему
         </Button>
       </div>
       <div className={styles.body}>
