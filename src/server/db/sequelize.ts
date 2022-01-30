@@ -1,11 +1,14 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
+import { Comment } from './models/Comment';
+import { Emotion } from './models/Emotion';
+import { Topic } from './models/Topic';
 import { User } from './models/User';
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
 const sequelizeOptions: SequelizeOptions = {
-  host: 'redgreen.ya-praktikum.tech',
-  port: 5432,
+  host: POSTGRES_HOST,
+  port: +POSTGRES_PORT,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
@@ -14,4 +17,4 @@ const sequelizeOptions: SequelizeOptions = {
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
-sequelize.addModels([User]);
+sequelize.addModels([User, Topic, Comment, Emotion]);

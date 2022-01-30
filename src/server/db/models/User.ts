@@ -1,4 +1,15 @@
-import { AllowNull, Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import {
+  AllowNull,
+  Column,
+  DataType,
+  HasMany,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
+
+import { Comment } from './Comment';
+import { Topic } from './Topic';
 
 interface UserAttributes {
   avatar: string | null;
@@ -10,7 +21,7 @@ interface UserAttributes {
 @Table({
   timestamps: false,
   paranoid: true,
-  tableName: 'theme',
+  tableName: 'user',
 })
 export class User extends Model<UserAttributes> {
   @PrimaryKey
@@ -34,4 +45,10 @@ export class User extends Model<UserAttributes> {
 
   @Column(DataType.STRING)
   avatar: string;
+
+  @HasMany(() => Topic)
+  topics: Topic[];
+
+  @HasMany(() => Comment)
+  comments: Comment[];
 }
