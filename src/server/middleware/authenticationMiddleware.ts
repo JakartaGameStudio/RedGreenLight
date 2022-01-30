@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
+import { ApiEndpoints } from 'types/Api';
 
 export const authenticationMiddleware = async (
   request: Request,
@@ -7,7 +8,7 @@ export const authenticationMiddleware = async (
   next: NextFunction,
 ) => {
   try {
-    const res = await axios.get('https://ya-praktikum.tech/api/v2/auth/user', {
+    const res = await axios.get(`${ApiEndpoints.baseURL}${ApiEndpoints.identify}`, {
       withCredentials: true,
       headers: {
         Cookie: request.headers.cookie || '',
