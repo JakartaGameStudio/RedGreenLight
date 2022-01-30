@@ -1,21 +1,16 @@
-import { Image } from 'components/Image/Image';
+import { Avatar } from 'components/Avatar/Avatar';
 import { Title } from 'components/Title/Title';
-import UserIcon from 'images/icons/user.svg?icon';
 import { NavLink } from 'react-router-dom';
 
 import styles from './ForumTopic.module.scss';
 import { ForumTopicProps } from './ForumTopic.types';
 
-export function ForumTopic({ title, date, href, author }: ForumTopicProps) {
+export function ForumTopic({ title, date, href, author, count }: ForumTopicProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.head}>
-        <NavLink to={href} className={styles.authorImage}>
-          {author.image ? (
-            <Image {...author.image} className={styles.authorImg} />
-          ) : (
-            <UserIcon className={styles.authorIcon} />
-          )}
+        <NavLink to={href}>
+          <Avatar src={author.avatar} className={styles.authorImage} />
         </NavLink>
       </div>
       <div className={styles.body}>
@@ -33,6 +28,7 @@ export function ForumTopic({ title, date, href, author }: ForumTopicProps) {
           <dd className={styles.infoValue}>{author.name}</dd>
         </dl>
       </div>
+      <div className={styles.count}>{count}</div>
     </div>
   );
 }

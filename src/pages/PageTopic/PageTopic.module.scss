@@ -1,0 +1,26 @@
+@import "src/styles/variables/colors";
+
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.date {
+  font-size: 13px;
+  color: $color-basic-middle;
+  margin-bottom: 10px;
+}
+
+.authorImage {
+  flex: 0 0 auto;
+  font-size: 40px;
+  margin-right: 20px;
+}
+
+.authorName {
+  flex: 1 1 auto;
+}
+
+.divider {
+  margin: 20px 0 40px 0;
+}

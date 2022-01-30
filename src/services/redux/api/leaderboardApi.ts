@@ -13,7 +13,7 @@ export const leaderboardApi = createApi({
   reducerPath: 'leaderboard',
   tagTypes: ['Leaderboard'],
   baseQuery: fetchBaseQuery({
-    baseUrl: ApiEndpoints.baseURL,
+    baseUrl: ApiEndpoints.praktikumApi,
     credentials: 'include',
     fetchFn: fetch,
   }),

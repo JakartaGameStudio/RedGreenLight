@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+}
+
+.field {
+  flex: 0 1 100%;
+}
+
+.button {
+  flex: 0 0 auto;
+  margin-left: 20px;
+}

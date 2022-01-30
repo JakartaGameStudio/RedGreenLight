@@ -1,61 +1,38 @@
 import { Button } from 'components/Button/Button';
-import { Divider } from 'components/Divider/Divider';
-import { ForumTopic } from 'components/ForumTopic/ForumTopic';
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
+import { Preloader } from 'components/Preloader/Preloader';
 import { Title } from 'components/Title/Title';
-import React from 'react';
+import { TopicsList } from 'components/TopicsList/TopicsList';
+import { useMemo } from 'react';
+import { topicApi } from 'services/redux/api/topicApi';
 import { AppRoutes } from 'types/AppRoutes';
 
 import styles from './PageForum.module.scss';
-const items = [
-  {
-    id: 1,
-    title: 'Asd asda asd asdad asd?',
-    author: {
-      name: 'sadasd@asdasd.asd',
-      image: {
-        src: 'https://i.pravatar.cc/100',
-      },
-    },
-    href: '#',
-    date: new Date(),
-  },
-  {
-    id: 2,
-    title: 'Ksj jasdk ?',
-    author: {
-      name: 'sa21d',
-    },
-    href: '#',
-    date: new Date(),
-  },
-];
 
 export function PageForum() {
+  const { data, isLoading } = topicApi.useGetTopicsQuery();
+  const topics = useMemo(() => {
+    return data?.topics?.length ? data?.topics : undefined;
+  }, [data]);
+
   return (
     <LayoutPage>
       <div className={styles.head}>
         <Title size="h1" className={styles.title}>
           Форум
         </Title>
-        <Button href={AppRoutes.forumCreate} className={styles.button} mods={['link', 'inline']}>
+        <Button href={AppRoutes.forumNew} className={styles.button} mods={['link', 'inline']}>
           Создать тему
         </Button>
       </div>
       <div className={styles.body}>
-        {items.map((item, index) => {
-          return (
-            <React.Fragment key={item.id}>
-              <ForumTopic
-                title={item.title}
-                href={item.href}
-                date={item.date}
-                author={item.author}
-              />
-              {index < items.length - 1 && <Divider className={styles.divider} />}
-            </React.Fragment>
-          );
-        })}
+        {isLoading ? (
+          <Preloader />
+        ) : topics ? (
+          <TopicsList items={data.topics} />
+        ) : (
+          <div className={styles.empty}>Нет открытых топиков</div>
+        )}
       </div>
     </LayoutPage>
   );

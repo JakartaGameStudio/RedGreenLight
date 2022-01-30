@@ -5,7 +5,7 @@ export const usersApi = createApi({
   reducerPath: 'users',
   tagTypes: ['Users'],
   baseQuery: fetchBaseQuery({
-    baseUrl: ApiEndpoints.baseURL,
+    baseUrl: ApiEndpoints.praktikumApi,
     credentials: 'include',
   }),
   endpoints: (builder) => ({

@@ -16,6 +16,7 @@ export function FormField({
   value = '',
   errors = [],
   type = 'text',
+  rows
 }: FormFieldProps) {
   const [isFocus, setIsFocus] = useState(Boolean(value));
 
@@ -55,6 +56,7 @@ export function FormField({
           disabled={disabled}
           readOnly={readonly}
           required={required}
+          rows={rows}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={onChange}

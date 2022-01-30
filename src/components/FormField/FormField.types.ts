@@ -12,4 +12,5 @@ export type FormFieldProps = {
   required?: boolean;
   type?: 'text' | 'email' | 'number' | 'password' | 'tel' | 'textarea';
   value?: string;
+  rows?: number;
 };

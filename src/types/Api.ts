@@ -1,24 +1,22 @@
 export enum ApiEndpoints {
+  api = '/api',
   avatar = '/user/profile/avatar',
-  baseURL = 'https://ya-praktikum.tech/api/v2',
+  changeTheme = '/user/changeThemeId',
+  comment = '/comment',
   identify = '/auth/user',
   leaderboard = '/leaderboard',
   oAuthServiceId = '/oauth/yandex/service-id',
   oAuthSignIn = '/oauth/yandex',
   password = '/user/password',
+  praktikumApi = 'https://ya-praktikum.tech/api/v2',
   profile = '/user/profile',
   resources = '/resources',
   signin = '/auth/signin',
   signout = '/auth/logout',
   signup = '/auth/signup',
+  topic = '/topic',
   user = '/user',
   userSearch = '/user/search',
-}
-
-export enum SecondaryApiEndpoints {
-  baseURL = 'https://redgreen.ya-praktikum.tech:3000/api',
-  changeTheme = '/user/changeThemeId',
-  user = '/user',
 }
 
 export enum ApiMethods {
@@ -144,4 +142,52 @@ export type OauthSignInRequest = {
 
 export type ServiceId = {
   service_id: string;
+};
+
+export type Creator = {
+  avatar: string;
+  name: string;
+  userId: number;
+};
+
+export type Topic = {
+  commentsCount: string;
+  creationDate: string;
+  creator: Creator;
+  creatorId: number;
+  id: number;
+  slug: string;
+  title: string;
+};
+
+export type TopicCreateRequest = {
+  title: string;
+};
+
+export type TopicCreateResponse = {
+  id: number;
+  slug: string;
+};
+
+export type Comment = {
+  creationDate: string;
+  creatorId: number;
+  id: number;
+  parentCommentId: number | null;
+  text: string;
+  topicId: number;
+};
+
+export type CommentReply = Comment & {
+  creator: Creator;
+  dislikesCount: string;
+  likesCount: string;
+  repliesCount: string;
+  userEmotion: string;
+};
+
+export type CommentRequest = {
+  parentCommentId: number | null;
+  text: string;
+  topicId: number;
 };

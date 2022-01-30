@@ -11,9 +11,9 @@ export function getTemplate(reactHtml: string, reduxState = {}) {
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-      <link href="main.css" rel="stylesheet">
-      <link rel="stylesheet" data-style="dark" href="dark.css" media="(prefers-color-scheme: dark)">
-      <link rel="stylesheet" data-style="light" href="light.css" media="(prefers-color-scheme: light)">
+      <link href="/main.css" rel="stylesheet">
+      <link rel="stylesheet" data-style="dark" href="/dark.css" media="(prefers-color-scheme: dark)">
+      <link rel="stylesheet" data-style="light" href="/light.css" media="(prefers-color-scheme: light)">
       <title>Jakarta Games Studio | Red Green Light</title>
     </head>
     <body>
