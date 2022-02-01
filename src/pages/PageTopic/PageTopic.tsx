@@ -47,6 +47,10 @@ export function PageTopic() {
     setInputText(value);
   }
 
+  function handleInputBlur() {
+    setInputFocus(false);
+  }
+
   function handleReply(id) {
     setReplyId(id);
     setInputText(`#${id} `);
@@ -86,22 +90,22 @@ export function PageTopic() {
         </Title>
         <div className={styles.date}>{new Date(data.creationDate).toLocaleDateString()}</div>
       </div>
-      <Divider className={styles.divider} />
-      <div className={styles.list}>
-        {data.comments.map((item, index, items) => (
-          <React.Fragment key={item.id}>
-            <Comment
-              {...item}
-              key={item.id}
-              className={styles.item}
-              onReply={() => handleReply(item.id)}
-              onLike={() => handleLike(item.id)}
-              onDisLike={() => handleDisLike(item.id)}
-            />
-            {index < items.length - 1 && <Divider className={styles.divider} />}
-          </React.Fragment>
-        ))}
-      </div>
+      {data.comments && (
+        <div className={styles.list}>
+          {data.comments.map((item) => (
+            <React.Fragment key={item.id}>
+              <Divider className={styles.divider} />
+              <Comment
+                {...item}
+                key={item.id}
+                onReply={() => handleReply(item.id)}
+                onLike={() => handleLike(item.id)}
+                onDisLike={() => handleDisLike(item.id)}
+              />
+            </React.Fragment>
+          ))}
+        </div>
+      )}
       <form className={styles.form} onSubmit={handleFormSubmit} autoComplete="off">
         <FormField
           name="FormReply[text]"
@@ -111,7 +115,7 @@ export function PageTopic() {
           className={styles.formField}
           required={true}
           isFocus={inputFocus}
-          onBlur={() => setInputFocus(false)}
+          onBlur={handleInputBlur}
         />
         <Button className={styles.formButton} mods={['inline']}>
           Отправить
