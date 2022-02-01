@@ -3,6 +3,7 @@ export enum ApiEndpoints {
   avatar = '/user/profile/avatar',
   changeTheme = '/user/changeThemeId',
   comment = '/comment',
+  emotion = '/emotion',
   identify = '/auth/user',
   leaderboard = '/leaderboard',
   oAuthServiceId = '/oauth/yandex/service-id',
@@ -144,32 +145,46 @@ export type ServiceId = {
   service_id: string;
 };
 
-export type Creator = {
+export type ForumCreator = {
   avatar: string;
   name: string;
   userId: number;
 };
 
-export type Topic = {
+export type ForumTopic = {
+  comments: ForumComment[];
   commentsCount: string;
   creationDate: string;
-  creator: Creator;
+  creator: ForumCreator;
   creatorId: number;
   id: number;
   slug: string;
   title: string;
 };
 
-export type TopicCreateRequest = {
+export type ForumTopicCreateRequest = {
   title: string;
 };
 
-export type TopicCreateResponse = {
+export type ForumTopicCreateResponse = {
   id: number;
   slug: string;
 };
 
-export type Comment = {
+export type ForumComment = {
+  creationDate: string;
+  creator: ForumCreator;
+  creatorId: number;
+  dislikesCount: string;
+  id: number;
+  likesCount: string;
+  repliesCount: string;
+  text: string;
+  topicId: number;
+  userEmotion: string;
+};
+
+export type ForumCommentResponse = {
   creationDate: string;
   creatorId: number;
   id: number;
@@ -178,16 +193,22 @@ export type Comment = {
   topicId: number;
 };
 
-export type CommentReply = Comment & {
-  creator: Creator;
+export type ForumReply = ForumComment & {
+  creator: ForumCreator;
   dislikesCount: string;
   likesCount: string;
   repliesCount: string;
   userEmotion: string;
 };
 
-export type CommentRequest = {
+export type ForumCommentRequest = {
   parentCommentId: number | null;
   text: string;
+  topicId: number;
+};
+
+export type ForumEmotionRequest = {
+  commentId: number;
+  creatorId: number;
   topicId: number;
 };

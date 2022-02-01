@@ -1,6 +1,13 @@
 import { MouseEventHandler, ReactNode } from 'react';
 
-export type ButtonMods = 'light' | 'link' | 'warning' | 'warning-light' | 'inline';
+export type ButtonMods =
+  | 'light'
+  | 'link'
+  | 'warning'
+  | 'warning-light'
+  | 'inline'
+  | 'grey'
+  | 'small';
 
 export type ButtonProps = {
   children: ReactNode;

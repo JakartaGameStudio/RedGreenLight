@@ -8,7 +8,7 @@ export const authenticationMiddleware = async (
   next: NextFunction,
 ) => {
   try {
-    const res = await axios.get(`${ApiEndpoints.baseURL}${ApiEndpoints.identify}`, {
+    const res = await axios.get(`${ApiEndpoints.praktikumApi}${ApiEndpoints.identify}`, {
       withCredentials: true,
       headers: {
         Cookie: request.headers.cookie || '',

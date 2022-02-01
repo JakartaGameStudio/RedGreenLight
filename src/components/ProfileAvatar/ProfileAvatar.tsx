@@ -8,7 +8,11 @@ import { ProfileAvatarProps } from './ProfileAvatar.types';
 export function ProfileAvatar({ userData, onClick, className }: ProfileAvatarProps) {
   return (
     <div className={classNames(styles.wrapper, className)} onClick={onClick}>
-      <Avatar src={userData[UserResponseKeys.avatar]} className={styles.avatar} />
+      <Avatar
+        src={userData[UserResponseKeys.avatar]}
+        className={styles.avatar}
+        mods={['rounded']}
+      />
       <button className={styles.button}>Поменять</button>
       <div className={styles.icon} />
     </div>

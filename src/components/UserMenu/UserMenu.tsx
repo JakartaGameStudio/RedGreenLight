@@ -31,7 +31,7 @@ export function UserMenu({ userData, className }: UserMenuProps) {
     <div className={classNames(styles.wrapper, className)} onClick={onClick}>
       <div className={styles.head} title={userName}>
         <div className={styles.username}>{userName}</div>
-        <Avatar src={userData[UserResponseKeys.avatar]} className={styles.avatar} />
+        <Avatar src={userData[UserResponseKeys.avatar]} className={styles.avatar} mods={['rounded']}/>
       </div>
       {isActive && (
         <nav className={styles.dropdown}>

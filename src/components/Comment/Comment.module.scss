@@ -1,0 +1,67 @@
+@import "src/styles/variables/colors";
+@import "src/styles/variables/fonts";
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.avatar {
+  font-size: 60px;
+  margin-right: 20px;
+  flex: 0 0 auto;
+}
+
+.name,
+.date {
+  display: inline;
+  font-size: 14px;
+}
+
+.name {
+  font-weight: $font-weight-medium;
+  margin-right: 10px;
+}
+
+.date {
+  color: $color-basic-middle;
+}
+
+.text {
+  margin-top: 5px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-basic;
+  background-color: $color-basic-light;
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.actionLabel {
+  margin-left: 4px;
+}
+
+.body {
+  flex: 1 1 auto;
+}
+
+.id {
+  font-size: 12px;
+  margin-left: 20px;
+  color: $color-primary;
+}

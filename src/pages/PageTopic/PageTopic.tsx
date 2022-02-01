@@ -1,18 +1,73 @@
 import { Avatar } from 'components/Avatar/Avatar';
+import { Button } from 'components/Button/Button';
+import { Comment } from 'components/Comment/Comment';
 import { Divider } from 'components/Divider/Divider';
+import { FormField } from 'components/FormField/FormField';
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
 import { Preloader } from 'components/Preloader/Preloader';
 import { Title } from 'components/Title/Title';
-import { CommentsList } from 'containers/CommentsList/CommentsList';
-import { FormReply } from 'containers/FormReply/FormReply';
+import { useIdentify } from 'hooks/useIdentify';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { topicApi } from 'services/redux/api/topicApi';
+import { topicApi } from 'services/redux';
 
 import styles from './PageTopic.module.scss';
 
 export function PageTopic() {
   const { slug } = useParams();
   const { data, isLoading } = topicApi.useGetTopicBySlugQuery(slug);
+  const [userData] = useIdentify();
+  const [addLike] = topicApi.useAddLikeMutation();
+  const [addDisLike] = topicApi.useAddDisLikeMutation();
+  const [inputFocus, setInputFocus] = useState(false);
+  const [replyId, setReplyId] = useState<number | undefined>();
+  const [addComment] = topicApi.useAddCommentMutation();
+  const [inputText, setInputText] = useState<string>();
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    addComment({
+      text: inputText,
+      topicId: data.id,
+      parentCommentId: replyId,
+    }).then(() => {
+      setInputText('');
+      setReplyId(undefined);
+    });
+  }
+
+  function handleInputChange({ target }) {
+    const { value } = target;
+    const hasReply = value.includes(`#${replyId}`);
+
+    if (!hasReply) {
+      setReplyId(undefined);
+    }
+
+    setInputText(value);
+  }
+
+  function handleReply(id) {
+    setReplyId(id);
+    setInputText(`#${id} `);
+    setInputFocus(true);
+  }
+
+  function handleLike(id) {
+    addLike({
+      topicId: data.id,
+      commentId: id,
+      creatorId: userData.id,
+    });
+  }
+
+  function handleDisLike(id) {
+    addDisLike({
+      topicId: data.id,
+      commentId: id,
+      creatorId: userData.id,
+    });
+  }
 
   if (isLoading) {
     return (
@@ -24,16 +79,44 @@ export function PageTopic() {
 
   return (
     <LayoutPage title={data.title}>
-      <div className={styles.date}>{new Date(data.creationDate).toLocaleDateString()}</div>
-      <div className={styles.author}>
-        <Avatar className={styles.authorImage} src={data.creator.avatar} />
+      <div className={styles.head}>
+        <Avatar className={styles.authorImage} src={data.creator.avatar} mods={['rounded']} />
         <Title size="h4" className={styles.authorName}>
           {data.creator.name}
         </Title>
+        <div className={styles.date}>{new Date(data.creationDate).toLocaleDateString()}</div>
       </div>
       <Divider className={styles.divider} />
-      <CommentsList id={data.id} />
-      <FormReply topicId={data.id} />
+      <div className={styles.list}>
+        {data.comments.map((item, index, items) => (
+          <React.Fragment key={item.id}>
+            <Comment
+              {...item}
+              key={item.id}
+              className={styles.item}
+              onReply={() => handleReply(item.id)}
+              onLike={() => handleLike(item.id)}
+              onDisLike={() => handleDisLike(item.id)}
+            />
+            {index < items.length - 1 && <Divider className={styles.divider} />}
+          </React.Fragment>
+        ))}
+      </div>
+      <form className={styles.form} onSubmit={handleFormSubmit} autoComplete="off">
+        <FormField
+          name="FormReply[text]"
+          placeholder="Сообщение"
+          value={inputText}
+          onChange={handleInputChange}
+          className={styles.formField}
+          required={true}
+          isFocus={inputFocus}
+          onBlur={() => setInputFocus(false)}
+        />
+        <Button className={styles.formButton} mods={['inline']}>
+          Отправить
+        </Button>
+      </form>
     </LayoutPage>
   );
 }

@@ -1,6 +1,6 @@
 @import "src/styles/variables/colors";
 
-.author {
+.head {
   display: flex;
   align-items: center;
 }
@@ -8,12 +8,12 @@
 .date {
   font-size: 13px;
   color: $color-basic-middle;
-  margin-bottom: 10px;
+  flex: 0 0 auto;
 }
 
 .authorImage {
   flex: 0 0 auto;
-  font-size: 40px;
+  font-size: 100px;
   margin-right: 20px;
 }
 
@@ -22,5 +22,20 @@
 }
 
 .divider {
-  margin: 20px 0 40px 0;
+  margin: 12px 0;
+}
+
+.form {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+
+.formField {
+  flex: 0 1 100%;
+}
+
+.formButton {
+  flex: 0 0 auto;
+  margin-left: 20px;
 }
