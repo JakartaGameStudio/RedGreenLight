@@ -90,22 +90,18 @@ export function PageTopic() {
         </Title>
         <div className={styles.date}>{new Date(data.creationDate).toLocaleDateString()}</div>
       </div>
-      {data.comments && (
-        <div className={styles.list}>
-          {data.comments.map((item) => (
-            <React.Fragment key={item.id}>
-              <Divider className={styles.divider} />
-              <Comment
-                {...item}
-                key={item.id}
-                onReply={() => handleReply(item.id)}
-                onLike={() => handleLike(item.id)}
-                onDisLike={() => handleDisLike(item.id)}
-              />
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      {data.comments.map((item) => (
+        <React.Fragment key={item.id}>
+          <Divider className={styles.divider} />
+          <Comment
+            {...item}
+            key={item.id}
+            onReply={() => handleReply(item.id)}
+            onLike={() => handleLike(item.id)}
+            onDisLike={() => handleDisLike(item.id)}
+          />
+        </React.Fragment>
+      ))}
       <form className={styles.form} onSubmit={handleFormSubmit} autoComplete="off">
         <FormField
           name="FormReply[text]"
