@@ -62,6 +62,15 @@
 
 .id {
   font-size: 12px;
-  margin-left: 20px;
   color: $color-primary;
+  margin-left: 20px;
+}
+
+.replies {
+  margin: 20px 0;
+  padding-left: 80px;
+}
+
+.divider {
+  margin: 12px 0;
 }

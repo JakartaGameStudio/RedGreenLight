@@ -66,7 +66,10 @@ export const topicApi = createApi({
         method: ApiMethods.post,
         url: ApiEndpoints.comment,
       }),
-      invalidatesTags: (result) => [{ type: 'Topics', id: result.topicId }],
+      invalidatesTags: (result) => [
+        { type: 'Topics', id: result.topicId },
+        { type: 'Comments', id: 'LIST' },
+      ],
     }),
     addLike: builder.mutation<void, ForumEmotionRequest>({
       query: ({ commentId, creatorId }) => ({

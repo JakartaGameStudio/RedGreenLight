@@ -1,13 +1,12 @@
 import { Avatar } from 'components/Avatar/Avatar';
 import { Button } from 'components/Button/Button';
-import { Comment } from 'components/Comment/Comment';
-import { Divider } from 'components/Divider/Divider';
 import { FormField } from 'components/FormField/FormField';
 import { LayoutPage } from 'components/LayoutPage/LayoutPage';
 import { Preloader } from 'components/Preloader/Preloader';
 import { Title } from 'components/Title/Title';
+import { Comment } from 'containers/Comment/Comment';
 import { useIdentify } from 'hooks/useIdentify';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { topicApi } from 'services/redux';
 
@@ -91,16 +90,13 @@ export function PageTopic() {
         <div className={styles.date}>{new Date(data.creationDate).toLocaleDateString()}</div>
       </div>
       {data.comments.map((item) => (
-        <React.Fragment key={item.id}>
-          <Divider className={styles.divider} />
-          <Comment
-            {...item}
-            key={item.id}
-            onReply={() => handleReply(item.id)}
-            onLike={() => handleLike(item.id)}
-            onDisLike={() => handleDisLike(item.id)}
-          />
-        </React.Fragment>
+        <Comment
+          {...item}
+          key={item.id}
+          onReply={handleReply}
+          onLike={handleLike}
+          onDisLike={handleDisLike}
+        />
       ))}
       <form className={styles.form} onSubmit={handleFormSubmit} autoComplete="off">
         <FormField

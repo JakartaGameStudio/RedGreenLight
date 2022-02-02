@@ -34,7 +34,7 @@ export function FormField({
   }
 
   function handleBlur() {
-    onBlur();
+    onBlur && onBlur();
     setIsActive(false);
   }
 

@@ -3,6 +3,9 @@
 .head {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid $color-basic-light;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .date {
@@ -19,10 +22,6 @@
 
 .authorName {
   flex: 1 1 auto;
-}
-
-.divider {
-  margin: 12px 0;
 }
 
 .form {
