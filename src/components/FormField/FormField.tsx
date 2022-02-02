@@ -16,12 +16,11 @@ export function FormField({
   value = '',
   errors = [],
   type = 'text',
-  rows,
   isFocus,
   onBlur,
 }: FormFieldProps) {
   const [isActive, setIsActive] = useState(Boolean(value));
-  const ref = useRef<HTMLInputElement & HTMLTextAreaElement>();
+  const ref = useRef<HTMLInputElement>();
 
   useEffect(() => {
     if (ref.current && isFocus) {
@@ -49,43 +48,23 @@ export function FormField({
         {placeholder}
         {required && <span className={styles.required}>*</span>}
       </label>
-      {type !== 'textarea' ? (
-        <input
-          ref={ref}
-          id={id}
-          name={name}
-          value={value}
-          type={type}
-          disabled={disabled}
-          readOnly={readonly}
-          required={required}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={onChange}
-          className={classNames(styles.input, {
-            [styles.inputActive]: isActive || value,
-            [styles.inputError]: errors.length,
-          })}
-        />
-      ) : (
-        <textarea
-          ref={ref}
-          id={id}
-          name={name}
-          value={value}
-          disabled={disabled}
-          readOnly={readonly}
-          required={required}
-          rows={rows}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={onChange}
-          className={classNames(styles.textarea, {
-            [styles.inputActive]: isActive || value,
-            [styles.inputError]: errors.length,
-          })}
-        />
-      )}
+      <input
+        ref={ref}
+        id={id}
+        name={name}
+        value={value}
+        type={type}
+        disabled={disabled}
+        readOnly={readonly}
+        required={required}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={onChange}
+        className={classNames(styles.input, {
+          [styles.inputActive]: isActive || value,
+          [styles.inputError]: errors.length,
+        })}
+      />
 
       {errors.map((error, index) => (
         <div key={index} className={styles.error}>

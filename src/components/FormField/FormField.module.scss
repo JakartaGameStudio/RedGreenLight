@@ -29,11 +29,11 @@
   font-size: 10px;
 }
 
-.input,
-.textarea {
+.input {
   display: block;
   width: 100%;
   padding: 14px;
+  height: 48px;
 
   color: $color-basic;
 
@@ -45,14 +45,6 @@
   &:focus {
     border-color: $color-basic-middle;
   }
-}
-
-.input {
-  height: 48px;
-}
-
-.textarea {
-  resize: none;
 }
 
 .labelActive {

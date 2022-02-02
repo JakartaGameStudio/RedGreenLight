@@ -9,10 +9,9 @@ export type FormFieldProps = {
   id?: string;
   isFocus?: boolean;
   onBlur?: () => void;
-  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   readonly?: boolean;
   required?: boolean;
-  rows?: number;
-  type?: 'text' | 'email' | 'number' | 'password' | 'tel' | 'textarea';
+  type?: 'text' | 'email' | 'number' | 'password' | 'tel';
   value?: string;
 };
