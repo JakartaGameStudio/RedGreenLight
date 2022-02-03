@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
-import { ApiEndpoints } from 'types/Api';
+import { ApiEndpoints, ApiUrl } from 'types/Api';
 
 export const authenticationMiddleware = async (
   request: Request,
@@ -8,7 +8,7 @@ export const authenticationMiddleware = async (
   next: NextFunction,
 ) => {
   try {
-    const res = await axios.get(`${ApiEndpoints.baseURL}${ApiEndpoints.identify}`, {
+    const res = await axios.get(`${ApiUrl.praktikum}${ApiEndpoints.identify}`, {
       withCredentials: true,
       headers: {
         Cookie: request.headers.cookie || '',

@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ApiEndpoints, ApiMethods, FindUserRequest, UserResponse } from 'types/Api';
+import { ApiEndpoints, ApiMethods, ApiUrl, FindUserRequest, UserResponse } from 'types/Api';
 
 export const usersApi = createApi({
   reducerPath: 'users',
   tagTypes: ['Users'],
   baseQuery: fetchBaseQuery({
-    baseUrl: ApiEndpoints.baseURL,
+    baseUrl: ApiUrl.praktikum,
     credentials: 'include',
   }),
   endpoints: (builder) => ({

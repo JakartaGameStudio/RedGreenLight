@@ -1,0 +1,44 @@
+@import "src/styles/variables/colors";
+
+.head {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-basic-light;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.date {
+  font-size: 13px;
+  color: $color-basic-middle;
+  flex: 0 0 auto;
+}
+
+.authorImage {
+  flex: 0 0 auto;
+  font-size: 100px;
+  margin-right: 20px;
+}
+
+.authorName {
+  flex: 1 1 auto;
+}
+
+.form {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 40px;
+}
+
+.formField {
+  flex: 0 1 100%;
+}
+
+.formSubmit {
+  flex: 0 0 200px;
+  margin-left: 20px;
+}
+
+.formPreloader {
+  font-size: 40px;
+}

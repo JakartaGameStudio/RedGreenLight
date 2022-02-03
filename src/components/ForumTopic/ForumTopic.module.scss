@@ -1,0 +1,62 @@
+@import "~styles/variables/colors.scss";
+@import "~styles/variables/fonts.scss";
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.body {
+  flex: 1 1 auto;
+}
+
+.head {
+  margin-right: 20px;
+}
+
+.title {
+  margin-bottom: 5px;
+}
+
+.authorImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authorImage {
+  font-size: 60px;
+}
+
+.info {
+  display: block;
+  font-size: 12px;
+}
+
+.infoName,
+.infoValue {
+  display: inline;
+  font-weight: $font-weight-medium;
+}
+
+.infoName {
+  margin-right: 5px;
+  color: $color-basic-middle;
+}
+
+.count {
+  text-align: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 8px;
+  line-height: 20px;
+  background: $color-primary-light;
+  border-radius: 50%;
+  align-self: center;
+  font-weight: $font-weight-medium;
+  margin-left: 20px;
+}

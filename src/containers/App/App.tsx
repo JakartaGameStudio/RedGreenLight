@@ -4,11 +4,13 @@ import { ProtectedRoute } from 'components/ProtectedRoute/ProtectedRoute';
 import { Page404 } from 'pages/Page404/Page404';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageForum } from 'pages/PageForum/PageForum';
+import { PageForumCreate } from 'pages/PageForumCreate/PageForumCreate';
 import { PageGame } from 'pages/PageGame/PageGame';
 import { PageIndex } from 'pages/PageIndex/PageIndex';
 import { PageLeaderBoards } from 'pages/PageLeaderBoards/PageLeaderBoards';
 import { PageProfile } from 'pages/PageProfile/PageProfile';
 import { PageSignOut } from 'pages/PageSignOut/PageSignOut';
+import { PageTopic } from 'pages/PageTopic/PageTopic';
 import { useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -42,6 +44,8 @@ export const App = hot(() => {
       <Route path={AppRoutes.leaderBoards} element={<PageLeaderBoards />} />
       <Route element={<ProtectedRoute />}>
         <Route path={AppRoutes.forum} element={<PageForum />} />
+        <Route path={AppRoutes.forumNew} element={<PageForumCreate />} />
+        <Route path={`${AppRoutes.forumTopic}/:slug`} element={<PageTopic />} />
         <Route path={AppRoutes.profile} element={<PageProfile />} />
         <Route path={AppRoutes.profileEdit} element={<PageProfile type="edit" />} />
         <Route path={AppRoutes.profilePassword} element={<PageProfile type="password" />} />

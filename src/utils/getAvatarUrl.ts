@@ -1,5 +1,5 @@
-import { ApiEndpoints } from 'types/Api';
+import { ApiEndpoints, ApiUrl } from 'types/Api';
 
 export function getAvatarUrl(avatar: string) {
-  return avatar ? `${ApiEndpoints.baseURL}${ApiEndpoints.resources}/${avatar}` : undefined;
+  return avatar ? `${ApiUrl.praktikum}${ApiEndpoints.resources}/${avatar}` : undefined;
 }

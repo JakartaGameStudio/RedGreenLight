@@ -1,6 +1,14 @@
+export enum ApiUrl {
+  local = 'https://redgreen.ya-praktikum.tech:3000',
+  praktikum = 'https://ya-praktikum.tech/api/v2',
+}
+
 export enum ApiEndpoints {
+  api = '/api',
   avatar = '/user/profile/avatar',
-  baseURL = 'https://ya-praktikum.tech/api/v2',
+  changeTheme = '/user/changeThemeId',
+  comment = '/comment',
+  emotion = '/emotion',
   identify = '/auth/user',
   leaderboard = '/leaderboard',
   oAuthServiceId = '/oauth/yandex/service-id',
@@ -11,14 +19,9 @@ export enum ApiEndpoints {
   signin = '/auth/signin',
   signout = '/auth/logout',
   signup = '/auth/signup',
+  topic = '/topic',
   user = '/user',
   userSearch = '/user/search',
-}
-
-export enum SecondaryApiEndpoints {
-  baseURL = 'https://redgreen.ya-praktikum.tech:3000/api',
-  changeTheme = '/user/changeThemeId',
-  user = '/user',
 }
 
 export enum ApiMethods {
@@ -144,4 +147,72 @@ export type OauthSignInRequest = {
 
 export type ServiceId = {
   service_id: string;
+};
+
+export type ForumCreator = {
+  avatar: string;
+  name: string;
+  userId: number;
+};
+
+export type ForumTopic = {
+  comments: ForumComment[];
+  commentsCount: string;
+  creationDate: string;
+  creator: ForumCreator;
+  creatorId: number;
+  id: number;
+  slug: string;
+  title: string;
+};
+
+export type ForumTopicCreateRequest = {
+  title: string;
+};
+
+export type ForumTopicCreateResponse = {
+  id: number;
+  slug: string;
+};
+
+export type ForumComment = {
+  creationDate: string;
+  creator: ForumCreator;
+  creatorId: number;
+  dislikesCount: string;
+  id: number;
+  likesCount: string;
+  repliesCount: string;
+  text: string;
+  topicId: number;
+  userEmotion: string;
+};
+
+export type ForumCommentResponse = {
+  creationDate: string;
+  creatorId: number;
+  id: number;
+  parentCommentId: number | null;
+  text: string;
+  topicId: number;
+};
+
+export type ForumReply = ForumComment & {
+  creator: ForumCreator;
+  dislikesCount: string;
+  likesCount: string;
+  repliesCount: string;
+  userEmotion: string;
+};
+
+export type ForumCommentRequest = {
+  parentCommentId: number | null;
+  text: string;
+  topicId: number;
+};
+
+export type ForumEmotionRequest = {
+  commentId: number;
+  creatorId: number;
+  topicId: number;
 };

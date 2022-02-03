@@ -34,24 +34,21 @@ export function FormPassword() {
       },
     ];
   }, []);
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit: updatePassword });
+  const formProps = useForm<FormFieldProps>({
+    fields,
+    onSubmit: updatePassword,
+    buttons: [
+      {
+        children: 'Сохранить',
+        type: 'submit',
+      },
+      {
+        mods: ['warning-light'],
+        children: 'Отмена',
+        href: AppRoutes.profile,
+      },
+    ],
+  });
 
-  return (
-    <Form
-      {...formProps}
-      title="Изменить пароль"
-      isLoading={isLoading}
-      buttons={[
-        {
-          children: 'Сохранить',
-          type: 'submit',
-        },
-        {
-          mod: 'warning-light',
-          children: 'Отмена',
-          href: AppRoutes.profile,
-        },
-      ]}
-    />
-  );
+  return <Form {...formProps} title="Изменить пароль" isLoading={isLoading} />;
 }

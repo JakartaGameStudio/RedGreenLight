@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import fetch from 'isomorphic-fetch';
-import { ApiEndpoints, ApiMethods, GameResult } from 'types/Api';
+import { ApiEndpoints, ApiMethods, ApiUrl, GameResult } from 'types/Api';
 import { LeaderboardsPlayer } from 'types/LeaderboardsPlayer.types';
 
 const TEAM_NAME = 'jakarta';
@@ -13,7 +13,7 @@ export const leaderboardApi = createApi({
   reducerPath: 'leaderboard',
   tagTypes: ['Leaderboard'],
   baseQuery: fetchBaseQuery({
-    baseUrl: ApiEndpoints.baseURL,
+    baseUrl: ApiUrl.praktikum,
     credentials: 'include',
     fetchFn: fetch,
   }),

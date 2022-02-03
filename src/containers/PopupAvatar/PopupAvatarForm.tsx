@@ -52,7 +52,7 @@ export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
           Применить
         </Button>
       )}
-      <Button type="reset" className={styles.button} mod="warning-light" onClick={onClose}>
+      <Button type="reset" className={styles.button} mods={['warning-light']} onClick={onClose}>
         Отмена
       </Button>
     </form>
