@@ -1,3 +1,8 @@
+export enum ApiUrl {
+  local = 'https://redgreen.ya-praktikum.tech:3000',
+  praktikum = 'https://ya-praktikum.tech/api/v2',
+}
+
 export enum ApiEndpoints {
   api = '/api',
   avatar = '/user/profile/avatar',
@@ -9,7 +14,6 @@ export enum ApiEndpoints {
   oAuthServiceId = '/oauth/yandex/service-id',
   oAuthSignIn = '/oauth/yandex',
   password = '/user/password',
-  praktikumApi = 'https://ya-praktikum.tech/api/v2',
   profile = '/user/profile',
   resources = '/resources',
   signin = '/auth/signin',

@@ -29,7 +29,7 @@ export function PageForum() {
         {isLoading ? (
           <Preloader />
         ) : topics ? (
-          <TopicsList items={data.topics} />
+          <TopicsList items={topics} />
         ) : (
           <div className={styles.empty}>Нет открытых топиков</div>
         )}

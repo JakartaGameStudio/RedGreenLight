@@ -25,7 +25,16 @@ export function PageForumCreate() {
   const onSubmit = function (formData) {
     return addTopic(formData);
   };
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
+  const formProps = useForm<FormFieldProps>({
+    fields,
+    onSubmit,
+    buttons: [
+      {
+        children: 'Создать',
+        type: 'submit',
+      },
+    ],
+  });
 
   if (isSuccess) {
     return <Navigate to={`${AppRoutes.forumTopic}/${data.slug}`} />;
@@ -34,17 +43,7 @@ export function PageForumCreate() {
   return (
     <LayoutPage>
       <div className={styles.form}>
-        <Form
-          {...formProps}
-          title="Создать тему"
-          isLoading={isLoading}
-          buttons={[
-            {
-              children: 'Создать',
-              type: 'submit',
-            },
-          ]}
-        />
+        <Form {...formProps} title="Создать тему" isLoading={isLoading} />
       </div>
     </LayoutPage>
   );

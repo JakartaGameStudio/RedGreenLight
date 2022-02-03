@@ -1,5 +1,4 @@
 export enum AppRoutes {
-  basePath = 'https://redgreen.ya-praktikum.tech:3000',
   error500 = '/500',
   forum = '/forum',
   forumNew = '/forum/new',

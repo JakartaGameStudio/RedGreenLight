@@ -34,7 +34,11 @@
   flex: 0 1 100%;
 }
 
-.formButton {
-  flex: 0 0 auto;
+.formSubmit {
+  flex: 0 0 200px;
   margin-left: 20px;
+}
+
+.formPreloader {
+  font-size: 40px;
 }

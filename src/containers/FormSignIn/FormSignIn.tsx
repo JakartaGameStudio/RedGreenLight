@@ -38,29 +38,22 @@ export function FormSignIn({ from }: FormSignInProps) {
   const formProps = useForm<FormFieldProps>({
     fields,
     onSubmit: signIn,
+    buttons: [
+      {
+        children: 'Начать игру',
+        type: 'submit',
+      },
+      {
+        children: 'Нет аккаунта?',
+        mods: ['link'],
+        href: AppRoutes.signUp,
+      },
+    ],
   });
 
   if (isSuccess) {
     return <Navigate to={from || AppRoutes.game} />;
   }
 
-  return (
-    <Form
-      {...formProps}
-      title="Вход"
-      error={errorMessage}
-      isLoading={isLoading}
-      buttons={[
-        {
-          children: 'Начать игру',
-          type: 'submit',
-        },
-        {
-          children: 'Нет аккаунта?',
-          mods: ['link'],
-          href: AppRoutes.signUp,
-        },
-      ]}
-    />
-  );
+  return <Form {...formProps} title="Вход" error={errorMessage} isLoading={isLoading} />;
 }

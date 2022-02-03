@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 import {
   ApiEndpoints,
   ApiMethods,
+  ApiUrl,
   ChangePasswordRequest,
   OauthSignInRequest,
   ServiceId,
@@ -18,7 +19,7 @@ export const userApi = createApi({
   reducerPath: 'user',
   tagTypes: ['Profile'],
   baseQuery: fetchBaseQuery({
-    baseUrl: ApiEndpoints.praktikumApi,
+    baseUrl: ApiUrl.praktikum,
     credentials: 'include',
     fetchFn: fetch,
   }),
@@ -86,7 +87,7 @@ export const userApi = createApi({
     getUser: builder.query<UserResponse, void>({
       query: () => ({
         method: ApiMethods.get,
-        url: `${AppRoutes.basePath}${ApiEndpoints.api}${ApiEndpoints.user}`,
+        url: `${ApiUrl.local}${ApiEndpoints.api}${ApiEndpoints.user}`,
       }),
       providesTags: ['Profile'],
     }),
@@ -94,7 +95,7 @@ export const userApi = createApi({
       query: (body) => ({
         body,
         method: ApiMethods.put,
-        url: `${AppRoutes.basePath}${ApiEndpoints.api}${ApiEndpoints.changeTheme}`,
+        url: `${ApiUrl.local}${ApiEndpoints.api}${ApiEndpoints.changeTheme}`,
       }),
       invalidatesTags: ['Profile'],
     }),

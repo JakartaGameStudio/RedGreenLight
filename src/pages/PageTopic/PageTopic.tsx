@@ -13,15 +13,15 @@ import { topicApi } from 'services/redux';
 import styles from './PageTopic.module.scss';
 
 export function PageTopic() {
-  const { slug } = useParams();
-  const { data, isLoading } = topicApi.useGetTopicBySlugQuery(slug);
-  const [userData] = useIdentify();
-  const [addLike] = topicApi.useAddLikeMutation();
-  const [addDisLike] = topicApi.useAddDisLikeMutation();
   const [inputFocus, setInputFocus] = useState(false);
   const [replyId, setReplyId] = useState<number | undefined>();
-  const [addComment] = topicApi.useAddCommentMutation();
   const [inputText, setInputText] = useState<string>();
+  const { slug } = useParams();
+  const [userData] = useIdentify();
+  const { data, isLoading } = topicApi.useGetTopicBySlugQuery(slug);
+  const [addLike] = topicApi.useAddLikeMutation();
+  const [addDisLike] = topicApi.useAddDisLikeMutation();
+  const [addComment, addCommentState] = topicApi.useAddCommentMutation();
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -29,7 +29,7 @@ export function PageTopic() {
       text: inputText,
       topicId: data.id,
       parentCommentId: replyId,
-    }).then(() => {
+    }).finally(() => {
       setInputText('');
       setReplyId(undefined);
     });
@@ -109,9 +109,13 @@ export function PageTopic() {
           isFocus={inputFocus}
           onBlur={handleInputBlur}
         />
-        <Button className={styles.formButton} mods={['inline']}>
-          Отправить
-        </Button>
+        <div className={styles.formSubmit}>
+          {addCommentState.isLoading ? (
+            <Preloader className={styles.formPreloader} />
+          ) : (
+            <Button>Отправить</Button>
+          )}
+        </div>
       </form>
     </LayoutPage>
   );

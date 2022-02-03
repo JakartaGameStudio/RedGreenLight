@@ -52,28 +52,25 @@ export function FormSignUp({ from }: FormSignUpProps) {
       },
     ];
   }, []);
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit: signUp });
+  const formProps = useForm<FormFieldProps>({
+    fields,
+    onSubmit: signUp,
+    buttons: [
+      {
+        children: 'Зарегистироваться',
+        type: 'submit',
+      },
+      {
+        children: 'Уже зарегистирован?',
+        mods: ['link'],
+        href: AppRoutes.signIn,
+      },
+    ],
+  });
 
   if (isSuccess) {
     return <Navigate to={from || AppRoutes.game} />;
   }
 
-  return (
-    <Form
-      {...formProps}
-      title="Присоединиться к игре"
-      isLoading={isLoading}
-      buttons={[
-        {
-          children: 'Зарегистироваться',
-          type: 'submit',
-        },
-        {
-          children: 'Уже зарегистирован?',
-          mods: ['link'],
-          href: AppRoutes.signIn,
-        },
-      ]}
-    />
-  );
+  return <Form {...formProps} title="Присоединиться к игре" isLoading={isLoading} />;
 }
