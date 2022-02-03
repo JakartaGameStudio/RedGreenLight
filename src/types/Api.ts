@@ -16,7 +16,7 @@ export enum ApiEndpoints {
 }
 
 export enum SecondaryApiEndpoints {
-  baseURL = 'https://redgreen.ya-praktikum.tech:3000/api',
+  baseURL = 'https://redgreen.ya-praktikum.tech/api',
   changeTheme = '/user/changeThemeId',
   user = '/user',
 }

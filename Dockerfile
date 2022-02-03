@@ -7,4 +7,4 @@ RUN npm install
 COPY . .
 RUN npm run build:prod
 
-CMD npm run ssr:server
+CMD npm run server

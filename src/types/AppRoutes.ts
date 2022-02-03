@@ -4,7 +4,7 @@ export enum AppRoutes {
   game = '/game',
   index = '/',
   leaderBoards = '/leaderboards',
-  oauthRedirectUri = 'https://redgreen.ya-praktikum.tech:3000',
+  oauthRedirectUri = 'https://redgreen.ya-praktikum.tech',
   profile = '/profile',
   profileEdit = '/profile/edit',
   profilePassword = '/profile/password',
