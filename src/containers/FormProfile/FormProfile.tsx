@@ -33,24 +33,21 @@ export function FormProfile() {
   const onSubmit = function (formData) {
     return updateProfile(formData).finally(() => navigate(AppRoutes.profile));
   };
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
+  const formProps = useForm<FormFieldProps>({
+    fields,
+    onSubmit,
+    buttons: [
+      {
+        children: 'Сохранить',
+        type: 'submit',
+      },
+      {
+        mods: ['warning-light'],
+        children: 'Отмена',
+        href: AppRoutes.profile,
+      },
+    ],
+  });
 
-  return (
-    <Form
-      {...formProps}
-      title="Изменить данные"
-      isLoading={isLoading}
-      buttons={[
-        {
-          children: 'Сохранить',
-          type: 'submit',
-        },
-        {
-          mod: 'warning-light',
-          children: 'Отмена',
-          href: AppRoutes.profile,
-        },
-      ]}
-    />
-  );
+  return <Form {...formProps} title="Изменить данные" isLoading={isLoading} />;
 }

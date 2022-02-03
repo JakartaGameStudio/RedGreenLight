@@ -1,8 +1,17 @@
+import classNames from 'classnames';
 import Lottie from 'lottie-react';
 
-import data from './Pre.json';
 import styles from './Preloader.module.scss';
+import { PreloaderProps } from './Preloader.types';
+import data from './PreloaderLottie.json';
 
-export function Preloader() {
-  return <Lottie className={styles.preloader} animationData={data} loop={true} autoPlay={true} />;
+export function Preloader({ className }: PreloaderProps) {
+  return (
+    <Lottie
+      className={classNames(styles.preloader, className)}
+      animationData={data}
+      loop={true}
+      autoPlay={true}
+    />
+  );
 }

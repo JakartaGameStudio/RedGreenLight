@@ -1,10 +1,9 @@
 import classNames from 'classnames';
-import { Image } from 'components/Image/Image';
+import { Avatar } from 'components/Avatar/Avatar';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
-import { getAvatarUrl } from 'utils/getAvatarUrl';
 
 import styles from './UserMenu.module.scss';
 import { UserMenuProps } from './UserMenu.types';
@@ -32,17 +31,11 @@ export function UserMenu({ userData, className }: UserMenuProps) {
     <div className={classNames(styles.wrapper, className)} onClick={onClick}>
       <div className={styles.head} title={userName}>
         <div className={styles.username}>{userName}</div>
-        <div className={styles.avatar}>
-          {userData[UserResponseKeys.avatar] ? (
-            <Image
-              src={getAvatarUrl(userData[UserResponseKeys.avatar])}
-              className={styles.userImage}
-              alt={userName}
-            />
-          ) : (
-            <Image src="/images/icons/user.svg" />
-          )}
-        </div>
+        <Avatar
+          src={userData[UserResponseKeys.avatar]}
+          className={styles.avatar}
+          mods={['rounded']}
+        />
       </div>
       {isActive && (
         <nav className={styles.dropdown}>

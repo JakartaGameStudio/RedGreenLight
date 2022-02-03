@@ -7,6 +7,8 @@ export type FormFieldProps = {
   disabled?: boolean;
   errors?: string[];
   id?: string;
+  isFocus?: boolean;
+  onBlur?: () => void;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   readonly?: boolean;
   required?: boolean;
