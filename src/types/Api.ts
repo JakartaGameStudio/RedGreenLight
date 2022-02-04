@@ -1,5 +1,5 @@
 export enum ApiUrl {
-  local = 'https://redgreen.ya-praktikum.tech:3000',
+  local = 'https://redgreen.ya-praktikum.tech',
   praktikum = 'https://ya-praktikum.tech/api/v2',
 }
 
