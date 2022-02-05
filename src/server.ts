@@ -53,7 +53,6 @@ const startServer = (port: number) => {
       console.info('Application is started on localhost:', port);
     });
   } else {
-    // Если сервер в прод, то перед ним будет стоять nginx
     app.listen(port, () => {
       console.info('Application is started on localhost prod:', port);
     });
