@@ -18,7 +18,7 @@ const rulesListItems = [
 
 export function PageIndex() {
   return (
-    <LayoutPage title="Найди свою скорость, чтобы выиграть!">
+    <LayoutPage title="Найди свою скорость, чтобы выиграть">
       <div className={styles.description}>
         <p>Быстрее двигаешься - медленнее тормозишь.</p>
         <p>Успей остановиться до того, как фигура повернется.</p>
