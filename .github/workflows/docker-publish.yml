@@ -37,14 +37,14 @@ jobs:
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             POSTGRES_HOST_AUTH_METHOD=${{ secrets.POSTGRES_HOST_AUTH_METHOD }}
       - name: Publishing on the server
-          uses: appleboy/ssh-action@master
-          with:
-              host: ${{ secrets.HOST }}
-              username: ${{ secrets.USERNAME }}
-              key: ${{ secrets.KEY }}
-              port: ${{ secrets.PORT }}
-              script: |
-                cd redgreen
-                docker pull agafonikita/jakarta
-                docker-compose down
-                docker-compose up
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.KEY }}
+            port: ${{ secrets.PORT }}
+            script: |
+              cd redgreen
+              docker pull agafonikita/jakarta
+              docker-compose down
+              docker-compose up
