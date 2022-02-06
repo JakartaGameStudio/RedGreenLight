@@ -4,6 +4,10 @@ services:
     container_name: core_web
     restart: on-failure
     image: nginx:stable
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     ports:
       - "443:443"
       - "80:80"
@@ -17,8 +21,9 @@ services:
     depends_on:
       - postgres
     environment:
-      env_file:
-        ./.env
+      POSTGRES_HOST: 'postgres'
+      POSTGRES_PORT: 5432
+      SECRET_KEY: 'MY_SECRET_KEY'
     ports:
       - "3000:3000"
     restart: always
@@ -32,11 +37,19 @@ services:
       - ./postgresdata:/var/lib/postgresql/data
     restart: always
     environment:
-      env_file:
-        ./.env
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'newPassword'
+      POSTGRES_DB: 'redgreen'
     networks:
       - awesome
-
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - awesome
 networks:
     awesome:
         driver: bridge
