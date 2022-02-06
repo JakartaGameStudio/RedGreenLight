@@ -47,4 +47,4 @@ jobs:
               cd redgreen
               docker pull agafonikita/jakarta
               docker-compose down
-              docker-compose up
+              docker-compose up -d
