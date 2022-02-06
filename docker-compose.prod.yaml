@@ -1,0 +1,42 @@
+version: "3"
+services:
+  nginx:
+    container_name: core_web
+    restart: on-failure
+    image: nginx:stable
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - awesome
+  web:
+    container_name: web
+    image: agafonikita/jakarta
+    depends_on:
+      - postgres
+    environment:
+      env_file:
+        ./.env
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - awesome
+  postgres:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data
+    restart: always
+    environment:
+      env_file:
+        ./.env
+    networks:
+      - awesome
+
+networks:
+    awesome:
+        driver: bridge
