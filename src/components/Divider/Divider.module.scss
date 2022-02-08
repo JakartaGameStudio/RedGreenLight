@@ -1,10 +1,11 @@
-@import "~styles/variables/colors.scss";
+@import '~styles/variables/colors.scss';
 
 .divider {
   display: block;
   clear: both;
   height: 1px;
+  padding: 0;
+
   background: $color-basic-light;
   border: none;
-  padding: 0;
 }

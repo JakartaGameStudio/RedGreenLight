@@ -1,5 +1,5 @@
-import { Topic } from 'types/Api';
+import { ForumTopic } from 'types/Api';
 
 export type TopicsListProps = {
-  items: Topic[];
+  items: ForumTopic[];
 };

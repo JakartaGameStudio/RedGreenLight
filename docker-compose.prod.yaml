@@ -6,8 +6,8 @@ services:
     image: nginx:stable
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./static/cert.pem:/etc/ssl/cert.pem
-      - ./static/key.pem:/etc/ssl/key.pem
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     ports:
       - "443:443"
       - "80:80"
@@ -17,13 +17,11 @@ services:
       - awesome
   web:
     container_name: web
-    build:
-      context: .
+    image: agafonikita/jakarta
     depends_on:
       - postgres
-    environment:
-      env_file:
-        ./.env
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     restart: always
@@ -36,12 +34,18 @@ services:
     volumes:
       - ./postgresdata:/var/lib/postgresql/data
     restart: always
-    environment:
-      env_file:
-        ./.env
+    env_file:
+      - .env
     networks:
       - awesome
-
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - awesome
 networks:
     awesome:
         driver: bridge

@@ -13,13 +13,12 @@ import {
   UserResponse,
   UserUpdateRequest,
 } from 'types/Api';
-import { AppRoutes } from 'types/AppRoutes';
 
 export const userApi = createApi({
   reducerPath: 'user',
   tagTypes: ['Profile'],
   baseQuery: fetchBaseQuery({
-    baseUrl: ApiUrl.praktikum,
+    baseUrl: '/',
     credentials: 'include',
     fetchFn: fetch,
   }),
@@ -30,13 +29,13 @@ export const userApi = createApi({
           redirect_uri: url,
         },
         method: ApiMethods.get,
-        url: ApiEndpoints.oAuthServiceId,
+        url: `${ApiUrl.praktikum}${ApiEndpoints.oAuthServiceId}`,
       }),
     }),
     oAuthSignIn: builder.mutation<void, OauthSignInRequest>({
       query: ({ code, redirect_uri }) => ({
         method: ApiMethods.post,
-        url: ApiEndpoints.oAuthSignIn,
+        url: `${ApiUrl.praktikum}${ApiEndpoints.oAuthSignIn}`,
         body: {
           code,
           redirect_uri,
@@ -48,7 +47,7 @@ export const userApi = createApi({
       query: (body) => ({
         body,
         method: ApiMethods.post,
-        url: ApiEndpoints.signup,
+        url: `${ApiUrl.praktikum}${ApiEndpoints.signup}`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -59,7 +58,7 @@ export const userApi = createApi({
       query: (body) => ({
         body,
         method: ApiMethods.post,
-        url: ApiEndpoints.signin,
+        url: `${ApiUrl.praktikum}${ApiEndpoints.signin}`,
         responseHandler: (response) => {
           if (response.ok) {
             return response.text();
@@ -73,7 +72,7 @@ export const userApi = createApi({
     signOut: builder.mutation<string, void>({
       query: () => ({
         method: 'POST',
-        url: ApiEndpoints.signout,
+        url: `${ApiUrl.praktikum}${ApiEndpoints.signout}`,
         responseHandler: (response) => {
           if (response.ok) {
             return response.text();
@@ -87,7 +86,7 @@ export const userApi = createApi({
     getUser: builder.query<UserResponse, void>({
       query: () => ({
         method: ApiMethods.get,
-        url: `${ApiUrl.local}${ApiEndpoints.api}${ApiEndpoints.user}`,
+        url: `${ApiEndpoints.api}${ApiEndpoints.user}`,
       }),
       providesTags: ['Profile'],
     }),
@@ -95,7 +94,7 @@ export const userApi = createApi({
       query: (body) => ({
         body,
         method: ApiMethods.put,
-        url: `${ApiUrl.local}${ApiEndpoints.api}${ApiEndpoints.changeTheme}`,
+        url: `${ApiEndpoints.api}${ApiEndpoints.changeTheme}`,
       }),
       invalidatesTags: ['Profile'],
     }),
@@ -103,7 +102,7 @@ export const userApi = createApi({
       query: (body) => ({
         body,
         method: ApiMethods.put,
-        url: ApiEndpoints.profile,
+        url: `${ApiUrl.praktikum}${ApiEndpoints.profile}`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -119,7 +118,7 @@ export const userApi = createApi({
         return {
           body: data,
           method: ApiMethods.put,
-          url: ApiEndpoints.avatar,
+          url: `${ApiUrl.praktikum}${ApiEndpoints.avatar}`,
         };
       },
       invalidatesTags: ['Profile'],
@@ -128,7 +127,7 @@ export const userApi = createApi({
       query: (body) => ({
         body,
         method: ApiMethods.put,
-        url: ApiEndpoints.password,
+        url: `${ApiUrl.praktikum}${ApiEndpoints.password}`,
         headers: {
           'Content-Type': 'application/json',
         },

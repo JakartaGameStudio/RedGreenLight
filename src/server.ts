@@ -43,14 +43,20 @@ app.get('/*', (req: Request, res: Response) => {
 });
 
 const startServer = (port: number) => {
-  const options = {
-    cert: readFileSync(join(__dirname, 'cert.pem'), 'utf-8'),
-    key: readFileSync(join(__dirname, 'key.pem'), 'utf-8'),
-  };
+  if (process.env.NODE_ENV !== 'production') {
+    const options = {
+      cert: readFileSync(join(__dirname, 'cert.pem'), 'utf-8'),
+      key: readFileSync(join(__dirname, 'key.pem'), 'utf-8'),
+    };
 
-  https.createServer(options, app).listen(port, () => {
-    console.info('Application is started on localhost:', port);
-  });
+    https.createServer(options, app).listen(port, () => {
+      console.info('Application is started on localhost:', port);
+    });
+  } else {
+    app.listen(port, () => {
+      console.info('Application is started on localhost prod:', port);
+    });
+  }
 };
 
 export { startServer };

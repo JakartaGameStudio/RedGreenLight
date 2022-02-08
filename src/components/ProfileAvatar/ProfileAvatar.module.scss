@@ -2,7 +2,9 @@
 
 .wrapper {
   position: relative;
+
   display: inline-block;
+
   cursor: pointer;
 }
 
@@ -16,8 +18,8 @@
   height: 20px;
 
   background: $color-content url('~images/icons/camera.svg') center center no-repeat;
-  border-radius: 50%;
   background-size: 70%;
+  border-radius: 50%;
 }
 
 .button {

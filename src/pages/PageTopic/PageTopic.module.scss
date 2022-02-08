@@ -1,23 +1,26 @@
-@import "src/styles/variables/colors";
+@import 'src/styles/variables/colors';
 
 .head {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid $color-basic-light;
   margin-bottom: 20px;
   padding-bottom: 20px;
+
+  border-bottom: 1px solid $color-basic-light;
 }
 
 .date {
-  font-size: 13px;
-  color: $color-basic-middle;
   flex: 0 0 auto;
+
+  color: $color-basic-middle;
+  font-size: 13px;
 }
 
 .authorImage {
   flex: 0 0 auto;
-  font-size: 100px;
   margin-right: 20px;
+
+  font-size: 100px;
 }
 
 .authorName {
