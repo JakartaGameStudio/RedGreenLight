@@ -1,7 +1,7 @@
 import './App.module.scss';
 
 import { ProtectedRoute } from 'components/ProtectedRoute/ProtectedRoute';
-import { useWindowLocation } from 'hooks/useWindowLocation';
+import { useHostName } from 'hooks/useHostName';
 import { Page404 } from 'pages/Page404/Page404';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageForum } from 'pages/PageForum/PageForum';
@@ -20,7 +20,7 @@ import { AppRoutes } from 'types/AppRoutes';
 
 export const App = hot(() => {
   const { search } = useLocation();
-  const windowLocation = useWindowLocation();
+  const hostname = useHostName();
   const navigate = useNavigate();
   const [oAuthSignIn] = userApi.useOAuthSignInMutation();
 
@@ -31,10 +31,10 @@ export const App = hot(() => {
     if (oAuthCode) {
       oAuthSignIn({
         code: oAuthCode,
-        redirect_uri: windowLocation.origin,
+        redirect_uri: hostname,
       }).finally(() => navigate(AppRoutes.index));
     }
-  }, [navigate, oAuthSignIn, search, windowLocation]);
+  }, [navigate, oAuthSignIn, search, hostname]);
 
   return (
     <Routes>

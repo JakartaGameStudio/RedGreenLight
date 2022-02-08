@@ -2,9 +2,9 @@ import { Footer } from 'components/Footer/Footer';
 import { FormSignIn } from 'containers/FormSignIn/FormSignIn';
 import { FormSignUp } from 'containers/FormSignUp/FormSignUp';
 import { Header } from 'containers/Header/Header';
-import { useWindowLocation } from 'hooks/useWindowLocation';
+import { useHostName } from 'hooks/useHostName';
 import LogoYandex from 'images/icons/ya.svg?icon';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { userApi } from 'services/redux';
 
@@ -17,19 +17,16 @@ type LocationState = {
 
 export function PageAuth({ signUp }: PageAuthProps) {
   const location = useLocation();
-  const windowLocation = useWindowLocation();
+  const hostname = useHostName();
   const state = location.state as LocationState;
   const from = state?.from;
   const [oAuthGetId, { data }] = userApi.useLazyOAuthGetIdQuery();
-  const redirectUri = useMemo(() => {
-    return windowLocation?.origin;
-  }, [windowLocation]);
 
   useEffect(() => {
-    if (redirectUri) {
-      oAuthGetId(redirectUri);
+    if (hostname) {
+      oAuthGetId(hostname);
     }
-  }, [oAuthGetId, redirectUri]);
+  }, [oAuthGetId, hostname]);
 
   return (
     <div className={styles.page}>
@@ -44,7 +41,7 @@ export function PageAuth({ signUp }: PageAuthProps) {
             <li className={styles.oauthListItem}>
               <a
                 className={styles.oauthItem}
-                href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${redirectUri}`}
+                href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${hostname}`}
                 rel="noreferrer"
               >
                 <LogoYandex />
