@@ -5,8 +5,9 @@ import { FormEventHandler } from 'react';
 export type FormProps = {
   buttons: Omit<ButtonProps, 'className'>[];
   fields: Omit<FormFieldProps, 'className' | 'onChange'>[];
-  isLoading?: boolean;
   onChange: FormFieldProps['onChange'];
   onSubmit: FormEventHandler<HTMLFormElement>;
+  error?: string;
+  isLoading?: boolean;
   title?: string;
 };

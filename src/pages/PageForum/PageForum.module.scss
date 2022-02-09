@@ -1,0 +1,23 @@
+@import '~styles/variables/colors.scss';
+
+.head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 20px 30px;
+
+  border: 1px solid $color-basic-light;
+  border-radius: 20px;
+}
+
+.title {
+  flex: 1 1 auto;
+}
+
+.button {
+  margin-left: 20px;
+}
+
+.empty {
+  color: $color-basic-middle;
+}

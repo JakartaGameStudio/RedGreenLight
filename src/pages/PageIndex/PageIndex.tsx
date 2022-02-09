@@ -33,7 +33,7 @@ export function PageIndex() {
       </div>
       <div className={styles.form}>
         <Button href={AppRoutes.game}>Начать игру</Button>
-        <Button href={AppRoutes.signUp} mod="light">
+        <Button href={AppRoutes.signUp} mods={['light']}>
           Стать участником
         </Button>
       </div>

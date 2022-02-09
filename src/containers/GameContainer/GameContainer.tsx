@@ -7,10 +7,11 @@ import {
 import { Popup } from 'components/Popup/Popup';
 import { Title } from 'components/Title/Title';
 import { useEffect, useState } from 'react';
+import { userApi } from 'services/redux';
 import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
 import { GameStatus } from './GameContainer.types';
-import { storeResult } from './storeResult';
+import { saveResults } from './saveResults';
 import { useGame } from './useGame';
 
 type HeroType = 'SLOW_HERO' | 'FAST_HERO';
@@ -83,6 +84,7 @@ export const GameContainer = () => {
   const { gameActions, canvasRef, renderTime, gameStatus, score } = useGame(config);
   const { startBoost, endBoost, startGame, restartGame } = gameActions;
   const [heroType, setHeroType] = useState<HeroType | undefined>();
+  const { data } = userApi.useGetUserQuery();
 
   useEffect(() => {
     if (!heroType) {
@@ -102,10 +104,13 @@ export const GameContainer = () => {
   }, []);
 
   useEffect(() => {
-    if (gameStatus === GameStatus.win) {
-      storeResult(score);
+    if (data && data.login && gameStatus === GameStatus.win) {
+      saveResults({
+        login: data.login,
+        result: score,
+      });
     }
-  }, [gameStatus, score]);
+  }, [score, data, gameStatus]);
 
   return (
     <div>

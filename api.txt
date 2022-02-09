@@ -1,0 +1,125 @@
+GET /topic
+
+Response:
+{
+  topics: [{
+    id: number
+    slug: string,
+    title: string,
+    creationDate: date,
+    creatorId: number,
+    commentsCount: string
+    creator: {
+      userId: number,
+      name: string,
+      avatar: string,
+    }
+  }]
+}
+_____________________________________________
+
+GET /topic/${slug}
+
+Response:
+{
+  id: number,
+  slug: string,
+  title: string,
+  creationDate: date,
+  creatorId: number,
+  creator: {
+    userId: number,
+    name: string,
+    avatar: string,
+  }
+  comments: [{
+    id: number,
+    text: string,
+    creationDate: date,
+    topicId: number,
+    creatorId: number,
+    repliesCount: string,
+    dislikesCount: string,
+    likesCount: string,
+    userEmotion: string,
+    creator: {
+      userId: number,
+      name: string,
+      avatar: string,
+    }
+  }]
+}
+_____________________________________________
+
+POST /topic
+
+Request:
+{
+  title: number,
+}
+
+Response:
+{
+  slug: string
+}
+
+_____________________________________________
+
+GET /comment/${id}
+
+Response:
+{
+  replies: [{
+    id: number,
+    text: string,
+    topicId: number,
+    creationDate: date,
+    creatorId: number,
+    parentCommentId: number | null,
+    repliesCount: string,
+    dislikesCount: string,
+    likesCount: string,
+    userEmotion: string,
+    creator: {
+      userId: number,
+      name: string,
+      avatar: string,
+    }
+  }]
+}
+
+_____________________________________________
+
+POST /comment
+
+Request:
+{
+  topicId: number,
+  text: number,
+  parentCommentId: number | null,
+}
+
+Response:
+{
+    id: number,
+    text: string,
+    creationDate: date,
+    topicId: number,
+    creatorId: number,
+    parentCommentId: number | null,
+}
+_____________________________________________
+
+POST /emotion
+
+Request:
+{
+  creatorId: number,
+  commentId: number,
+  emotion: 'like' | 'dislike' | null,
+}
+
+Response:
+{
+  result: 'success'
+}

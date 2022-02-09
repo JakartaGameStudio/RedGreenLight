@@ -8,6 +8,7 @@ $layout-breakpoints: (
 );
 
 // чтобы использовать в JS надо сделать экспорт
+
 :export {
   xs: map_get($layout-breakpoints, xs);
   sm: map_get($layout-breakpoints, sm);

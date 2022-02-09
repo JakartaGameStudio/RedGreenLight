@@ -6,7 +6,7 @@ import { Title } from 'components/Title/Title';
 import styles from './Form.module.scss';
 import { FormProps } from './Form.types';
 
-export function Form({ title, fields, buttons, onSubmit, onChange, isLoading }: FormProps) {
+export function Form({ title, error, fields, buttons, onSubmit, onChange, isLoading }: FormProps) {
   return (
     <div className={styles.wrapper}>
       {isLoading && (
@@ -18,6 +18,7 @@ export function Form({ title, fields, buttons, onSubmit, onChange, isLoading }: 
         <Title size="h3" className={styles.title}>
           {title}
         </Title>
+        {error && <div className={styles.error}>{error}</div>}
         {fields.map((props) => (
           <FormField key={props.id} className={styles.field} onChange={onChange} {...props} />
         ))}

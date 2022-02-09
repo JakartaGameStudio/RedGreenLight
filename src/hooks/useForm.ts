@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import { ButtonProps } from 'components/Button/Button.types';
+import { useCallback, useEffect, useState } from 'react';
 
 type Field = {
   [key: string]: any;
@@ -7,11 +8,12 @@ type Field = {
 };
 
 type Props<F> = {
+  buttons: ButtonProps[];
   fields: F[];
   onSubmit(data);
 };
 
-export function useForm<F extends Field>({ fields, onSubmit }: Props<F>) {
+export function useForm<F extends Field>({ fields, buttons, onSubmit }: Props<F>) {
   const [formFields, setFormFields] = useState(fields);
   const handleChange = useCallback((event) => {
     const { name, value } = event.target;
@@ -35,7 +37,12 @@ export function useForm<F extends Field>({ fields, onSubmit }: Props<F>) {
     [formFields, onSubmit],
   );
 
+  useEffect(() => {
+    setFormFields(fields);
+  }, [fields]);
+
   return {
+    buttons,
     fields: formFields,
     setFields: setFormFields,
     onChange: handleChange,

@@ -10,3 +10,7 @@ npm-debug.log
 *.sublime-*
 .sass-cache
 node_modules/
+postgresdata
+dev.env
+static/cert.pem
+static/key.pem

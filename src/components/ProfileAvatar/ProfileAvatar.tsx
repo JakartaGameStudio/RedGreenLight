@@ -1,20 +1,18 @@
-import { UserResponseKeys } from 'api/api.types';
 import classNames from 'classnames';
-import { getAvatarUrl } from 'helpers/getAvatarUrl';
+import { Avatar } from 'components/Avatar/Avatar';
+import { UserResponseKeys } from 'types/Api';
 
 import styles from './ProfileAvatar.module.scss';
 import { ProfileAvatarProps } from './ProfileAvatar.types';
 
 export function ProfileAvatar({ userData, onClick, className }: ProfileAvatarProps) {
   return (
-    <div className={classNames(styles.avatar, className)} onClick={onClick}>
-      {userData && (
-        <img
-          src={getAvatarUrl(userData[UserResponseKeys.avatar])}
-          alt={userData[UserResponseKeys.displayName]}
-          className={styles.image}
-        />
-      )}
+    <div className={classNames(styles.wrapper, className)} onClick={onClick}>
+      <Avatar
+        src={userData[UserResponseKeys.avatar]}
+        className={styles.avatar}
+        mods={['rounded']}
+      />
       <button className={styles.button}>Поменять</button>
       <div className={styles.icon} />
     </div>

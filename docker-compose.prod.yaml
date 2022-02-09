@@ -1,0 +1,51 @@
+version: "3"
+services:
+  nginx:
+    container_name: core_web
+    restart: on-failure
+    image: nginx:stable
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - awesome
+  web:
+    container_name: web
+    image: agafonikita/jakarta
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - awesome
+  postgres:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - awesome
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - awesome
+networks:
+    awesome:
+        driver: bridge

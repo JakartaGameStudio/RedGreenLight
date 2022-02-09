@@ -1,26 +1,36 @@
-@import "~styles/variables/colors.scss";
+@import '~styles/variables/colors.scss';
 
 .button {
   display: block;
   width: 100%;
+  padding: 14px 20px;
+
   color: $color-content;
-  background: $color-primary;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
   font-size: 16px;
   line-height: 20px;
-  padding: 14px 20px;
   text-align: center;
+
+  background: $color-primary;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
   user-select: none;
 
   &:disabled {
     cursor: not-allowed;
   }
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.95;
+  }
 }
 
 .button--light {
   color: $color-primary;
+
   background: $color-primary-light;
 }
 
@@ -30,14 +40,32 @@
 
 .button--warning-light {
   color: $color-secondary;
+
   background: $color-secondary-light;
 }
 
 .button--link {
   color: $color-primary;
-  background: none;
 
-  &:hover {
-    color: $color-basic;
-  }
+  background: none;
+}
+
+.button--inline {
+  display: inline-block;
+  width: auto;
+}
+
+.button--grey {
+  color: $color-basic;
+
+  background-color: $color-basic-light;
+}
+
+.button--small {
+  padding: 4px 8px;
+
+  font-size: 14px;
+  line-height: 16px;
+
+  border-radius: 4px;
 }

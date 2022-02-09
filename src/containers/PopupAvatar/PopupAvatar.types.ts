@@ -1,3 +1,4 @@
 export type PopupAvatarFormProps = {
-  onClose(): void;
+  onClose();
+  onSubmit();
 };

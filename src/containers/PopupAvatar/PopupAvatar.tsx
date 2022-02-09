@@ -7,10 +7,11 @@ import { PopupAvatarForm } from './PopupAvatarForm';
 export function PopupAvatar({
   active,
   onClose,
+  onSubmit,
 }: Omit<PopupProps, 'children'> & PopupAvatarFormProps) {
   return (
     <Popup active={active} onClose={onClose}>
-      <PopupAvatarForm onClose={onClose} />
+      <PopupAvatarForm onClose={onClose} onSubmit={onSubmit} />
     </Popup>
   );
 }

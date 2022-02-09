@@ -1,13 +1,15 @@
 import { ChangeEventHandler } from 'react';
 
 export type FormFieldProps = {
+  name: string;
+  placeholder: string;
   className?: string;
   disabled?: boolean;
   errors?: string[];
   id?: string;
-  name: string;
+  isFocus?: boolean;
+  onBlur?: () => void;
   onChange?: ChangeEventHandler<HTMLInputElement>;
-  placeholder: string;
   readonly?: boolean;
   required?: boolean;
   type?: 'text' | 'email' | 'number' | 'password' | 'tel';

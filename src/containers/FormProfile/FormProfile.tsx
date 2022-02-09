@@ -1,14 +1,13 @@
-import { UsersApi } from 'api';
-import { UserUpdateRequestKeys } from 'api/UsersApi/UsersApi.types';
 import { Form } from 'components/Form/Form';
 import { FormFieldProps } from 'components/FormField/FormField.types';
 import { formFieldsDictionary } from 'constants/formFieldsDictionary';
 import { useForm } from 'hooks/useForm';
-import { useMemo, useState } from 'react';
+import { useIdentify } from 'hooks/useIdentify';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { userApi } from 'services/redux';
+import { UserUpdateRequestKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
-
-import { FormProfileProps } from './FormProfile.types';
 
 const FIELDS = {
   [UserUpdateRequestKeys.firstName]: formFieldsDictionary.firstName,
@@ -19,7 +18,9 @@ const FIELDS = {
   [UserUpdateRequestKeys.email]: formFieldsDictionary.email,
 };
 
-export function FormProfile({ userData }: FormProfileProps) {
+export function FormProfile() {
+  const [userData] = useIdentify();
+  const [updateProfile, { isLoading }] = userApi.useUpdateProfileMutation();
   const navigate = useNavigate();
   const fields = useMemo<FormFieldProps[]>(() => {
     return Object.entries(FIELDS).map(([key, label]) => ({
@@ -29,36 +30,24 @@ export function FormProfile({ userData }: FormProfileProps) {
       value: userData[key],
     }));
   }, [userData]);
-  const onSubmit = useMemo(() => {
-    return function (data) {
-      setLoading(true);
+  const onSubmit = function (formData) {
+    return updateProfile(formData).finally(() => navigate(AppRoutes.profile));
+  };
+  const formProps = useForm<FormFieldProps>({
+    fields,
+    onSubmit,
+    buttons: [
+      {
+        children: 'Сохранить',
+        type: 'submit',
+      },
+      {
+        mods: ['warning-light'],
+        children: 'Отмена',
+        href: AppRoutes.profile,
+      },
+    ],
+  });
 
-      return UsersApi.updateProfile(data)
-        .then(() => {
-          navigate(AppRoutes.profile);
-        })
-        .finally(() => setLoading(false));
-    };
-  }, [navigate]);
-  const formProps = useForm<FormFieldProps>({ fields, onSubmit });
-  const [isLoading, setLoading] = useState(false);
-
-  return (
-    <Form
-      {...formProps}
-      title="Изменить данные"
-      isLoading={isLoading}
-      buttons={[
-        {
-          children: 'Сохранить',
-          type: 'submit',
-        },
-        {
-          mod: 'warning-light',
-          children: 'Отмена',
-          href: AppRoutes.profile,
-        },
-      ]}
-    />
-  );
+  return <Form {...formProps} title="Изменить данные" isLoading={isLoading} />;
 }

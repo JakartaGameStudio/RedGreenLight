@@ -49,6 +49,7 @@
       "error",
       {
         "allow": [
+          "error",
           "warn",
           "info"
         ]
@@ -77,7 +78,7 @@
     "max-params": [
       "error",
       {
-        "max": 2
+        "max": 3
       }
     ],
     "curly": "error",
@@ -99,7 +100,11 @@
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/interface": [
+      "error",
+      "asc",
+      { "caseSensitive": true, "natural": false, "requiredFirst": true }
+    ],
     "typescript-sort-keys/string-enum": "error",
     "sort-class-members/sort-class-members": "off",
     "simple-import-sort/imports": "error",
@@ -112,6 +117,7 @@
       "error",
       { "blankLine": "always", "prev": "*", "next": "return" },
       { "blankLine": "always", "prev": "*", "next": "block-like" },
+      { "blankLine": "always", "prev": "*", "next": "export" },
       { "blankLine": "always", "prev": "block-like", "next": "*" },
       { "blankLine": "always", "prev": "function", "next": "*" },
       { "blankLine": "always", "prev": ["const", "let"], "next": "*" },

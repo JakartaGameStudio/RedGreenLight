@@ -1,19 +1,21 @@
-import { UsersApi } from 'api';
 import { Button } from 'components/Button/Button';
+import { Image } from 'components/Image/Image';
+import { Preloader } from 'components/Preloader/Preloader';
 import { useMemo, useState } from 'react';
+import { userApi } from 'services/redux';
 
 import styles from './PopupAvatar.module.scss';
 import { PopupAvatarFormProps } from './PopupAvatar.types';
 
-export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
+export function PopupAvatarForm({ onClose, onSubmit }: PopupAvatarFormProps) {
+  const [updateAvatar, { isLoading }] = userApi.useUpdateAvatarMutation();
   const [value, setValue] = useState<File>();
   const handleSubmit = useMemo(() => {
     return function (event) {
       event.preventDefault();
-
-      UsersApi.updateAvatar(value).then(onClose);
+      updateAvatar(value).finally(onSubmit);
     };
-  }, [value, onClose]);
+  }, [value, onSubmit, updateAvatar]);
   const handleChange = useMemo(() => {
     return function (event) {
       const file = event.target.files[0];
@@ -22,12 +24,16 @@ export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
     };
   }, []);
 
+  if (isLoading) {
+    return <Preloader />;
+  }
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.label}>
         {value && (
           <>
-            <img src={URL.createObjectURL(value)} alt="Аватар" className={styles.image} />
+            <Image src={URL.createObjectURL(value)} alt="Аватар" className={styles.image} />
             <span className={styles.value}>{value.name}</span>
           </>
         )}
@@ -46,7 +52,7 @@ export function PopupAvatarForm({ onClose }: PopupAvatarFormProps) {
           Применить
         </Button>
       )}
-      <Button type="reset" className={styles.button} mod="warning-light" onClick={onClose}>
+      <Button type="reset" className={styles.button} mods={['warning-light']} onClick={onClose}>
         Отмена
       </Button>
     </form>

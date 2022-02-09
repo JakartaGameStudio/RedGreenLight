@@ -1,0 +1,82 @@
+@import 'src/styles/variables/colors';
+@import 'src/styles/variables/fonts';
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.avatar {
+  flex: 0 0 auto;
+  margin-right: 20px;
+
+  font-size: 60px;
+}
+
+.name,
+.date {
+  display: inline;
+
+  font-size: 14px;
+}
+
+.name {
+  margin-right: 10px;
+
+  font-weight: $font-weight-medium;
+}
+
+.date {
+  color: $color-basic-middle;
+}
+
+.text {
+  margin-top: 5px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  padding: 4px 8px;
+
+  color: $color-basic;
+  font-size: 14px;
+  line-height: 16px;
+
+  background-color: $color-basic-light;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actionLabel {
+  margin-left: 4px;
+}
+
+.body {
+  flex: 1 1 auto;
+}
+
+.id {
+  margin-left: 20px;
+
+  color: $color-primary;
+  font-size: 12px;
+}
+
+.replies {
+  margin: 20px 0;
+  padding-left: 80px;
+}
+
+.divider {
+  margin: 12px 0;
+}

@@ -1,14 +1,16 @@
 import classNames from 'classnames';
-import UserIcon from 'images/icons/user.svg';
+import { Avatar } from 'components/Avatar/Avatar';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserResponseKeys } from 'types/Api';
 import { AppRoutes } from 'types/AppRoutes';
 
 import styles from './UserMenu.module.scss';
 import { UserMenuProps } from './UserMenu.types';
 
-export function UserMenu({ userName, className }: UserMenuProps) {
+export function UserMenu({ userData, className }: UserMenuProps) {
   const [isActive, setActive] = useState(false);
+  const userName = userData[UserResponseKeys.displayName] || userData[UserResponseKeys.login];
 
   useEffect(() => {
     const closeMenu = () => setActive(false);
@@ -29,9 +31,11 @@ export function UserMenu({ userName, className }: UserMenuProps) {
     <div className={classNames(styles.wrapper, className)} onClick={onClick}>
       <div className={styles.head} title={userName}>
         <div className={styles.username}>{userName}</div>
-        <div className={styles.icon}>
-          <UserIcon width="1em" height="1em" />
-        </div>
+        <Avatar
+          src={userData[UserResponseKeys.avatar]}
+          className={styles.avatar}
+          mods={['rounded']}
+        />
       </div>
       {isActive && (
         <nav className={styles.dropdown}>

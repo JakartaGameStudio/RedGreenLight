@@ -1,0 +1,12 @@
+.body {
+  --theme-color-content: #000;
+  --theme-color-basic: #fff;
+  --theme-color-basic-middle: #696969;
+  --theme-color-basic-light: #4c4c4c;
+  --theme-color-primary: #0CABB0;
+  --theme-color-primary-middle: #76C5C8;
+  --theme-color-primary-light: #E2F2EE;
+  --theme-color-secondary: #DD0B61;
+  --theme-color-secondary-middle: #DE75A0;
+  --theme-color-secondary-light: #FEEFF2;
+}

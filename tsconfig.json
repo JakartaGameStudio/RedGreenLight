@@ -1,13 +1,10 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "resolveJsonModule": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es6",
     "jsx": "react-jsx",
     "importHelpers": true,
     "noUnusedLocals": true,
@@ -15,6 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
     "declaration": false,
     "sourceMap": false,
     "baseUrl": ".",
@@ -23,7 +21,5 @@
     },
     "typeRoots": ["node_modules/@types", "typings/**/*.d.ts"]
   },
-  "exclude": [
-    "node_modules/**/*"
-  ]
+  "exclude": ["node_modules/**/*"]
 }

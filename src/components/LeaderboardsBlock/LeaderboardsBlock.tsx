@@ -1,13 +1,14 @@
 import classNames from 'classnames';
-import UserIcon from 'images/icons/user.svg';
+import { Image } from 'components/Image/Image';
 import { LeaderboardsPlayer } from 'types/LeaderboardsPlayer.types';
+import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
 import styles from './LeaderboardsBlock.module.scss';
 
-type LeaderboardsBlockProps = { isOwn: boolean; player: LeaderboardsPlayer };
+type LeaderboardsBlockProps = { player: LeaderboardsPlayer; isOwn?: boolean };
 
 export function LeaderboardsBlock({ player, isOwn }: LeaderboardsBlockProps) {
-  const { value, login, place } = player;
+  const { time, login, place } = player;
 
   return (
     <div
@@ -18,11 +19,11 @@ export function LeaderboardsBlock({ player, isOwn }: LeaderboardsBlockProps) {
       <div className={styles.leaderboardsBlock__place}>{place}</div>
       <div className={styles.leaderboardsBlock__info}>
         <div className={styles.leaderboardsBlock__icon}>
-          <UserIcon width="1em" height="1em" />
+          <Image src="/images/icons/user.svg" />
         </div>
         <p className={styles.leaderboardsBlock__login}>{login}</p>
       </div>
-      <div className={styles.leaderboardsBlock__time}>{value}</div>
+      <div className={styles.leaderboardsBlock__time}>{changeMsToMinSec(time)}</div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { UserResponse } from 'api/api.types';
+import { UserResponse } from 'types/Api';
 
 export type ProfileAvatarProps = {
   className?: string;
