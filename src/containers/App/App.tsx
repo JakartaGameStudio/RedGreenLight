@@ -1,7 +1,6 @@
 import './App.module.scss';
 
 import { ProtectedRoute } from 'components/ProtectedRoute/ProtectedRoute';
-import { useHostName } from 'hooks/useHostName';
 import { Page404 } from 'pages/Page404/Page404';
 import { PageAuth } from 'pages/PageAuth/PageAuth';
 import { PageForum } from 'pages/PageForum/PageForum';
@@ -17,16 +16,17 @@ import { hot } from 'react-hot-loader/root';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { userApi } from 'services/redux';
 import { AppRoutes } from 'types/AppRoutes';
+import { getHostName } from 'utils/getHostName';
 
 export const App = hot(() => {
   const { search } = useLocation();
-  const hostname = useHostName();
   const navigate = useNavigate();
   const [oAuthSignIn] = userApi.useOAuthSignInMutation();
 
   useEffect(() => {
     const params = new URLSearchParams(search);
     const oAuthCode = params.get('code');
+    const hostname = getHostName();
 
     if (oAuthCode) {
       oAuthSignIn({
@@ -34,7 +34,7 @@ export const App = hot(() => {
         redirect_uri: hostname,
       }).finally(() => navigate(AppRoutes.index));
     }
-  }, [navigate, oAuthSignIn, search, hostname]);
+  }, [navigate, oAuthSignIn, search]);
 
   return (
     <Routes>
