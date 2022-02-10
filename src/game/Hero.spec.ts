@@ -7,6 +7,7 @@ const createHero = () =>
     radius: 30,
     x: 0,
     y: 0,
+    maxSpeed: 0.1,
   });
 
 describe('Hero', () => {
