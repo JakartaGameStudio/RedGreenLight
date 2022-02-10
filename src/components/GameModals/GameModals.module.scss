@@ -2,31 +2,24 @@
 @import '~styles/variables/colors';
 
 .modalWrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: auto;
-
-  background: rgba(#000, 0.4);
-
-  overflow-scrolling: touch;
-
-  &__body {
-    width: 300px;
-    padding: 20px;
-
-    background-color: $color-content;
-    border-radius: 10px;
+  &__tomain {
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 20px;
   }
 
   &__title {
     margin-bottom: 20px;
+  }
+
+  &__choosingHero {
+    display: flex;
+    gap: 20px;
+  }
+  &__changeHero {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
   }
 }

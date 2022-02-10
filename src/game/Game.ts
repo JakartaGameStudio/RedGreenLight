@@ -5,7 +5,6 @@ export class Game {
   public clear: () => void;
   public restart: () => void;
   private requestID: number;
-
   private run() {
     let lastTime = 0;
     const animate = (time: number) => {
@@ -23,6 +22,11 @@ export class Game {
 
   public start() {
     this.beforeStart();
+    this.run();
+  }
+
+  public reload() {
+    this.clearAnimate();
     this.run();
   }
 

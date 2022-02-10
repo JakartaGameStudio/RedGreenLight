@@ -10,13 +10,13 @@ import { useEffect, useState } from 'react';
 import { userApi } from 'services/redux';
 import { changeMsToMinSec } from 'utils/changeMsToMinSec';
 
+import styles from './GameContainer.module.scss';
 import { GameStatus } from './GameContainer.types';
 import { saveResults } from './saveResults';
 import { useGame } from './useGame';
-
 type HeroType = 'SLOW_HERO' | 'FAST_HERO';
 
-type Config = {
+export type Config = {
   BACKGROUND_BASE_COLOR: string;
   BACKGROUND_STOP_COLOR: string;
   GAME_BORDER_ALLOWED_COLOR: string;
@@ -32,6 +32,7 @@ type Config = {
   HERO_DEFAULT_RADIUS: number;
   HERO_FILL_LOSE_COLOR: string;
   HERO_FILL_MAIN_COLOR: string;
+  HERO_MAX_SPEED: number;
   HERO_START_POSITION_X: number;
   HERO_START_POSITION_Y: number;
   MAX_GAME_TIME: number;
@@ -60,15 +61,18 @@ const DEFAULT_CONFIG: Config = {
   HERO_DEFAULT_BOOST: 0.00007,
   HERO_DEFAULT_DEBOOST: 0.00002,
   MAX_GAME_TIME: 80000,
+  HERO_MAX_SPEED: 0.12,
 };
 const HERO_TYPES_CONFIG = {
   SLOW_HERO: {
     boost: 0.00002,
     deboost: 0.00001,
+    radius: 20,
   },
   FAST_HERO: {
-    boost: 0.00007,
+    boost: 0.00004,
     deboost: 0.00002,
+    radius: 10,
   },
 };
 const getConfigWithHeroType = (config: Config, heroTypeConfig): Config => {
@@ -76,6 +80,7 @@ const getConfigWithHeroType = (config: Config, heroTypeConfig): Config => {
     ...config,
     HERO_DEFAULT_BOOST: heroTypeConfig.boost,
     HERO_DEFAULT_DEBOOST: heroTypeConfig.deboost,
+    HERO_DEFAULT_RADIUS: heroTypeConfig.radius,
   };
 };
 
@@ -84,6 +89,7 @@ export const GameContainer = () => {
   const { gameActions, canvasRef, renderTime, gameStatus, score } = useGame(config);
   const { startBoost, endBoost, startGame, restartGame } = gameActions;
   const [heroType, setHeroType] = useState<HeroType | undefined>();
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const { data } = userApi.useGetUserQuery();
 
   useEffect(() => {
@@ -112,6 +118,15 @@ export const GameContainer = () => {
     }
   }, [score, data, gameStatus]);
 
+  useEffect(() => {
+    setIsFirstRender(false);
+  }, []);
+
+  const deleteHero = () => {
+    localStorage.removeItem('heroType');
+    setHeroType(undefined);
+  };
+
   return (
     <div>
       <div>
@@ -123,18 +138,25 @@ export const GameContainer = () => {
         height={config.GAME_HEIGHT}
         onMouseDown={startBoost}
         onMouseUp={endBoost}
+        className={styles.canvas}
       />
-      <Popup
-        active={gameStatus !== GameStatus.inGame}
-        onClose={GameStatus.beforeGame === gameStatus ? startGame : restartGame}
-      >
-        {gameStatus === GameStatus.beforeGame && !heroType && (
-          <ChoiceHeroWindow setHeroType={setHeroType} />
-        )}
-        {gameStatus === GameStatus.beforeGame && heroType && <StartWindow startGame={startGame} />}
-        {gameStatus === GameStatus.lose && <LoseWindow restartGame={restartGame} />}
-        {gameStatus === GameStatus.win && <WinWindow restartGame={restartGame} score={score} />}
-      </Popup>
+      {!isFirstRender && (
+        <Popup
+          active={gameStatus !== GameStatus.inGame}
+          onClose={GameStatus.beforeGame === gameStatus ? startGame : restartGame}
+        >
+          {!heroType && <ChoiceHeroWindow setHeroType={setHeroType} />}
+          {gameStatus === GameStatus.beforeGame && heroType && (
+            <StartWindow startGame={startGame} choiseHero={deleteHero} />
+          )}
+          {gameStatus === GameStatus.lose && heroType && (
+            <LoseWindow restartGame={restartGame} choiseHero={deleteHero} />
+          )}
+          {gameStatus === GameStatus.win && heroType && (
+            <WinWindow restartGame={restartGame} score={score} choiseHero={deleteHero} />
+          )}
+        </Popup>
+      )}
     </div>
   );
 };
