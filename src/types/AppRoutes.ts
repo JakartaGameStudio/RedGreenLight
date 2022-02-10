@@ -1,12 +1,10 @@
 export enum AppRoutes {
-  error500 = '/500',
   forum = '/forum',
   forumNew = '/forum/new',
   forumTopic = '/forum/topic',
   game = '/game',
   index = '/',
   leaderBoards = '/leaderboards',
-  oauthRedirectUri = 'https://redgreen.ya-praktikum.tech',
   profile = '/profile',
   profileEdit = '/profile/edit',
   profilePassword = '/profile/password',
