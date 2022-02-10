@@ -16,6 +16,7 @@ import { hot } from 'react-hot-loader/root';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { userApi } from 'services/redux';
 import { AppRoutes } from 'types/AppRoutes';
+import { getHostName } from 'utils/getHostName';
 
 export const App = hot(() => {
   const { search } = useLocation();
@@ -25,11 +26,12 @@ export const App = hot(() => {
   useEffect(() => {
     const params = new URLSearchParams(search);
     const oAuthCode = params.get('code');
+    const hostname = getHostName();
 
     if (oAuthCode) {
       oAuthSignIn({
         code: oAuthCode,
-        redirect_uri: AppRoutes.oauthRedirectUri,
+        redirect_uri: hostname,
       }).finally(() => navigate(AppRoutes.index));
     }
   }, [navigate, oAuthSignIn, search]);
