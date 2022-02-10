@@ -33,7 +33,7 @@ export const useGame = (config: Config) => {
     });
     const _timeController = new TimeController({
       timeoutValue: 2000,
-      safePeriodValue: 800,
+      safePeriodValue: 1500,
       allowedMoveTimeValue: () => Math.random() * (3000 - 1000) + 1000,
       totalTime: config.MAX_GAME_TIME,
     });

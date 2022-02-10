@@ -3,10 +3,11 @@
 
 .modalWrapper {
   &__tomain {
+    margin-top: 20px;
+
     font-size: 14px;
     line-height: 20px;
     text-align: center;
-    margin-top: 20px;
   }
 
   &__title {
@@ -18,8 +19,8 @@
     gap: 20px;
   }
   &__changeHero {
-    margin: 10px;
     display: flex;
     justify-content: center;
+    margin: 10px;
   }
 }
