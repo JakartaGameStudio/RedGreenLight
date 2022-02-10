@@ -1,6 +1,7 @@
 export interface IHero {
   boost: number;
   deboost: number;
+  maxSpeed: number;
   radius: number;
   x: number;
   y: number;
@@ -20,6 +21,7 @@ export class Hero implements IHero {
   isLost: boolean;
   isWon: boolean;
   deboost: number;
+  maxSpeed: number;
 
   constructor(props: IHero) {
     this.x = this.baseX = props.x;
@@ -33,6 +35,7 @@ export class Hero implements IHero {
     this.isWon = false;
     this.directionX = 0;
     this.directionY = 0;
+    this.maxSpeed = props.maxSpeed;
   }
 
   get leftBorder() {
@@ -50,14 +53,20 @@ export class Hero implements IHero {
   }
 
   move(timeFraction: number) {
-    if (!this.inBoost && this.speed < 0) {
+    if ((!this.inBoost && this.speed < 0) || this.isLost || this.isWon) {
       return;
     }
+
+    const speedBefore = this.speed;
 
     if (this.inBoost) {
       this.speed += timeFraction * this.boost;
     } else {
       this.speed -= timeFraction * this.deboost;
+    }
+
+    if (this.maxSpeed < this.speed) {
+      this.speed = speedBefore;
     }
 
     this.x += timeFraction * this.speed * this.directionX;

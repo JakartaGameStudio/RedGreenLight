@@ -1,9 +1,10 @@
 import { Background, Game, MainHero, SafeZone, TimeController } from 'game';
 import { MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 
+import { Config } from './GameContainer';
 import { GameStatus } from './GameContainer.types';
 
-export const useGame = (config) => {
+export const useGame = (config: Config) => {
   const canvasRef = useRef(null);
   const [renderTime, setRenderTime] = useState<number | null>(null);
   const [gameStatus, setGameStatus] = useState<keyof typeof GameStatus>(GameStatus.beforeGame);
@@ -15,6 +16,7 @@ export const useGame = (config) => {
       radius: config.HERO_DEFAULT_RADIUS,
       boost: config.HERO_DEFAULT_BOOST,
       deboost: config.HERO_DEFAULT_DEBOOST,
+      maxSpeed: config.HERO_MAX_SPEED,
       mainStyle: {
         stroke: config.HERO_BORDER_MAIN_COLOR,
         fill: config.HERO_FILL_MAIN_COLOR,
@@ -31,8 +33,8 @@ export const useGame = (config) => {
     });
     const _timeController = new TimeController({
       timeoutValue: 2000,
-      safePeriodValue: 800,
-      allowedMoveTimeValue: 3000,
+      safePeriodValue: 1500,
+      allowedMoveTimeValue: () => Math.random() * (3000 - 1000) + 1000,
       totalTime: config.MAX_GAME_TIME,
     });
     const _game = new Game();
@@ -40,7 +42,7 @@ export const useGame = (config) => {
       widthGame: config.GAME_WIDTH,
       heightGame: config.GAME_HEIGHT,
       lengthDistance: config.GAME_FIELD_DISTANCE_LENGTH,
-      color: config.SAFEZONE_ALLOWED_COLOR,
+      color: config.SAVEZONE_ALLOWED_COLOR,
     });
 
     return {
@@ -127,11 +129,13 @@ export const useGame = (config) => {
       }
 
       if (mainHero.isLost) {
+        mainHero.endBoost();
         timeController.stop();
         setGameStatus('lose');
       }
 
       if (mainHero.isWon) {
+        mainHero.endBoost();
         timeController.stop();
         setScore(timeController.currentTime);
         setGameStatus('win');
@@ -159,6 +163,7 @@ export const useGame = (config) => {
       timeController.refresh();
       setScore(null);
       setGameStatus('inGame');
+      game.reload();
     };
 
     return () => {
